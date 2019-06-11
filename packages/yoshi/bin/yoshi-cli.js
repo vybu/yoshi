@@ -49,7 +49,7 @@ if (config.experimentalMonorepo) {
     .action(() => runCLI('build-monorepo'));
 
   prog
-    .command('start')
+    .command('start [app]')
     .description(
       'Experimental way to start a Lerna monorepo for local development',
     )
