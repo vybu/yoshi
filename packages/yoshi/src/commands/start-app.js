@@ -98,12 +98,13 @@ module.exports = async () => {
   if (!!project.webWorkerEntry) {
     webWorkerConfig = createWebWorkerWebpackConfig({
       isDebug: true,
+      isHmr: true,
     });
   }
 
   // Configure compilation
   const multiCompiler = createCompiler(
-    [clientConfig, serverConfig].concat(webWorkerConfig),
+    [clientConfig, serverConfig, webWorkerConfig].filter(Boolean),
     { https },
   );
 
