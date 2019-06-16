@@ -47,6 +47,7 @@ const ServerProcess = require('../server-process');
 const host = '0.0.0.0';
 
 const https = cliArgs.https || project.servers.cdn.ssl;
+const isWebWorkerBundle = !!project.webWorkerEntry;
 
 function watchPublicFolder() {
   const watcher = chokidar.watch(PUBLIC_DIR, {
@@ -95,7 +96,7 @@ module.exports = async () => {
 
   let webWorkerConfig;
 
-  if (!!project.webWorkerEntry) {
+  if (isWebWorkerBundle) {
     webWorkerConfig = createWebWorkerWebpackConfig({
       isDebug: true,
       isHmr: true,
@@ -129,7 +130,9 @@ module.exports = async () => {
     host,
   });
 
-  webWorkerCompiler.watch({ 'info-verbosity': 'none' }, () => {});
+  if (isWebWorkerBundle) {
+    webWorkerCompiler.watch({ 'info-verbosity': 'none' }, () => {});
+  }
 
   serverCompiler.watch({ 'info-verbosity': 'none' }, async (error, stats) => {
     // We save the result of this build to webpack-dev-server's internal state so the last
