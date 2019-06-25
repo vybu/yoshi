@@ -38,13 +38,12 @@
     "@wix/wix-base-ui": "^3.70.0",
     "@wix/wix-experiments": "^2.0.5",
     "@wix/wix-experiments-react": "^2.0.6",
+    "@wix/wix-i18n-config": "^1.0.0",
     "axios": "^0.19.0",
-    "i18next": "^11.6.0",
     "lodash": "^4.17.11",
     "prop-types": "~15.6.0",
     "react": "~16.6.2",
     "react-dom": "~16.6.2",
-    "react-i18next": "^7.11.0",
     "wix-ui-tpa": "^1.0.123"
   },
   "lint-staged": {

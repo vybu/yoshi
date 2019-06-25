@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Widget } from './Widget';
-import { I18nextProvider } from 'react-i18next';
+import { I18nextProvider } from '@wix/wix-i18n-config';
 import i18n from '../../../__tests__/helpers/i18n.mock';
 import { ExperimentsProvider } from '@wix/wix-experiments-react';
 
@@ -24,6 +24,6 @@ describe('Widget', () => {
     const key = 'app.hello';
 
     expect(wrapper.find('h2').exists()).toBe(true);
-    expect(wrapper.find('h2').text()).toBe(`${key} ${name}!`);
+    expect(wrapper.find('h2').text()).toBe(`${key}!`);
   });
 });
