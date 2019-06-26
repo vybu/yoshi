@@ -1,15 +1,7 @@
-import * as i18next from 'i18next';
+import { initI18n } from '@wix/wix-i18n-config';
 
 // We initialize i18next once with configuration for component tests.
-export default i18next.init({
-  // This configuration causes i18n to always return the key from calling `t('...')`
-  fallbackLng: 'cimode',
-
-  // Change to `true` to see more information
-  debug: false,
-
-  // Configure our translate HOC to not wait for data to be available
-  react: {
-    wait: false,
-  },
+export default initI18n({
+  locale: 'en',
+  messages: {}
 });
