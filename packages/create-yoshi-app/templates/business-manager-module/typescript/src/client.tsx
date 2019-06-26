@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { I18nextProvider } from 'react-i18next';
+import { initI18n, I18nextProvider } from '@wix/wix-i18n-config';
 import { ModuleRegistry } from 'react-module-container';
 import { create } from '@wix/fedops-logger';
 import { wixAxiosConfig } from '@wix/wix-axios-config';
 import { COMPONENT_NAME, IBMModuleParams } from './config';
-import i18n from './i18n';
 import App from './components/App';
 
 wixAxiosConfig(axios, {
@@ -29,7 +28,6 @@ const notifyDoneLoading = () => {
 export default class AppContainer extends React.Component<IBMModuleParams> {
   static propTypes = {
     locale: PropTypes.string,
-    config: PropTypes.object,
   };
 
   constructor(props) {
@@ -45,10 +43,13 @@ export default class AppContainer extends React.Component<IBMModuleParams> {
   }
 
   render() {
-    const { locale, config } = this.props;
-    const baseUrl = config.topology.staticsUrl;
+    const i18n = initI18n({
+      locale: this.props.locale,
+      asyncMessagesLoader: locale =>
+        import(`./assets/locale/messages_${locale}.json`),
+    });
     return (
-      <I18nextProvider i18n={i18n({ locale, baseUrl })}>
+      <I18nextProvider i18n={i18n}>
         <App />
       </I18nextProvider>
     );
