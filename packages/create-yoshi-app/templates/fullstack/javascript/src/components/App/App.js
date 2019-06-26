@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from '@wix/wix-i18n-config';
 import s from './App.scss';
 
 /* <-- To remove demo stuff just copy-paste:
@@ -27,7 +27,7 @@ class App extends React.Component {
     return (
       <div className={s.root}>
         <h2 className={s.title} data-testid="app-title">
-          {t('app.title')}
+          {t('app.title', { who: 'yoshi' })}
         </h2>
         {/* <-- Feel free to remove TemplateIntro */}
         {this.state.TemplateIntro &&
@@ -38,4 +38,4 @@ class App extends React.Component {
   }
 }
 
-export default translate()(App);
+export default withTranslation()(App);

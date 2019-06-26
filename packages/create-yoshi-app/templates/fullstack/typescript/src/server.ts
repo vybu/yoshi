@@ -1,8 +1,13 @@
 import { Router } from 'express';
 import { hot } from 'bootstrap-hot-loader';
+import * as path from 'path';
 import * as wixExpressCsrf from '@wix/wix-express-csrf';
 import * as wixExpressRequireHttps from '@wix/wix-express-require-https';
+import * as WixNodeI18nCache from 'wix-node-i18n-cache';
 
+const localI18NCache = new WixNodeI18nCache({
+  localeFilePath: path.join(__dirname, 'statics', 'assets', 'locales'),
+});
 // This function is the main entry for our server. It accepts an express Router
 // (see http://expressjs.com) and attaches routes and middlewares to it.
 //
@@ -39,6 +44,7 @@ export default hot(module, (app: Router, context) => {
     return {
       language,
       basename,
+      messages: JSON.stringify(localI18NCache.getLocaleData(language)),
       debug: debug || process.env.NODE_ENV === 'development',
       title: 'Wix Full Stack Project Boilerplate',
       staticsDomain: config.clientTopology.staticsDomain,
