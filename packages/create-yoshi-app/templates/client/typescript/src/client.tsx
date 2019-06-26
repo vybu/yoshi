@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as axios from 'axios';
-import { initI18n, I18nextProvider } from '@wix/wix-i18n-confin';
+import { initI18n, I18nextProvider } from '@wix/wix-i18n-config';
 import { wixAxiosConfig } from '@wix/wix-axios-config';
 import App from './components/App';
 import { create as createFedopsLogger } from '@wix/fedops-logger';

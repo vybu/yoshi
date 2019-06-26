@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { translate } from 'react-i18next';
+import { withTranslation } from '@wix/wix-i18n-config';
 import s from './App.scss';
 
 class App extends React.Component {
@@ -15,10 +15,15 @@ class App extends React.Component {
         <div className={s.header}>
           <h2 data-hook="app-title">{t('app.title')}</h2>
         </div>
-        <p className={s.intro}>{t('app.intro')}</p>
+        <p className={s.intro}>
+          {t('app.intro', {
+            introUrl:
+              'https://github.com/wix-private/business-manager-test-app/blob/master/docs/step-by-step.md',
+          })}
+        </p>
       </div>
     );
   }
 }
 
-export default translate(null, { wait: true })(App);
+export default withTranslation()(App);

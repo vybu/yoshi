@@ -26,7 +26,7 @@ class App extends React.Component<AppProps> {
     return (
       <div className={s.root}>
         <h2 className={s.title} data-testid="app-title">
-          {t('app.title', {who: 'yoshi'})}
+          {t('app.title', { who: 'yoshi' })}
         </h2>
         {/* <-- Feel free to remove TemplateIntro */}
         <this.state.TemplateIntro />

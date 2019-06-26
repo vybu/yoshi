@@ -11,7 +11,8 @@
     "allowJs": true,
     "jsx": "react",
     "lib": ["dom", "esnext"],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "./__tests__/**/*.ts",

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nextProvider, withTranslation, initI18n } from '@wix/wix-i18n-config';
+import { I18nextProvider, withTranslation, initI18n, WithTranslation } from '@wix/wix-i18n-config';
 import {
   ExperimentsProvider,
   withExperiments,
@@ -36,17 +36,22 @@ export default class WidgetRoot extends React.Component<IWidgetRootProps, {}> {
   }
 }
 
-export const Widget = withExperiments<any>(
-  withTranslation()(({ name, t, ...rest }) => {
-    return (
-      <div {...styles('root', {}, rest)}>
-        <div className={styles.header}>
-          <h2>
-            {t('app.hello', {name})}!
-          </h2>
-        </div>
-        <Button className={styles.mainButton}>click me</Button>
-      </div>
-    );
-  }),
-);
+​
+interface WidgetProps extends WithTranslation {
+ name?: string;
+}
+​
+const WidgetComponent: React.FC<WidgetProps> = ({ name, t, ...rest }) => {
+ return (
+  <div {...styles('root', {}, rest)}>
+   <div className={styles.header}>
+    <h2>
+     {t('app.hello', {name})}!
+    </h2>
+   </div>
+   <Button className={styles.mainButton}>click me</Button>
+  </div>
+ );
+};
+​
+export const Widget = withExperiments<any>(withTranslation()(WidgetComponent));
