@@ -1,20 +1,43 @@
 # Changelog
 
+## 4.57.0 (2020-04-16)
+
+#### :rocket: New Feature
+
+- `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2217](https://github.com/wix/yoshi/pull/2217) Separate wrapping for ooi widgets and platform widgets ([@maoryosef2](https://github.com/maoryosef2))
+
+#### :nail_care: Polish
+
+- `yoshi-common`
+  - [#2227](https://github.com/wix/yoshi/pull/2227) Don't transpile Carmi's output with Typescript/Babel ([@ronami](https://github.com/ronami))
+- `yoshi-flow-editor-runtime`
+  - [#2222](https://github.com/wix/yoshi/pull/2222) Use `EditorSDKLoadedContext` interface for editorSDK render prop. ([@yavorsky](https://github.com/yavorsky))
+- `yoshi-flow-editor`
+  - [#2233](https://github.com/wix/yoshi/pull/2233) Add `isAnalyze` option to Worker bundles for flow editor. ([@yavorsky](https://github.com/yavorsky))
+
+#### :house: Internal
+
+- [#2238](https://github.com/wix/yoshi/pull/2238) Remove `yurynix` from codeowners ([@yurynix](https://github.com/yurynix))
+
 ## 4.56.3 (2020-04-15)
 
 #### :bug: Bug Fix
-* `yoshi-common`, `yoshi-flow-editor`
-  * [#2237](https://github.com/wix/yoshi/pull/2237) Add entries from editor flow to files needed to be transpiled ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-common`, `yoshi-flow-editor`
+  - [#2237](https://github.com/wix/yoshi/pull/2237) Add entries from editor flow to files needed to be transpiled ([@yavorsky](https://github.com/yavorsky))
 
 ## 4.56.2 (2020-04-14)
 
 #### :bug: Bug Fix
-* `yoshi-flow-editor`
-  * [#2229](https://github.com/wix/yoshi/pull/2229) Use ES5 in entry points ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-flow-editor`
+  - [#2229](https://github.com/wix/yoshi/pull/2229) Use ES5 in entry points ([@yavorsky](https://github.com/yavorsky))
 
 #### :nail_care: Polish
-* `yoshi-flow-editor-runtime`
-  * [#2228](https://github.com/wix/yoshi/pull/2228) Use `isEditor` as an optional value for `IWixSDKProps` ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-flow-editor-runtime`
+  - [#2228](https://github.com/wix/yoshi/pull/2228) Use `isEditor` as an optional value for `IWixSDKProps` ([@yavorsky](https://github.com/yavorsky))
 
 ## 4.56.1 (2020-04-13)
 
