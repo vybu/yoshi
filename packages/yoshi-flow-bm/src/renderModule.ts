@@ -20,7 +20,7 @@ createModule({
       ({ componentId, componentPath }) => `
       {
         componentId: '${componentId}',
-        loadComponent: async () => (await import('${componentPath}')).default,
+        loadComponent: async () => (await import(/* webpackChunkName: "${componentId}" */'${componentPath}')).default,
       },
     `,
     )}
@@ -30,7 +30,7 @@ createModule({
       ({ componentId, componentPath }) => `
       {
         componentId: '${componentId}',
-        loadComponent: async () => (await import('${componentPath}')).default,
+        loadComponent: async () => (await import(/* webpackChunkName: "${componentId}" */'${componentPath}')).default,
       },
     `,
     )}
@@ -45,7 +45,7 @@ createModule({
     )}
   ], // ${JSON.stringify(methods)},
   ${moduleInitPath ? `moduleInit: require('${moduleInitPath}').default,` : ''}
-  loadLocale: (locale = 'en') => import(\`${localePath}/\${locale}\`),
+  loadLocale: (locale = 'en') => import(/* webpackChunkName: "[request]" */\`${localePath}/\${locale}\`),
   config: ${JSON.stringify(moduleConfig)},
 });`;
 
