@@ -129,6 +129,7 @@ export function createWebWorkerWebpackConfig(
     isDev,
     isHot,
     isAnalyze,
+    externalizeRelativeLodash: true,
     ...defaultOptions,
   });
 
