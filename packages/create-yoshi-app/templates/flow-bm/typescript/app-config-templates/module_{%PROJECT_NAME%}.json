@@ -1,0 +1,28 @@
+{
+  "moduleId": "{%projectName%}",
+  "mainPageComponentId": "{%projectName%}.pages.index",
+  "pageComponents": [
+    {
+      "pageComponentId": "{%projectName%}.pages.index",
+      "pageComponentName": "{%projectName%}.pages.index",
+      "route": "{%projectName%}"
+    }
+  ],
+  "config": {
+    "topology": {
+      "staticsUrl": "com.wixpress.{%projectName%}"
+    }
+  },
+  "bundles": [
+    {
+      "file": {
+        "artifactId": "com.wixpress.{%projectName%}",
+        "path": "module.bundle.min.js"
+      },
+      "debugFile": {
+        "artifactId": "com.wixpress.{%projectName%}",
+        "path": "module.bundle.js"
+      }
+    }
+  ]
+}
