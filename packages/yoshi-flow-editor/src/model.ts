@@ -6,6 +6,11 @@ import resolve from 'resolve';
 import fs from 'fs-extra';
 import { Config } from 'yoshi-config/build/config';
 import {
+  WidgetType,
+  OOI_WIDGET_COMPONENT_TYPE,
+  PLATFORM_WIDGET_COMPONENT_TYPE,
+} from 'yoshi-flow-editor-runtime/build/constants';
+import {
   WIDGET_FILENAME,
   VIEWER_CONTROLLER_FILENAME,
   EDITOR_CONTROLLER_FILENAME,
@@ -14,8 +19,6 @@ import {
   COMPONENT_CONFIG_FILENAME,
   VIEWER_APP_FILENAME,
   EDITOR_APP_FILENAME,
-  WIDGET_COMPONENT_TYPE,
-  PAGE_COMPONENT_TYPE,
 } from './constants';
 
 export interface FlowEditorModel {
@@ -27,15 +30,9 @@ export interface FlowEditorModel {
   components: Array<ComponentModel>;
 }
 
-export type ComponentType =
-  | typeof WIDGET_COMPONENT_TYPE
-  | typeof PAGE_COMPONENT_TYPE;
-
-const DEFAULT_COMPONENT_TYPE: ComponentType = 'widget';
-
 export interface ComponentModel {
   name: string;
-  type: ComponentType;
+  type: WidgetType;
   widgetFileName: string | null;
   viewerControllerFileName: string;
   editorControllerFileName: string | null;
@@ -48,7 +45,7 @@ export interface AppConfig {
 }
 export interface ComponentConfig {
   id: string;
-  type?: ComponentType;
+  type?: WidgetType;
 }
 
 const extensions = ['.tsx', '.ts', '.js', '.json'];
@@ -147,9 +144,7 @@ For more info, visit http://tiny.cc/dev-center-registration`);
         // Ignore components w/o config file.
         return processedModels;
       }
-      if (!componentConfig.type) {
-        componentConfig.type = DEFAULT_COMPONENT_TYPE;
-      }
+
       if (!componentConfig.id) {
         console.warn(`Seems like you added new component and didn't specify "id" for it.
 You should register it in dev-center and paste id to "${formatPathsForLog(
@@ -170,8 +165,22 @@ For more info, visit http://tiny.cc/dev-center-registration`);
       const editorControllerFileName = resolveFromComponents(
         EDITOR_CONTROLLER_FILENAME,
       );
-      const widgetFileName = resolveFromComponents(WIDGET_FILENAME);
-      if (!widgetFileName && !editorControllerFileName) {
+
+      const assumedWidgetType: WidgetType = editorControllerFileName
+        ? PLATFORM_WIDGET_COMPONENT_TYPE
+        : OOI_WIDGET_COMPONENT_TYPE;
+
+      if (!componentConfig.type) {
+        componentConfig.type = assumedWidgetType;
+      }
+
+      const isOOIWidget = componentConfig.type === OOI_WIDGET_COMPONENT_TYPE;
+
+      const widgetFileName = isOOIWidget
+        ? resolveFromComponents(WIDGET_FILENAME)
+        : null;
+
+      if (!widgetFileName && isOOIWidget) {
         throw new Error(`Missing widget or page file for the component in "${componentPathRelativeToRoot}".
         Please create either index.${fileExtension} or Widget.${fileExtension} file in "${componentPathRelativeToRoot}" directory`);
       }

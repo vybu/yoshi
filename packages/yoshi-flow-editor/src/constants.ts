@@ -7,5 +7,3 @@ export const COMPONENT_CONFIG_FILENAME = ['.component'];
 export const APPLICATION_CONFIG_FILENAME = ['.application'];
 export const VIEWER_APP_FILENAME = ['viewer.app', 'app'];
 export const EDITOR_APP_FILENAME = ['editor.app'];
-export const WIDGET_COMPONENT_TYPE = 'widget';
-export const PAGE_COMPONENT_TYPE = 'page';

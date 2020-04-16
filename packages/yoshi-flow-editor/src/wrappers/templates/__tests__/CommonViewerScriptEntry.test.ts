@@ -9,6 +9,7 @@ describe('CommonViewerScriptEntry template', () => {
         {
           controllerFileName: 'project/src/components/button/controller.ts',
           id: '123',
+          widgetType: 'ooi_widget',
         },
       ],
       viewerAppFileName: 'project/src/app.ts',
@@ -25,10 +26,12 @@ describe('CommonViewerScriptEntry template', () => {
         {
           controllerFileName: 'project/src/components/todo/controller.ts',
           id: '123',
+          widgetType: 'ooi_widget',
         },
         {
           controllerFileName: 'project/src/components/todo/controller.ts',
           id: '567',
+          widgetType: 'ooi_widget',
         },
       ],
       viewerAppFileName: 'project/src/app.ts',

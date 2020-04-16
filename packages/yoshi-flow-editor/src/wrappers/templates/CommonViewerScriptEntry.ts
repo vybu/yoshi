@@ -1,8 +1,10 @@
+import { WidgetType } from 'yoshi-flow-editor-runtime/build/constants';
 import t from './template';
 
 export type TemplateControllerConfig = {
   id: string | null;
   controllerFileName: string;
+  widgetType: WidgetType;
 };
 
 type Opts = {
@@ -33,9 +35,9 @@ const controllerConfigs = t<{
   controllersMeta
     .map(
       (controller, i) =>
-        `{ method: ${getControllerVariableName(i)}, id: ${
-          controller.id ? `"${controller.id}"` : controller.id
-        } }`,
+        `{ method: ${getControllerVariableName(i)},
+          widgetType: "${controller.widgetType}",
+          id: ${controller.id ? `"${controller.id}"` : controller.id} }`,
     )
     .join(', ')}`;
 

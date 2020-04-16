@@ -1,4 +1,7 @@
-import { WIDGET_COMPONENT_TYPE, PAGE_COMPONENT_TYPE } from '../constants';
+import {
+  OOI_WIDGET_COMPONENT_TYPE,
+  PAGE_COMPONENT_TYPE,
+} from 'yoshi-flow-editor-runtime/build/constants';
 import { overrideQueryParamsWithModel } from '../utils';
 
 describe('addOverrideQueryParamsWithModel', () => {
@@ -16,7 +19,7 @@ describe('addOverrideQueryParamsWithModel', () => {
           {
             name: 'comp',
             id: 'WIDGET_ID',
-            type: WIDGET_COMPONENT_TYPE,
+            type: OOI_WIDGET_COMPONENT_TYPE,
             widgetFileName: 'proj/comp/Widget.ts',
             viewerControllerFileName: 'proj/comp/controller.ts',
             editorControllerFileName: null,
@@ -45,7 +48,7 @@ describe('addOverrideQueryParamsWithModel', () => {
           {
             name: 'comp',
             id: 'COMP_WIDGET_ID',
-            type: WIDGET_COMPONENT_TYPE,
+            type: OOI_WIDGET_COMPONENT_TYPE,
             widgetFileName: 'proj/comp/Widget.ts',
             viewerControllerFileName: 'proj/comp/controller.ts',
             editorControllerFileName: null,
@@ -83,7 +86,7 @@ describe('addOverrideQueryParamsWithModel', () => {
           {
             name: 'comp',
             id: 'WIDGET_ID',
-            type: WIDGET_COMPONENT_TYPE,
+            type: OOI_WIDGET_COMPONENT_TYPE,
             widgetFileName: 'proj/comp/Widget.ts',
             viewerControllerFileName: 'proj/comp/controller.ts',
             editorControllerFileName: null,

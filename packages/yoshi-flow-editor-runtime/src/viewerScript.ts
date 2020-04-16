@@ -1,16 +1,116 @@
 import { IWidgetControllerConfig } from '@wix/native-components-infra/dist/es/src/types/types';
 import { createInstances, objectPromiseAll, fetchFrameworkData } from './utils';
+import { WidgetType, OOI_WIDGET_COMPONENT_TYPE } from './constants';
 
 let frameworkData: any;
 
 type ControllerDescriptor = {
   id: string | null;
   method: Function;
+  widgetType: WidgetType;
 };
 
 const getFirstDescriptor = (descriptors: Array<ControllerDescriptor>) => {
   if (descriptors.length === 1) {
     return descriptors[0];
+  }
+};
+
+const defaultControllerWrapper = (
+  controllerDescriptor: ControllerDescriptor,
+  controllerConfig: IWidgetControllerConfig,
+  appData: any,
+) =>
+  controllerDescriptor.method({
+    controllerConfig,
+    frameworkData,
+    appData,
+  });
+
+function ooiControllerWrapper(
+  controllerDescriptor: ControllerDescriptor,
+  controllerConfig: IWidgetControllerConfig,
+  appData: any,
+) {
+  const { setProps } = controllerConfig;
+
+  const setState = (newState: any) => {
+    const updatedState = {
+      ...context.state,
+      ...newState,
+    };
+
+    // Track state
+    context.state = updatedState;
+
+    // Run state change callback
+    wrappedController.then((userController: any) => {
+      if (userController.stateChange) {
+        userController.stateChange();
+      }
+    });
+
+    // Update render cycle
+    return setProps({ state: updatedState });
+  };
+
+  const context = {
+    state: {},
+    setState,
+  };
+
+  const userControllerPromise = controllerDescriptor.method.call(context, {
+    controllerConfig,
+    frameworkData,
+    appData,
+  });
+
+  const wrappedController = Promise.resolve(userControllerPromise).then(
+    (userController: any) => {
+      return {
+        ...userController,
+        pageReady: async (...args: Array<any>) => {
+          const awaitedFrameworkData = await objectPromiseAll(frameworkData);
+
+          // TODO: export by property (methods, state) so we won't have conflicting props
+          setProps({
+            __publicData__: controllerConfig.config.publicData,
+            ...awaitedFrameworkData,
+            // Set initial state
+            state: context.state,
+            // Set methods
+            methods: userController.methods,
+          });
+
+          // Optional `pageReady`
+          if (userController.pageReady) {
+            return userController.pageReady(setProps, ...args);
+          }
+        },
+        exports: userController.corvid,
+      };
+    },
+  );
+}
+
+const wrapControllerByWidgetType = (
+  controllerDescriptor: ControllerDescriptor,
+  controllerConfig: IWidgetControllerConfig,
+  appData: any,
+) => {
+  switch (controllerDescriptor.widgetType) {
+    case OOI_WIDGET_COMPONENT_TYPE:
+      return ooiControllerWrapper(
+        controllerDescriptor,
+        controllerConfig,
+        appData,
+      );
+    default:
+      return defaultControllerWrapper(
+        controllerDescriptor,
+        controllerConfig,
+        appData,
+      );
   }
 };
 
@@ -33,6 +133,7 @@ export const createControllers = (
       {
         method: createController,
         id: null,
+        widgetType: OOI_WIDGET_COMPONENT_TYPE,
       },
     ],
     mapPlatformStateToAppData,
@@ -71,66 +172,11 @@ export const createControllersWithDescriptors = (
 
     initializeExperiments();
 
-    const { setProps } = controllerConfig;
-
-    const setState = (newState: any) => {
-      const updatedState = {
-        ...context.state,
-        ...newState,
-      };
-
-      // Track state
-      context.state = updatedState;
-
-      // Run state change callback
-      wrappedController.then((userController: any) => {
-        if (userController.stateChange) {
-          userController.stateChange();
-        }
-      });
-
-      // Update render cycle
-      return setProps({ state: updatedState });
-    };
-
-    const context = {
-      state: {},
-      setState,
-    };
-
-    const userControllerPromise = controllerDescriptor.method.call(context, {
+    return wrapControllerByWidgetType(
+      controllerDescriptor,
       controllerConfig,
-      frameworkData,
       appData,
-    });
-
-    const wrappedController = Promise.resolve(userControllerPromise).then(
-      (userController: any) => {
-        return {
-          ...userController,
-          pageReady: async (...args: Array<any>) => {
-            const awaitedFrameworkData = await objectPromiseAll(frameworkData);
-
-            // TODO: export by property (methods, state) so we won't have conflicting props
-            setProps({
-              __publicData__: controllerConfig.config.publicData,
-              ...awaitedFrameworkData,
-              // Set initial state
-              state: context.state,
-              // Set methods
-              methods: userController.methods,
-            });
-
-            // Optional `pageReady`
-            if (userController.pageReady) {
-              return userController.pageReady(setProps, ...args);
-            }
-          },
-          exports: userController.corvid,
-        };
-      },
     );
-    return wrappedController;
   });
 
   return wrappedControllers;

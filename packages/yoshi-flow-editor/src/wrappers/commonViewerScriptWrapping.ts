@@ -14,6 +14,7 @@ const toControllerMeta = (
   return {
     controllerFileName: component.viewerControllerFileName,
     id: component.id,
+    widgetType: component.type,
   };
 };
 
