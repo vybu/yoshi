@@ -15,6 +15,7 @@ import {
 import { CliCommand } from '../bin/yoshi-bm';
 import createFlowBMModel from '../createFlowBMModel';
 import renderModule, { moduleEntryPath } from '../renderModule';
+import renderModuleConfig from '../renderModuleConfig';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
@@ -65,7 +66,9 @@ const build: CliCommand = async function(argv, config) {
     fs.emptyDir(join(TARGET_DIR)),
   ]);
 
-  renderModule(createFlowBMModel());
+  const model = createFlowBMModel();
+  renderModule(model);
+  renderModuleConfig(model);
 
   if (inTeamCity()) {
     const petriSpecs = await import('yoshi-common/build/sync-petri-specs');

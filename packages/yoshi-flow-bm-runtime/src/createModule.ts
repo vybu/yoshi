@@ -62,8 +62,6 @@ export default function createModule({
           sentryClient,
         });
 
-        console.log(`Module: ${moduleId}, Component: ${componentId}`);
-
         this.registerPageComponent(
           componentId,
           ReactLoadableComponent(componentId, async () => {

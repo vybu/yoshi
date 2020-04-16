@@ -1,5 +1,7 @@
 import chance from 'chance';
 
+declare const testKitEnv: any;
+
 export const appDriver = () => {
   const waitForVisibilityOf = async (selector: string) => {
     return page.waitForSelector(selector);

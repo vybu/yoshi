@@ -1,20 +1,23 @@
-const testKitEnv = require('./environment')
-  .environment()
-  .then((env: any) => {
-    env.start();
-    return env;
-  });
+import { watch } from 'chokidar';
+import { environment } from './environment';
 
-// We need to stop the testkit explicitly, since it's running in a different process
-const stopTestKit = () => testKitEnv.then((tk: any) => tk.stop());
+(async () => {
+  let testkit = await environment();
+  await testkit.start();
 
-const signals: Array<'SIGINT' | 'SIGUSR1' | 'SIGUSR2'> = [
-  'SIGINT',
-  'SIGUSR1',
-  'SIGUSR2',
-];
+  const restartTestkit = async () => {
+    await testkit.stop();
+    testkit = await environment();
+    await testkit.start();
+  };
 
-signals.forEach(ev => process.on(ev, stopTestKit));
+  watch(['app-config-templates/module_{%PROJECT_NAME%}.json']).on(
+    'all',
+    async () => {
+      await restartTestkit();
+    },
+  );
 
-process.on('uncaughtException', stopTestKit);
-process.on('exit', stopTestKit);
+  process.on('SIGINT', () => testkit.stop());
+  process.on('exit', () => testkit.stop());
+})();

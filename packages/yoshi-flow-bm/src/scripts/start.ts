@@ -12,6 +12,7 @@ import {
 } from '../webpack.config';
 import { watchFlowBMModel } from '../createFlowBMModel';
 import renderModule, { moduleEntryPath } from '../renderModule';
+import renderModuleConfig from '../renderModuleConfig';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
@@ -84,7 +85,10 @@ const start: CliCommand = async function(argv, config) {
     fs.emptyDir(join(TARGET_DIR)),
   ]);
 
-  watchFlowBMModel(renderModule);
+  watchFlowBMModel(model => {
+    renderModule(model);
+    renderModuleConfig(model);
+  });
 
   const clientConfig = createClientWebpackConfig(config, {
     isDev: true,
