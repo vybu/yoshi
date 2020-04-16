@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.57.1 (2020-04-16)
+
+#### :bug: Bug Fix
+* `yoshi-flow-editor-runtime`
+  * [#2246](https://github.com/wix/yoshi/pull/2246) Hotfix: return `wrappedController` for createControllers wrapper ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.57.0 (2020-04-16)
 
 #### :rocket: New Feature
