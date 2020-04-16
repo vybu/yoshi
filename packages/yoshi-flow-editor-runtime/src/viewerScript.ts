@@ -91,6 +91,8 @@ function ooiControllerWrapper(
       };
     },
   );
+
+  return wrappedController;
 }
 
 const wrapControllerByWidgetType = (
