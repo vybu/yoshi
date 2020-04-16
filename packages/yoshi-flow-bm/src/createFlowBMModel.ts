@@ -1,6 +1,7 @@
 import path from 'path';
 import globby from 'globby';
 import { getProjectArtifactId } from 'yoshi-helpers/build/utils';
+import { watch } from 'chokidar';
 
 export interface ExportedComponentModel {
   componentId: string;
@@ -77,4 +78,24 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
     moduleConfig: {},
     moduleInitPath,
   };
+}
+
+export function watchFlowBMModel(
+  handler: (model: FlowBMModel) => void,
+  cwd = process.cwd(),
+) {
+  const watcher = watch(
+    [
+      pagesPattern,
+      componentsPattern,
+      methodsPattern,
+      moduleInitPattern,
+      translationsPattern,
+    ],
+    {
+      cwd,
+    },
+  );
+
+  watcher.on('all', () => handler(createFlowBMModel(cwd)));
 }

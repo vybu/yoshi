@@ -14,7 +14,7 @@ import {
 } from '../webpack.config';
 import { CliCommand } from '../bin/yoshi-bm';
 import createFlowBMModel from '../createFlowBMModel';
-import renderModule from '../renderModule';
+import renderModule, { moduleEntryPath } from '../renderModule';
 
 const join = (...dirs: Array<string>) => path.join(process.cwd(), ...dirs);
 
@@ -65,7 +65,7 @@ const build: CliCommand = async function(argv, config) {
     fs.emptyDir(join(TARGET_DIR)),
   ]);
 
-  const model = createFlowBMModel();
+  renderModule(createFlowBMModel());
 
   if (inTeamCity()) {
     const petriSpecs = await import('yoshi-common/build/sync-petri-specs');
@@ -86,14 +86,14 @@ const build: CliCommand = async function(argv, config) {
     isDev: true,
     forceEmitSourceMaps,
   });
-  clientDebugConfig.entry = { module: renderModule(model) };
+  clientDebugConfig.entry = { module: moduleEntryPath };
 
   const clientOptimizedConfig = createClientWebpackConfig(config, {
     isAnalyze,
     forceEmitSourceMaps,
     forceEmitStats,
   });
-  clientOptimizedConfig.entry = { module: renderModule(model) };
+  clientOptimizedConfig.entry = { module: moduleEntryPath };
 
   const serverConfig = createServerWebpackConfig(config, {
     isDev: true,

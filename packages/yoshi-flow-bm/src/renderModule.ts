@@ -49,12 +49,9 @@ createModule({
   config: ${JSON.stringify(moduleConfig)},
 });`;
 
-const renderModule = (model: FlowBMModel) => {
-  const filePath = path.resolve(__dirname, '../tmp/module.ts');
+export const moduleEntryPath = path.resolve(__dirname, '../tmp/module.ts');
 
-  fs.outputFileSync(filePath, generateModuleCode(model));
-
-  return filePath;
-};
+const renderModule = (model: FlowBMModel) =>
+  fs.outputFileSync(moduleEntryPath, generateModuleCode(model));
 
 export default renderModule;
