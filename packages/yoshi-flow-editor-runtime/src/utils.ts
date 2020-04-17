@@ -29,7 +29,39 @@ export const loadScript = (scriptSrc: string) =>
     document.body.appendChild(script);
   });
 
-export const getEditorSDKSrc = (): string | null => {
+interface IEditorParams {
+  editorSDKSrc: string | null;
+  componentId: string | null;
+}
+
+const viewerModeEditorParams: IEditorParams = {
+  editorSDKSrc: null,
+  componentId: null,
+};
+
+const warnInDevelopment = (msg: string) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.warn(msg);
+  }
+};
+
+export const getEditorParams = (): IEditorParams => {
+  // We don't use it in viewer environment anywhere now, but since it's a public function,
+  // we should prevent runtime errors and follow SDK render prop logic, where values is `null` in viwer mode.
+  if (!isEditor()) {
+    warnInDevelopment(
+      "You are using getEditorParams in viewer environment. Please, remove it from your Widget, since it is useful only for platform's Settings Panel component",
+    );
+    return viewerModeEditorParams;
+  }
   const queryParams: URLSearchParams = getQueryParams();
-  return queryParams.get('wix-sdk-version');
+  return {
+    editorSDKSrc: queryParams.get('wix-sdk-version'),
+    componentId: queryParams.get('componentId'),
+  };
+};
+
+export const isEditor = (): boolean => {
+  // We are checking SSR and CSR cases
+  return typeof window !== 'undefined' && !!window.__EDITOR_MODE__;
 };

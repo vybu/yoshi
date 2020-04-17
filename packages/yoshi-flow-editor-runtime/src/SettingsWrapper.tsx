@@ -1,17 +1,18 @@
 import React, { Suspense } from 'react';
 import { PublicDataProvider } from './react/PublicData/PublicDataProvider';
 import { ErrorBoundary } from './react/ErrorBoundary';
-import { getEditorSDKSrc } from './utils';
+import { getEditorParams } from './utils';
 import { SDKProvider } from './react/SDK/SDKProvider';
 import { SDK } from './react/SDK/SDKRenderProp';
 
 interface SettingsWrapperProps {
-  children: React.Component;
   __publicData__: Record<string, any>;
 }
 
-const SettingsWrapper = (props: SettingsWrapperProps) => {
-  const editorSDKSrc = getEditorSDKSrc();
+const SettingsWrapper = (UserComponent: typeof React.Component) => (
+  props: SettingsWrapperProps,
+) => {
+  const { editorSDKSrc } = getEditorParams();
 
   return (
     <ErrorBoundary handleException={error => console.error(error)}>
@@ -21,7 +22,7 @@ const SettingsWrapper = (props: SettingsWrapperProps) => {
             {sdk => {
               return (
                 <PublicDataProvider sdk={sdk} data={props.__publicData__}>
-                  {props.children}
+                  <UserComponent />
                 </PublicDataProvider>
               );
             }}

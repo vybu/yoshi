@@ -13,5 +13,5 @@ export default t<Opts>`
   import Settings from '${({ componentFileName }) => componentFileName}';
   import '${({ baseUIPath }) => baseUIPath}';
 
-  ReactDOM.render(React.createElement(SettingsWrapper, null, React.createElement(Settings)), document.getElementById('root'));
+  ReactDOM.render(React.createElement(SettingsWrapper(Settings), null), document.getElementById('root'));
 `;

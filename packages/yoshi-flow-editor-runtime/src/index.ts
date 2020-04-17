@@ -14,3 +14,4 @@ export * from './react/SDK/SDKRenderProp';
 export * from './react/SDK/useSDK';
 
 export * from './react/ErrorBoundary';
+export { getEditorParams, isEditor } from './utils';

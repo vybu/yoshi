@@ -1,4 +1,5 @@
 import React from 'react';
+import { isEditor } from '../../utils';
 import {
   WixSDKContext,
   EditorSDKContext,
@@ -15,11 +16,6 @@ declare global {
     __EDITOR_MODE__?: boolean;
   }
 }
-
-const isEditor = (): boolean => {
-  // We are checking SSR and CSR cases
-  return typeof window !== 'undefined' && !!window.__EDITOR_MODE__;
-};
 
 type IWixSDKConsumerEditorChildren = (
   sdk: IWixSDKEditorEnvironmentContext,
