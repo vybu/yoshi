@@ -1,10 +1,30 @@
 # Changelog
 
+## 4.57.2 (2020-04-19)
+
+#### :rocket: New Feature
+
+- `babel-preset-yoshi`
+  - [#2254](https://github.com/wix/yoshi/pull/2254) Allow using flag to prevent prop type optimization ([@NitayRabi](https://github.com/NitayRabi))
+- `yoshi-flow-editor`
+  - [#2231](https://github.com/wix/yoshi/pull/2231) Update editor entry-point to accept `default` export with function ([@yavorsky](https://github.com/yavorsky))
+
+#### :bug: Bug Fix
+
+- `jest-yoshi-preset`
+  - [#2235](https://github.com/wix/yoshi/pull/2235) Use an identity-proxy that supports both default & named imports ([@amitdahan](https://github.com/amitdahan))
+
+#### :nail_care: Polish
+
+- `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2252](https://github.com/wix/yoshi/pull/2252) Pass `componentId` to platform's Settings ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.57.1 (2020-04-16)
 
 #### :bug: Bug Fix
-* `yoshi-flow-editor-runtime`
-  * [#2246](https://github.com/wix/yoshi/pull/2246) Hotfix: return `wrappedController` for createControllers wrapper ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-flow-editor-runtime`
+  - [#2246](https://github.com/wix/yoshi/pull/2246) Hotfix: return `wrappedController` for createControllers wrapper ([@yavorsky](https://github.com/yavorsky))
 
 ## 4.57.0 (2020-04-16)
 
