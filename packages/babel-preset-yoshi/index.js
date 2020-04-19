@@ -1,6 +1,7 @@
 const DEFAULT_ENV = 'development';
 const DEFAULT_MODULES = 'commonjs';
 const env = process.env.BABEL_ENV || process.env.NODE_ENV || DEFAULT_ENV;
+const disablePropTypeRemoval = process.env.DISABLE_REACT_PROP_TYPE_REMOVAL;
 
 const requireDefault = path => {
   const required = require(path);
@@ -102,13 +103,16 @@ module.exports = function(api, opts = {}) {
         : [
             // Transform Object { ...rest, ...spread } to support old browsers
             requireDefault('@babel/plugin-proposal-object-rest-spread'),
-            !options.ignoreReact && [
-              // Remove PropTypes on react projects.
-              requireDefault('babel-plugin-transform-react-remove-prop-types'),
-              {
-                removeImport: true,
-              },
-            ],
+            !options.ignoreReact &&
+              !disablePropTypeRemoval && [
+                // Remove PropTypes on react projects.
+                requireDefault(
+                  'babel-plugin-transform-react-remove-prop-types',
+                ),
+                {
+                  removeImport: true,
+                },
+              ],
           ]),
     ].filter(Boolean),
   };
