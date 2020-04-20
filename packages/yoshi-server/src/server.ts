@@ -76,6 +76,9 @@ export default class Server {
           await new Promise(resolve => requireHttps(req, res, resolve));
           await new Promise(resolve => cookieParser()(req, res, resolve));
           await new Promise(resolve => wixExpressCsrf()(req, res, resolve));
+          await new Promise(resolve =>
+            this.context.renderer.middleware()(req, res, resolve),
+          );
           return await handler(req, res, params);
         }
       }

@@ -4613,6 +4613,22 @@
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-bi-logger-client/-/@wix/wix-bi-logger-client-0.0.785.tgz#56a46d22e41d97c2eace6ef0c135e1440646a53e"
   integrity sha1-VqRtIuQdl8Lqzm7wwTXhRAZGpT4=
 
+"@wix/wix-bootstrap-api@latest":
+  version "1.0.587"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-bootstrap-api/-/@wix/wix-bootstrap-api-1.0.587.tgz#997812bd66713ecbc32e6e73c027c906750f3285"
+  integrity sha1-mXgSvWZxPsvDLm5zwCfJBnUPMoU=
+  dependencies:
+    "@types/newrelic" "6.4.0"
+    "@types/node" "12.12.17"
+    "@wix/wix-artifact-info" "~1.0.83"
+    "@wix/wix-aspects" "~1.0.640"
+    "@wix/wix-common-aspects" "~1.0.0"
+    "@wix/wix-config" "~2.0.174"
+    "@wix/wix-json-rpc-client" "~0.1.564"
+    "@wix/wix-measured" "~1.0.506"
+    "@wix/wix-petri-client" "~0.1.714"
+    "@wix/wix-session-crypto" "~2.0.159"
+
 "@wix/wix-bootstrap-api@~1.0.0":
   version "1.0.567"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-bootstrap-api/-/@wix/wix-bootstrap-api-1.0.567.tgz#a67742d763ce893133ffd814b01aad993a3bd97b"
@@ -4683,6 +4699,18 @@
     "@wix/wix-bootstrap-api" "~1.0.0"
     "@wix/wix-express-aspects" "~1.0.843"
     "@wix/wnp-bootstrap-composer" "~0.1.1634"
+
+"@wix/wix-bootstrap-renderer@^1.0.0":
+  version "1.0.548"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-bootstrap-renderer/-/@wix/wix-bootstrap-renderer-1.0.548.tgz#7203b13cef8891517742236ec07849ecd5421865"
+  integrity sha1-cgOxPO+IkVF3QiNuwHhJ7NVCGGU=
+  dependencies:
+    "@wix/wix-bootstrap-api" latest
+    "@wix/wix-configurable" latest
+    "@wix/wix-run-mode" latest
+    cosmiconfig "^5.2.1"
+    ejs "~2.6.1"
+    lodash "^4.17.15"
 
 "@wix/wix-bootstrap-require-login@^1.0.0":
   version "1.0.1835"
@@ -4795,6 +4823,11 @@
   dependencies:
     fast-xml-parser "3.16.0"
     lodash "4.17.15"
+
+"@wix/wix-configurable@latest":
+  version "1.0.836"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-configurable/-/@wix/wix-configurable-1.0.836.tgz#64eca6a1946ebdca9e1224964157539f1310737e"
+  integrity sha1-ZOymoZRuvcqeEiSWQVdTnxMQc34=
 
 "@wix/wix-configurable@~1.0.0":
   version "1.0.831"
@@ -5181,6 +5214,11 @@
   dependencies:
     "@wix/wix-tracing" "~1.0.0"
     opentracing "0.14.4"
+
+"@wix/wix-run-mode@latest":
+  version "2.0.714"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-run-mode/-/@wix/wix-run-mode-2.0.714.tgz#4db24847424376ee4ce77b3fbc7047853a5cc725"
+  integrity sha1-TbJIR0JDdu5M53s/vHBHhTpcxyU=
 
 "@wix/wix-run-mode@~2.0.120":
   version "2.0.709"
@@ -10758,6 +10796,11 @@ ejs@2.7.4, ejs@^2.6.1, ejs@^2.7.4:
   version "2.7.4"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/ejs/-/ejs-2.7.4.tgz#48661287573dcc53e366c7a1ae52c3a120eec9ba"
   integrity sha1-SGYSh1c9zFPjZsehrlLDoSDuybo=
+
+ejs@~2.6.1:
+  version "2.6.2"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/ejs/-/ejs-2.6.2.tgz#3a32c63d1cd16d11266cd4703b14fec4e74ab4f6"
+  integrity sha1-OjLGPRzRbREmbNRwOxT+xOdKtPY=
 
 electron-to-chromium@^1.3.103, electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.390:
   version "1.3.404"
