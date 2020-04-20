@@ -6,27 +6,11 @@ import { FlowBMModel } from './createFlowBMModel';
 
 export default ({ pages, moduleId }: FlowBMModel) => {
   const artifactId = `com.wixpress.${getProjectArtifactId()}`;
-  const routeNamespace = moduleId;
-  const pagesDir = path.join(process.cwd(), 'src/pages');
-
-  const pageComponents = pages.map(({ componentPath }) => {
-    const { name } = path.parse(componentPath);
-
-    const pageComponentId = `${moduleId}.pages.${name}`;
-    const relativePath = path.relative(pagesDir, componentPath);
-
-    const route = path.join(
-      routeNamespace,
-      ...relativePath.split(path.delimiter).slice(0, -1),
-      name !== 'index' ? name : '',
-    );
-
-    return {
-      pageComponentId,
-      pageComponentName: pageComponentId,
-      route,
-    };
-  });
+  const pageComponents = pages.map(({ componentId, componentName, route }) => ({
+    pageComponentId: componentId,
+    pageComponentName: componentName,
+    route,
+  }));
 
   const template = {
     moduleId,

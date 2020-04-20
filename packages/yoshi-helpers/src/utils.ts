@@ -1,6 +1,6 @@
-import fs from 'fs';
 import path from 'path';
 import childProcess, { ChildProcess } from 'child_process';
+import fs from 'fs-extra';
 import mkdirp from 'mkdirp';
 import chokidar from 'chokidar';
 import chalk from 'chalk';
@@ -241,3 +241,6 @@ export const killSpawnProcessAndHisChildren = (child: ChildProcess) => {
     });
   });
 };
+
+export const readJsonSilent = (jsonPath: string): Record<string, any> =>
+  !fs.existsSync(jsonPath) ? {} : fs.readJSONSync(jsonPath);

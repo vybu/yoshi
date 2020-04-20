@@ -9,7 +9,6 @@ const generateModuleCode = ({
   pages,
   moduleInitPath,
   localePath,
-  moduleConfig,
 }: FlowBMModel) => `
 import { createModule } from 'yoshi-flow-bm-runtime';
 
@@ -46,7 +45,6 @@ createModule({
   ], // ${JSON.stringify(methods)},
   ${moduleInitPath ? `moduleInit: require('${moduleInitPath}').default,` : ''}
   loadLocale: (locale = 'en') => import(/* webpackChunkName: "[request]" */\`${localePath}/\${locale}\`),
-  config: ${JSON.stringify(moduleConfig)},
 });`;
 
 export const moduleEntryPath = path.resolve(__dirname, '../tmp/module.ts');

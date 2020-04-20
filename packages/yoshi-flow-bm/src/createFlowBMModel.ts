@@ -1,13 +1,26 @@
 import path from 'path';
 import globby from 'globby';
-import { getProjectArtifactId } from 'yoshi-helpers/build/utils';
 import { watch } from 'chokidar';
+import {
+  readModuleConfig,
+  readExportedComponentConfig,
+  readMethodConfig,
+  readPageConfig,
+} from './config';
+import {
+  EXPORTED_COMPONENTS_PATTERN,
+  METHODS_PATTERN,
+  MODULE_INIT_PATTERN,
+  PAGES_PATTERN,
+  TRANSLATIONS_DIR,
+} from './constants';
 
 export interface ExportedComponentModel {
   componentId: string;
   componentPath: string;
 }
 export interface PageModel extends ExportedComponentModel {
+  componentName: string;
   route: string;
 }
 export interface MethodModel {
@@ -22,15 +35,7 @@ export interface FlowBMModel {
   methods: Array<MethodModel>;
   moduleInitPath?: string;
   localePath: string;
-  moduleConfig: any;
 }
-
-const exts = '{js,jsx,ts,tsx}';
-const pagesPattern = `src/pages/**/*.${exts}`;
-const componentsPattern = `src/exported-components/**/*.${exts}`;
-const methodsPattern = `src/methods/**/*.${exts}`;
-const moduleInitPattern = `src/moduleInit.${exts}`;
-const translationsPattern = 'translations';
 
 export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
   const globFiles = (pattern: string) =>
@@ -44,38 +49,68 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
       expandDirectories: false,
     });
 
-  const moduleId = getProjectArtifactId(cwd)!;
+  const config = readModuleConfig(cwd);
 
-  const pages = globFiles(pagesPattern).map(pagePath => ({
-    componentId: `${moduleId}.pages.${path.parse(pagePath).name}`,
-    componentPath: pagePath,
-    route: '', // TODO: Deferred to the "render ERB" feature, unnecessary until then
-  }));
-
-  const exportedComponents = globFiles(componentsPattern).map(
-    componentPath => ({
-      componentId: `${moduleId}.exported-components.${
-        path.parse(componentPath).name
-      }`,
+  const getPageModel = (componentPath: string): PageModel => {
+    const { name } = path.parse(componentPath);
+    const { componentId, componentName } = readPageConfig(
+      config,
       componentPath,
-    }),
+    );
+    const route = path.join(
+      config.routeNamespace,
+      ...path
+        .relative(path.join(cwd, PAGES_PATTERN), componentPath)
+        .split(path.delimiter)
+        .slice(0, -1),
+      name !== 'index' ? name : '',
+    );
+
+    return {
+      componentId,
+      componentName,
+      componentPath,
+      route,
+    };
+  };
+
+  const getExportedComponentModel = (
+    componentPath: string,
+  ): ExportedComponentModel => {
+    const { componentId } = readExportedComponentConfig(config, componentPath);
+
+    return {
+      componentId,
+      componentPath,
+    };
+  };
+
+  const getMethodModel = (methodPath: string): MethodModel => {
+    const { methodId } = readMethodConfig(config, methodPath);
+
+    return {
+      methodId,
+      methodPath,
+    };
+  };
+
+  const pages = globFiles(PAGES_PATTERN).map(getPageModel);
+
+  const exportedComponents = globFiles(EXPORTED_COMPONENTS_PATTERN).map(
+    getExportedComponentModel,
   );
 
-  const methods = globFiles(methodsPattern).map(methodPath => ({
-    methodId: `${moduleId}.methods.${path.parse(methodPath).name}`,
-    methodPath,
-  }));
+  const methods = globFiles(METHODS_PATTERN).map(getMethodModel);
 
-  const [moduleInitPath] = globFiles(moduleInitPattern);
-  const [localePath] = globDirs(translationsPattern);
+  const [moduleInitPath] = globFiles(MODULE_INIT_PATTERN);
+  const [localePath] = globDirs(TRANSLATIONS_DIR);
 
   return {
-    moduleId,
+    moduleId: config.moduleId,
     pages,
     exportedComponents,
     methods,
     localePath,
-    moduleConfig: {},
     moduleInitPath,
   };
 }
@@ -86,11 +121,11 @@ export function watchFlowBMModel(
 ) {
   const watcher = watch(
     [
-      pagesPattern,
-      componentsPattern,
-      methodsPattern,
-      moduleInitPattern,
-      translationsPattern,
+      PAGES_PATTERN,
+      EXPORTED_COMPONENTS_PATTERN,
+      METHODS_PATTERN,
+      MODULE_INIT_PATTERN,
+      TRANSLATIONS_DIR,
     ],
     {
       cwd,
