@@ -84,6 +84,7 @@ function createClientWebpackConfig({
     includeStyleLoaders,
     forceEmitSourceMaps: withLocalSourceMaps,
     useYoshiServer,
+    useProgressBar: false,
     ...defaultOptions,
   });
 
@@ -121,6 +122,7 @@ function createServerWebpackConfig({
     target: 'node',
     isDev: isDebug,
     isHot: isHmr,
+    useProgressBar: false,
     ...defaultOptions,
   });
 

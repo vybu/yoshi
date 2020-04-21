@@ -86,6 +86,7 @@ export function createClientWebpackConfig(
     isDev,
     isHot,
     suricate,
+    isMonorepo: true,
     isAnalyze,
     forceEmitSourceMaps,
     forceEmitStats,
@@ -165,6 +166,7 @@ export function createServerWebpackConfig(
     target: 'node',
     isDev,
     isHot,
+    isMonorepo: true,
     useNodeExternals: !isThunderboltElementModule(pkg),
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
@@ -214,6 +216,7 @@ export function createWebWorkerWebpackConfig(
     target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
     isDev,
     isHot,
+    isMonorepo: true,
     createEjsTemplates: pkg.config.experimentalBuildHtml,
     ...defaultOptions,
   });
@@ -256,6 +259,7 @@ export function createWebWorkerServerWebpackConfig(
     target: isThunderboltElementModule(pkg) ? 'async-webworker' : 'webworker',
     isDev,
     isHot,
+    isMonorepo: true,
     createWorkerManifest: false,
     ...defaultOptions,
   });

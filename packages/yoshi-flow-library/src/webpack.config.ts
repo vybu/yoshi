@@ -44,6 +44,7 @@ export function createClientWebpackConfig(
     exportAsLibraryName: library,
     cssModules: true,
     separateCss: true,
+    useProgressBar: false,
   });
 
   clientConfig.entry = isSingleEntry(entry)

@@ -39,6 +39,7 @@ import RtlCssPlugin from 'rtlcss-webpack-plugin';
 import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
 // @ts-ignore - missing types
 import { mdsvex } from 'mdsvex';
+import WebpackBar from 'webpackbar';
 import { resolveNamespaceFactory } from './@stylable/node';
 import StylableWebpackPlugin from './@stylable/webpack-plugin';
 import shouldTranspileFile from './utils/should-transpile-file';
@@ -69,6 +70,47 @@ const sassIncludePaths = ['node_modules', 'node_modules/compass-mixins/lib'];
 
 function prependNameWith(filename: string, prefix: string) {
   return filename.replace(/\.[0-9a-z]+$/i, match => `.${prefix}${match}`);
+}
+
+function stripOrganization(name: string): string {
+  return name.slice(name.indexOf('/') + 1);
+}
+
+function getProgressBarInfo(
+  configName: string,
+  isDev: boolean,
+  isMonorepo: boolean,
+  packageName: string,
+): { name: string; color: string } {
+  const longestNameLength = 19;
+
+  function getObject() {
+    if (configName === 'client') {
+      if (isDev) {
+        return { name: `Client [debug]`, color: 'blue' };
+      } else {
+        return { name: `Client [production]`, color: 'green' };
+      }
+    } else if (configName === 'web-worker') {
+      if (isDev) {
+        return { name: `Worker [debug]`, color: 'magenta' };
+      } else {
+        return { name: `Worker [production]`, color: 'cyan' };
+      }
+    } else {
+      return { name: `Server [production]`, color: 'orange' };
+    }
+  }
+
+  const obj = getObject();
+
+  obj.name = obj.name.padEnd(longestNameLength);
+
+  if (isMonorepo) {
+    obj.name = `${stripOrganization(packageName)}\n  ${obj.name}`;
+  }
+
+  return obj;
 }
 
 const getCommonStylbleWebpackConfig = (name: string) => ({
@@ -243,6 +285,7 @@ export function createBaseWebpackConfig({
   separateCss = false,
   keepFunctionNames = false,
   suricate = false,
+  isMonorepo = false,
   separateStylableCss = false,
   experimentalRtlCss = false,
   cssModules = true,
@@ -261,6 +304,7 @@ export function createBaseWebpackConfig({
   nodeExternalsWhitelist = [],
   useAssetRelocator = false,
   useYoshiServer = false,
+  useProgressBar = true,
   createWorkerManifest = true,
   useCustomSourceMapPlugin = false,
   forceEmitStats = false,
@@ -281,6 +325,7 @@ export function createBaseWebpackConfig({
   separateCss?: boolean;
   keepFunctionNames?: boolean;
   suricate?: boolean;
+  isMonorepo?: boolean;
   separateStylableCss?: boolean;
   experimentalRtlCss?: boolean;
   cssModules?: boolean;
@@ -299,6 +344,7 @@ export function createBaseWebpackConfig({
   nodeExternalsWhitelist?: Array<RegExp>;
   useAssetRelocator?: boolean;
   useYoshiServer?: boolean;
+  useProgressBar?: boolean;
   createWorkerManifest?: boolean;
   // changes source map to include public path and
   // use plugin directly instead of "devtool" option
@@ -669,6 +715,14 @@ export function createBaseWebpackConfig({
               }),
             ]
           : []
+        : []),
+
+      ...(!inTeamCity && useProgressBar
+        ? [
+            new WebpackBar(
+              getProgressBarInfo(configName, isDev, isMonorepo, name),
+            ),
+          ]
         : []),
     ],
 
