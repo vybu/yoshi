@@ -222,15 +222,17 @@ For example:
 }
 ```
 
-## transpileTests
+## export s
 
-An option to not transpile tests with Babel (via `@babel/register`). Defaults to `true`.
-
-## exports
+> Please use **exports** and not export, there is a bug that the search doesn't work
 
 If set, export the bundle as library. `yoshi.exports` is the name.
 
 Use this if you are writing a library and want to publish it as single file. Library will be exported with `UMD` format.
+
+## transpileTests
+
+An option to not transpile tests with Babel (via `@babel/register`). Defaults to `true`.
 
 ## hmr
 
