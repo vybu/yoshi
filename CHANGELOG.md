@@ -1,5 +1,28 @@
 # Changelog
 
+## 4.58.0 (2020-04-21)
+
+#### :rocket: New Feature
+* `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
+  * [#2267](https://github.com/wix/yoshi/pull/2267) Add a progress bar for build & start commands ([@ranyitz](https://github.com/ranyitz))
+* `yoshi-server`
+  * [#2257](https://github.com/wix/yoshi/pull/2257) Add an option to use `@wix/wix-bootstrap-renderer` ([@yanivefraim](https://github.com/yanivefraim))
+* `yoshi-common`
+  * [#2224](https://github.com/wix/yoshi/pull/2224) Add `editorx` domains to webpack-dev-server's allowed hosts ([@ranyitz](https://github.com/ranyitz))
+
+#### :building_construction: Templates
+* `create-yoshi-app`
+  * [#2225](https://github.com/wix/yoshi/pull/2225) Fix flow library template tsconfig to support es5 transpilation ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+* [#2266](https://github.com/wix/yoshi/pull/2266) Change exports to export s to make the search work on API page ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+* `yoshi-flow-monorepo`
+  * [#2256](https://github.com/wix/yoshi/pull/2256) Bundle `editor-elements-library` similar to `thudnerbolt-elements` ([@NitayRabi](https://github.com/NitayRabi))
+* Other
+  * [#2258](https://github.com/wix/yoshi/pull/2258) Remove specific names and use a team as the codeowners of the repo ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.57.2 (2020-04-19)
 
 #### :rocket: New Feature
