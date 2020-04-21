@@ -1,6 +1,6 @@
 {
   "name": "yoshi-common",
-  "version": "4.57.2",
+  "version": "4.58.0",
   "keywords": [
     "yoshi",
     "common"
@@ -25,10 +25,10 @@
     "@types/terser-webpack-plugin": "^1.2.1",
     "@types/watchpack": "1.1.5",
     "@types/webpack": "4.41.11",
-    "@types/webpackbar": "4.0.0",
     "@types/webpack-bundle-analyzer": "2.13.3",
     "@types/webpack-manifest-plugin": "2.1.0",
     "@types/webpack-node-externals": "1.7.1",
+    "@types/webpackbar": "4.0.0",
     "@types/xmldoc": "1.1.4",
     "type-fest": "0.13.1"
   },
@@ -101,17 +101,17 @@
     "wait-port": "0.2.7",
     "watchpack": "1.6.1",
     "webpack": "4.42.1",
-    "webpackbar": "4.0.0",
     "webpack-bundle-analyzer": "3.7.0",
     "webpack-dev-server": "3.2.1",
     "webpack-hot-middleware": "2.25.0",
     "webpack-manifest-plugin": "2.2.0",
     "webpack-sources": "1.4.3",
     "webpack-stats-plugin": "0.3.1",
+    "webpackbar": "4.0.0",
     "wix-tpa-style-loader": "1.0.13",
     "worker-loader": "2.0.0",
     "xmldoc": "1.1.2",
-    "yoshi-config": "4.56.0",
-    "yoshi-helpers": "4.57.2"
+    "yoshi-config": "4.58.0",
+    "yoshi-helpers": "4.58.0"
   }
 }
