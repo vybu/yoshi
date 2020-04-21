@@ -46,10 +46,9 @@ const createDefaultOptions = (pkg: PackageGraphNode) => {
   };
 };
 
-// TODO - thunderbolt-elements should be removed once editor-elements-registry is source of truth for comps
+// TODO - thunderbolt-elements should be removed once editor-elements-library is source of truth for comps
 const isThunderboltElementModule = (pkg: PackageGraphNode) =>
-  pkg.name === 'thunderbolt-elements' ||
-  pkg.name === 'editor-elements-registry';
+  pkg.name === 'thunderbolt-elements' || pkg.name === 'editor-elements-library';
 
 const isThunderboltAppModule = (pkg: PackageGraphNode) =>
   pkg.name === '@wix/thunderbolt-app';
