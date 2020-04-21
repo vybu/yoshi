@@ -34,7 +34,7 @@ export interface FlowBMModel {
   exportedComponents: Array<ExportedComponentModel>;
   methods: Array<MethodModel>;
   moduleInitPath?: string;
-  localePath: string;
+  localePath?: string;
 }
 
 export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {

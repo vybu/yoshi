@@ -27,7 +27,7 @@ interface ModuleOptions {
     methodId: string;
     loadMethod(): (...args: Array<any>) => any;
   }>;
-  loadLocale: (locale?: string) => Record<string, string>;
+  loadLocale?: (locale?: string) => Record<string, string>;
   moduleInit: (
     this: any,
     _module: BusinessManagerModule,
@@ -76,9 +76,11 @@ export default function createModule({
             // TODO: Do this the react-loadable way
             const [Component, translations] = await Promise.all([
               loadComponent(),
-              loadLocale(
-                ((this as any)._moduleParams as IBMModuleParams).locale,
-              ),
+              loadLocale
+                ? loadLocale(
+                    ((this as any)._moduleParams as IBMModuleParams).locale,
+                  )
+                : {},
               experiments.ready(),
             ]);
 
@@ -107,9 +109,11 @@ export default function createModule({
             // TODO: Do this the react-loadable way
             const [Component, translations] = await Promise.all([
               loadComponent(),
-              loadLocale(
-                ((this as any)._moduleParams as IBMModuleParams).locale,
-              ),
+              loadLocale
+                ? loadLocale(
+                    ((this as any)._moduleParams as IBMModuleParams).locale,
+                  )
+                : {},
               experiments.ready(),
             ]);
 

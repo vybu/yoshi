@@ -44,7 +44,11 @@ createModule({
     )}
   ], // ${JSON.stringify(methods)},
   ${moduleInitPath ? `moduleInit: require('${moduleInitPath}').default,` : ''}
-  loadLocale: (locale = 'en') => import(/* webpackChunkName: "[request]" */\`${localePath}/\${locale}\`),
+  ${
+    localePath
+      ? `loadLocale: (locale = 'en') => import(/* webpackChunkName: "[request]" */\`${localePath}/\${locale}\`),`
+      : ''
+  }
 });`;
 
 export const moduleEntryPath = path.resolve(__dirname, '../tmp/module.ts');
