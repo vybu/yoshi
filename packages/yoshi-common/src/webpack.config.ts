@@ -60,6 +60,10 @@ const disableModuleConcat = process.env.DISABLE_MODULE_CONCATENATION === 'true';
 
 const disableStatsOutput = process.env.DISABLE_WEBPACK_STATS_OUTPUT === 'true';
 
+const customAnalyzerPort: number | null = process.env.ANALYZE_PORT
+  ? Number(process.env.ANALYZE_PORT)
+  : null;
+
 const reScript = /\.js?$/;
 const reStyle = /\.(css|less|scss|sass)$/;
 const reAssets = /\.(png|jpg|jpeg|gif|woff|woff2|ttf|otf|eot|wav|mp3)$/;
@@ -384,6 +388,11 @@ export function createBaseWebpackConfig({
     ...nodeExternalsWhitelist,
   ];
 
+  const isBrowser = process.env.BROWSER !== 'none';
+  // We can take value from env variable mostly for internal purposes and not opening this option to be 'public'
+  // 'auto' should satisfy all user's needs. It will auto generate available port and use it.
+  const analyzerPort = customAnalyzerPort || (isBrowser ? 'auto' : undefined);
+
   const config: webpack.Configuration = {
     context: join(SRC_DIR),
 
@@ -682,7 +691,8 @@ export function createBaseWebpackConfig({
       ...(isAnalyze
         ? [
             new BundleAnalyzerPlugin({
-              openAnalyzer: process.env.BROWSER !== 'none',
+              openAnalyzer: isBrowser,
+              analyzerPort,
             }),
           ]
         : []),

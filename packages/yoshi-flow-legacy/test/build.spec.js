@@ -895,7 +895,9 @@ describe('Aggregator: Build', () => {
           'src/client.js': '',
           'package.json': fx.packageJson(),
         })
-        .spawn('build', ['--analyze']);
+        .spawn('build', ['--analyze'], {
+          ANALYZE_PORT: analyzerServerPort,
+        });
     });
 
     it('should serve webpack-bundle-analyzer server', () => {

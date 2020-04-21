@@ -242,6 +242,7 @@ export default class Scripts {
       env: {
         ...defaultOptions,
         ...localEnv,
+        ANALYZE_PORT: '8888',
       },
     });
 
