@@ -1,5 +1,14 @@
 # Changelog
 
+## 4.59.0 (2020-04-22)
+
+#### :rocket: New Feature
+* [#2276](https://github.com/wix/yoshi/pull/2276) Brand new website ([@ranyitz](https://github.com/ranyitz))
+
+#### :bug: Bug Fix
+* `yoshi-common`, `yoshi-flow-legacy`
+  * [#2272](https://github.com/wix/yoshi/pull/2272) Generate automatically bundle analyzer port ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.58.0 (2020-04-21)
 
 #### :rocket: New Feature
