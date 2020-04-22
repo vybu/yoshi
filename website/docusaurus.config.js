@@ -40,12 +40,8 @@ module.exports = {
           position: 'left',
           items: [
             {
-              label: 'next',
-              to: 'docs/next/welcome',
-            },
-            {
               label: versions[0],
-              to: 'docs/api/configuration',
+              to: 'docs/welcome',
             },
             ...versions.slice(1).map(version => ({
               label: version,
@@ -59,27 +55,27 @@ module.exports = {
           items: [
             {
               label: 'App Flow',
-              to: 'docs/next/app-flow',
+              to: 'docs/app-flow',
             },
             {
               label: 'Library Flow',
-              to: 'docs/next/library-flow',
+              to: 'docs/library-flow',
             },
             // {
             //   label: 'Editor Flow',
-            //   to: 'docs/next/editor-flow',
+            //   to: 'docs/editor-flow',
             // },
             // {
             //   label: 'Business Manager Flow',
-            //   to: 'docs/next/business-manager-flow',
+            //   to: 'docs/business-manager-flow',
             // },
             // {
             //   label: 'Monorepo Flow',
-            //   to: 'docs/next/monorepo-flow',
+            //   to: 'docs/monorepo-flow',
             // },
             {
               label: 'Legacy Flow',
-              to: 'docs/next/legacy-flow',
+              to: 'docs/legacy-flow',
             },
           ],
         },
@@ -107,7 +103,7 @@ module.exports = {
           items: [
             {
               label: 'Get Started',
-              to: 'docs/next/welcome',
+              to: 'docs/welcome',
             },
           ],
         },

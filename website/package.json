@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "//": "When we develop locally we prefer to see the next branch",
-    "start": "docusaurus start --no-open & open http://localhost:3000/yoshi/docs/next/api/configuration",
+    "start": "docusaurus start",
     "build": "docusaurus build",
     "version": "docusaurus docs:version",
     "publish-gh-pages": "docusaurus deploy",
