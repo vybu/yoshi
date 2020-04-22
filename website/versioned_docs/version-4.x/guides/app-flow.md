@@ -1,8 +1,7 @@
 ---
-id: version-4.x-app-flow
+id: app-flow
 title: App Flow
 sidebar_label: App Flow
-original_id: app-flow
 ---
 
 We want to deliver awesome developer experience, one that's specific to the type of application that you build.

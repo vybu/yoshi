@@ -1,16 +1,32 @@
 {
-  "name": "yoshi-website",
+  "name": "my-website",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "examples": "docusaurus-examples",
-    "start": "docusaurus-start",
-    "build": "docusaurus-build",
-    "publish-gh-pages": "docusaurus-publish",
-    "publish-surge": "teamcity-surge-autorelease --dist=build/yoshi --verbose",
-    "write-translations": "docusaurus-write-translations",
-    "version": "docusaurus-version",
-    "rename-version": "docusaurus-rename-version"
+    "//": "When we develop locally we prefer to see the next branch",
+    "start": "docusaurus start --no-open & open http://localhost:3000/yoshi/docs/next/api/configuration",
+    "build": "docusaurus build",
+    "version": "docusaurus docs:version",
+    "publish-gh-pages": "docusaurus deploy",
+    "publish-surge": "npx teamcity-surge-autorelease --dist=build --verbose"
   },
-  "devDependencies": {
-    "docusaurus": "^1.8.1"
+  "dependencies": {
+    "@docusaurus/core": "^2.0.0-alpha.50",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.50",
+    "classnames": "^2.2.6",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

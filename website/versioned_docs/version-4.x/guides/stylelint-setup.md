@@ -1,8 +1,7 @@
 ---
-id: version-4.x-stylelint-setup
+id: stylelint-setup
 title: Stylelint Setup
 sidebar_label: Stylelint Setup
-original_id: stylelint-setup
 ---
 
 ## Introduction

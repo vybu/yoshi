@@ -1,8 +1,7 @@
 ---
-id: version-3.x-project-types
+id: project-types
 title: Project Types
 sidebar_label: Project Types
-original_id: project-types
 ---
 
 The following Project Types can be generated using `create-yoshi-app`:

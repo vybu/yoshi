@@ -1,8 +1,7 @@
 ---
-id: version-3.x-usage
+id: usage
 title: Usage
 sidebar_label: Usage
-original_id: usage
 ---
 
 ### `npm start`

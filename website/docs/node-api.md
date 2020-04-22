@@ -1,5 +1,5 @@
 ---
-id: node
+id: node-api
 title: Node API
 sidebar_label: Node API
 ---

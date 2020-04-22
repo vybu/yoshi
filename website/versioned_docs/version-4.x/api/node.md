@@ -1,8 +1,7 @@
 ---
-id: version-4.x-node
+id: node
 title: Node API
 sidebar_label: Node API
-original_id: node
 ---
 
 ## Yoshi Serve

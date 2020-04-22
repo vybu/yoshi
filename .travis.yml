@@ -6,7 +6,7 @@ install: true
 cache:
   yarn: true
 env:
-  - WEBSITE_CHANGED = git diff --name-only $TRAVIS_COMMIT_RANGE | grep -E "website/|docs/"
+  - WEBSITE_CHANGED = git diff --name-only $TRAVIS_COMMIT_RANGE | grep -E "website"
 jobs:
   include:
     - name: "website:publish"

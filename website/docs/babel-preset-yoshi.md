@@ -1,7 +1,7 @@
 ---
-id: babel-setup
-title: Babel Setup
-sidebar_label: Babel Setup
+id: babel-preset-yoshi
+title: Babel Preset Yoshi
+sidebar_label: Babel Preset Yoshi
 ---
 
 ## Introduction

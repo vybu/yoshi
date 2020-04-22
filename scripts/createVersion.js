@@ -63,7 +63,7 @@ Promise.resolve()
       console.log();
     }
 
-    const createVersionedDocsCommand = `npm run version "${majorVersion}"`;
+    const createVersionedDocsCommand = `yarn run version "${majorVersion}"`;
 
     execa.sync(createVersionedDocsCommand, {
       cwd: websiteDirectory,

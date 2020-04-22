@@ -1,8 +1,7 @@
 ---
-id: version-4.x-create-app
+id: create-app
 title: Create App
 sidebar_label: Create App
-original_id: create-app
 ---
 
 ```sh
@@ -21,5 +20,5 @@ npm start
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
 
 <p align='center'>
-  <img src='https://yoshi-assets.surge.sh/create-yoshi-app.gif' alt='create-yoshi-app'>
+  <img src='https://yoshi-assets.surge.sh/create-yoshi-app.gif' alt='create-yoshi-app' />
 </p>

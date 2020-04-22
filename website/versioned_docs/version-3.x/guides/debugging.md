@@ -1,8 +1,7 @@
 ---
-id: version-3.x-debugging
+id: debugging
 title: Debugging
 sidebar_label: Debugging
-original_id: debugging
 ---
 
 This guide will help you get started with debugging. There are multiple things you can debug and you need a different configuration for each one:

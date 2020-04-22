@@ -1,8 +1,7 @@
 ---
-id: version-3.x-svg
+id: svg
 title: How to use SVG?
 sidebar_label: How to use SVG?
-original_id: svg
 ---
 
 There are few ways of using SVG:

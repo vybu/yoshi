@@ -1,8 +1,7 @@
 ---
-id: version-3.x-split-chunks
+id: split-chunks
 title: Split Chunks
 sidebar_label: Split Chunks
-original_id: split-chunks
 ---
 
 ## How do I separately bundle common logic for multiple entries?

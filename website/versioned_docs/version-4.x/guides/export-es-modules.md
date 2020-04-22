@@ -1,8 +1,7 @@
 ---
-id: version-4.x-export-es-modules
+id: export-es-modules
 title: Export ES Modules
 sidebar_label: Export ES Modules
-original_id: export-es-modules
 ---
 
 ## How to export ES modules along with commonjs?

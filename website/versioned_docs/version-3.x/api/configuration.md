@@ -1,8 +1,7 @@
 ---
-id: version-3.x-configuration
+id: configuration
 title: Configuration
 sidebar_label: Configuration
-original_id: configuration
 ---
 
 Configurations are meant to be inside `package.json` under `yoshi` section or by passing flags to common tasks, for example:

@@ -1,8 +1,7 @@
 ---
-id: version-3.x-babel-setup
+id: babel-setup
 title: Babel Setup
 sidebar_label: Babel Setup
-original_id: babel-setup
 ---
 
 ## Introduction

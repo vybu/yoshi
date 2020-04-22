@@ -1,8 +1,7 @@
 ---
-id: version-4.x-cli
+id: cli
 title: CLI Options
 sidebar_label: CLI Options
-original_id: cli
 ---
 
 # Top level flags

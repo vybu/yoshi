@@ -1,10 +1,10 @@
 ---
-id: project-types
-title: Project Types
-sidebar_label: Project Types
+id: templates
+title: Templates
+sidebar_label: Templates
 ---
 
-The following Project Types can be generated using `create-yoshi-app`:
+The following Templates can be generated using `create-yoshi-app`:
 
 ## Client
 
@@ -34,5 +34,4 @@ For more information head to the [official docs](<https://bo.wix.com/wix-docs/cl
 
 ---
 
-For more information, see [the templates](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates)
-for those project types
+For more information, see [the templates on yoshi's Github repo](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates)

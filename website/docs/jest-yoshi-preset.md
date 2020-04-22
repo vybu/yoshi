@@ -1,7 +1,7 @@
 ---
-id: jest-setup
-title: Jest Setup
-sidebar_label: Jest Setup
+id: jest-yoshi-preset
+title: Jest Yoshi Preset
+sidebar_label: Jest Yoshi Preset
 ---
 
 ## Introduction

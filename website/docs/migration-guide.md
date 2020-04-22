@@ -1,7 +1,7 @@
 ---
-id: version-4
-title: Version 4
-sidebar_label: Version 4
+id: migration-guide
+title: Version 4 Migration guide
+sidebar_label: Version 4 Migration guide
 ---
 
 Like any major release, Yoshi v4 comes with some breaking changes. It's recommended to go over them to make the migration go easily. If you encounter any problems, please [open an issue](https://github.com/wix/yoshi/issues/new/choose).

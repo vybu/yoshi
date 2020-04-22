@@ -1,8 +1,7 @@
 ---
-id: version-3.x-jest-setup
+id: jest-setup
 title: Jest Setup
 sidebar_label: Jest Setup
-original_id: jest-setup
 ---
 
 ## Introduction
