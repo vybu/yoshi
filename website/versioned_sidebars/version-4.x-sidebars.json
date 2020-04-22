@@ -1,36 +1,102 @@
 {
-  "version-4.x-docs": {
-    "Getting Started": [
-      "version-4.x/getting-started/create-app",
-      "version-4.x/getting-started/usage",
-      "version-4.x/getting-started/project-types"
-    ],
-    "API": [
-      "version-4.x/api/configuration",
-      "version-4.x/api/cli",
-      "version-4.x/api/node"
-    ],
-    "Guides": [
-      "version-4.x/guides/ab-translate",
-      "version-4.x/guides/assets",
-      "version-4.x/guides/bundle-analyze",
-      "version-4.x/guides/debugging",
-      "version-4.x/guides/app-flow",
-      "version-4.x/guides/disable-css-modules",
-      "version-4.x/guides/enzyme-support",
-      "version-4.x/guides/jest-setup",
-      "version-4.x/guides/babel-setup",
-      "version-4.x/guides/stylelint-setup",
-      "version-4.x/guides/export-es-modules",
-      "version-4.x/guides/hmr",
-      "version-4.x/guides/momentjs-optimization",
-      "version-4.x/guides/split-chunks",
-      "version-4.x/guides/svg",
-      "version-4.x/guides/managing-dependencies"
-    ],
-    "Migration": [
-      "version-4.x/migration/version-3",
-      "version-4.x/migration/version-4"
-    ]
-  }
+  "version-4.x/docs": [
+    {
+      "type": "doc",
+      "id": "version-4.x/welcome"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/create-yoshi-app"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/templates"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/app-flow"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/library-flow"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/legacy-flow"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/babel-preset-yoshi"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/jest-yoshi-preset"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/node-api"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/migration-guide"
+    },
+    {
+      "type": "category",
+      "label": "Legacy-Guides",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/ab-translate"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/assets"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/bundle-analyze"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/debugging"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/disable-css-modules"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/enzyme-support"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/stylelint-setup"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/export-es-modules"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/hmr"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/momentjs-optimization"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/split-chunks"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/svg"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.x/legacy-guides/managing-dependencies"
+        }
+      ]
+    }
+  ]
 }
