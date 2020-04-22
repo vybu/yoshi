@@ -312,6 +312,7 @@ export function createBaseWebpackConfig({
   createWorkerManifest = true,
   useCustomSourceMapPlugin = false,
   forceEmitStats = false,
+  forceMinimizeServer = false,
 }: {
   name: string;
   configName:
@@ -354,6 +355,7 @@ export function createBaseWebpackConfig({
   // use plugin directly instead of "devtool" option
   useCustomSourceMapPlugin?: boolean;
   forceEmitStats?: boolean;
+  forceMinimizeServer?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -501,7 +503,7 @@ export function createBaseWebpackConfig({
             // Do not modify/set the value of `process.env.NODE_ENV`
             nodeEnv: false,
             // Faster build time and possibly easier debugging
-            minimize: false,
+            minimize: forceMinimizeServer,
           },
 
     plugins: [

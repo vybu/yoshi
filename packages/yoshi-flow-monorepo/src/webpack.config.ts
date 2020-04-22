@@ -170,6 +170,7 @@ export function createServerWebpackConfig(
     useNodeExternals: !isThunderboltElementModule(pkg),
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
+    forceMinimizeServer: isThunderboltElementModule(pkg),
     ...defaultOptions,
   });
 
