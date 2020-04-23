@@ -72,6 +72,13 @@ const staticAssetName = 'media/[name].[hash:8].[ext]';
 
 const sassIncludePaths = ['node_modules', 'node_modules/compass-mixins/lib'];
 
+function addExtensionPrefix(filePath: string, prefix: string) {
+  const lastDotIndex = filePath.lastIndexOf('.');
+  const extension = filePath.slice(lastDotIndex);
+
+  return `${filePath.slice(0, lastDotIndex)}.${prefix}${extension}`;
+}
+
 function prependNameWith(filename: string, prefix: string) {
   return filename.replace(/\.[0-9a-z]+$/i, match => `.${prefix}${match}`);
 }
@@ -705,7 +712,12 @@ export function createBaseWebpackConfig({
             new StatsWriterPlugin({
               // The plugin does not accept absolute path, so we have to navigate relatively from bundle location
               // /dist/statics to stats file /target/webpack-stats.json
-              filename: path.join('../../', STATS_FILE),
+              filename: path.join(
+                '../../',
+                configName === 'client'
+                  ? STATS_FILE
+                  : addExtensionPrefix(STATS_FILE, configName),
+              ),
               stats: {
                 all: true,
                 maxModules: Infinity,
