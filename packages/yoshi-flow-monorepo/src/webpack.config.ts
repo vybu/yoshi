@@ -14,7 +14,7 @@ import {
   isTypescriptProject,
   isSingleEntry,
   inTeamCity,
-  isProduction,
+  isProduction as isProductionQuery,
 } from 'yoshi-helpers/build/queries';
 import { STATICS_DIR, SERVER_ENTRY } from 'yoshi-config/build/paths';
 import ManifestPlugin from 'yoshi-common/build/manifest-webpack-plugin';
@@ -22,6 +22,7 @@ import { isObject } from 'lodash';
 import { PackageGraphNode } from './load-package-graph';
 
 const useTypeScript = isTypescriptProject();
+const isProduction = isProductionQuery();
 
 const defaultSplitChunksConfig = {
   chunks: 'all',
@@ -32,7 +33,7 @@ const defaultSplitChunksConfig = {
 const createDefaultOptions = (pkg: PackageGraphNode) => {
   const separateCss =
     pkg.config.separateCss === 'prod'
-      ? inTeamCity() || isProduction()
+      ? inTeamCity() || isProduction
       : pkg.config.separateCss;
 
   return {
@@ -131,15 +132,63 @@ export function createClientWebpackConfig(
 
   const useSplitChunks = pkg.config.splitChunks;
 
-  clientConfig.plugins!.push(
-    new StatsWriterPlugin({
-      filename: `stats${isDev ? '' : '.min'}.json`,
-      stats: {
-        all: true,
-        maxModules: Infinity,
-      },
-    }),
-  );
+  // Thunderbolt and editor elements need a smaller version
+  // of the stats to be uploaded to the cdn
+  // This is being analyzed later on during render time
+  if (isThunderboltElementModule(pkg) || isThunderboltAppModule(pkg)) {
+    let statsFileName: string | null = null;
+
+    // build command, production bundle
+    if (isProduction && !isDev) {
+      statsFileName = 'stats.min.json';
+    }
+
+    // start command, development bundle
+    if (!isProduction && isDev) {
+      statsFileName = 'stats.json';
+    }
+
+    // We want to emit the production stats only when running yoshi build
+    // We want to emit the development stats only when running yoshi start
+    if (statsFileName) {
+      clientConfig.plugins!.push(
+        new StatsWriterPlugin({
+          filename: statsFileName,
+          // https://webpack.js.org/configuration/stats/#stats
+          stats: {
+            // build date and the build time information
+            builtAt: false,
+            // Add information about children
+            children: false,
+            // We don't need the errors in this stats file
+            errors: false,
+            errorDetails: false,
+            errorStack: false,
+            moduleTrace: false,
+            // shows performance hints
+            performance: false,
+            // Tells stats to add information about the reasons of why modules are included.
+            reasons: false,
+            // Adding the source code of the modules
+            source: false,
+            // show which exports of a module are used
+            usedExports: false,
+            // show the exports of the modules.
+            providedExports: false,
+            // Add the timing information
+            timings: false,
+            // the maximum number of modules to be shown
+            maxModules: Infinity,
+          },
+          transform(data: any) {
+            // By default, the stats file contain spaces an indentation
+            // This verifies it's minified
+            return JSON.stringify(data);
+          },
+        }),
+      );
+    }
+  }
 
   if (useSplitChunks) {
     const splitChunksConfig = isObject(useSplitChunks)
@@ -222,18 +271,8 @@ export function createWebWorkerWebpackConfig(
     ...defaultOptions,
   });
 
-  workerConfig.plugins!.push(
-    new StatsWriterPlugin({
-      filename: `stats-worker${isDev ? '' : '.min'}.json`,
-      stats: {
-        all: true,
-        maxModules: Infinity,
-      },
-    }),
-  );
-
   // Use inline source maps since Thunderbolt loads worker as a blob locally
-  if (!isProduction()) {
+  if (!isProduction) {
     workerConfig.devtool = 'inline-source-map';
   }
 
