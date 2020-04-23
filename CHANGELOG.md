@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.61.0 (2020-04-23)
+
+#### :rocket: New Feature
+* `yoshi-common`, `yoshi-flow-monorepo`
+  * [#2284](https://github.com/wix/yoshi/pull/2284) Enable `yoshi build --stats` for monorepo-flow worker bundle ([@amitdahan](https://github.com/amitdahan))
+
+#### :memo: Documentation
+* `yoshi-flow-editor`
+  * [#2275](https://github.com/wix/yoshi/pull/2275) Add docs for platform apps support with editor flow ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.60.0 (2020-04-23)
 
 #### :rocket: New Feature
