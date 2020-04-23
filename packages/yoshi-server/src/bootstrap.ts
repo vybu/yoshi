@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import bootstrap from '@wix/wix-bootstrap-ng';
+import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
 import Server from './server';
 
 bootstrap()
@@ -13,7 +14,7 @@ bootstrap()
   // https://github.com/wix-platform/wix-node-platform/tree/master/bootstrap/wix-bootstrap-require-login
   .use(require('@wix/wix-bootstrap-require-login'))
   .use(require('wix-bootstrap-bo-auth'))
-  .express(async (app: Router, context: any) => {
+  .express(async (app: Router, context: BootstrapContext) => {
     const server = await Server.create(context);
     app.all('*', server.handle);
 

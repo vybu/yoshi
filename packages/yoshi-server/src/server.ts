@@ -11,6 +11,7 @@ import requireHttps from 'wix-express-require-https';
 import cookieParser from 'cookie-parser';
 import wixExpressCsrf from '@wix/wix-express-csrf';
 import { ROUTES_BUILD_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
+import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
 import { InternalServerError } from './httpErrors';
 import { RouteFunction, InitServerFunction } from './types';
 import { pathMatch, connectToYoshiServerHMR, buildRoute } from './utils';
@@ -25,11 +26,11 @@ export type Route = {
 };
 
 export default class Server {
-  private context: any;
+  private context: BootstrapContext;
   private routes: Array<Route>;
   private initData: any;
 
-  constructor(context: any) {
+  constructor(context: BootstrapContext) {
     this.context = context;
 
     this.routes = this.createRoutes();
@@ -49,7 +50,7 @@ export default class Server {
     }
   }
 
-  static async create(context: any) {
+  static async create(context: BootstrapContext) {
     const server = new Server(context);
     await server.initServer();
     return server;
@@ -77,7 +78,7 @@ export default class Server {
           await new Promise(resolve => cookieParser()(req, res, resolve));
           await new Promise(resolve => wixExpressCsrf()(req, res, resolve));
           await new Promise(resolve =>
-            this.context.renderer.middleware()(req, res, resolve),
+            (this.context as any).renderer.middleware()(req, res, resolve),
           );
           return await handler(req, res, params);
         }

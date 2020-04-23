@@ -49,4 +49,4 @@ export type RouteFunction<Result extends FunctionResult> = (
   this: RouteContext,
 ) => Result;
 
-export type InitServerFunction = (context: RouteContext) => any;
+export type InitServerFunction = (context: BootstrapContext) => any;
