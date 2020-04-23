@@ -1,5 +1,15 @@
 # Changelog
 
+## 4.60.0 (2020-04-23)
+
+#### :rocket: New Feature
+* `yoshi-flow-monorepo`
+  * [#2280](https://github.com/wix/yoshi/pull/2280) Write only the minimal stats file and do it only when needed ([@ranyitz](https://github.com/ranyitz))
+
+#### :nail_care: Polish
+* `yoshi-common`, `yoshi-flow-monorepo`
+  * [#2274](https://github.com/wix/yoshi/pull/2274) Minimize node server code for Tb-Elements ([@ronami](https://github.com/ronami))
+
 ## 4.59.0 (2020-04-22)
 
 #### :rocket: New Feature
