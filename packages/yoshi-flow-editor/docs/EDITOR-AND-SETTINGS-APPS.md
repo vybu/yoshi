@@ -1,4 +1,4 @@
-### Serving editor and settings apps.
+# Serving editor and settings apps.
 
 #### Editor app and settings app.
 Let's try to understand what the difference between it.
