@@ -1,4 +1,8 @@
-# Out of IFrame App
+---
+id: overview
+title: Editor Flow Overview
+sidebar_label: Editor Flow
+---
 
 - [Overview](#overview)
 - [Initial Setup](#initial-setup)

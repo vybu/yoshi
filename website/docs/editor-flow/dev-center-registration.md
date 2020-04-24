@@ -1,4 +1,8 @@
-## Dev-center registration
+---
+id: dev-center-registration
+title: Dev Center Registration
+sidebar_label: Dev Center Registration
+---
 
 > Note: Currently, dev center is new and not stable. You can't create an out of iframe app just using dev center. You have to use rpc calls to app service to configure correctly your widget.
 
@@ -31,26 +35,6 @@ Steps to register your app in dev center:
 
 > **OOI Page** - The same as OOI Widget, but renders as a page. After adding it to your site, you can see it in the top left website navigation or via specific page url on the viewer site. The dev center configuration process is pretty the same as OOI Widget.
 
-
-### Configuring production app
-All examples above contain local development examples (using `localhost`). There are few basic concepts of working with production environment.
-
-#### Different apps for local and prod
-In this scenario we are configuring apps separately. For local one we are using localhost, for prod it will be CDN urls.
-
-To **deploy your app to prod**, you need to add it to lifecycle as a regular app.
-For more info, please check out [Deployment and CI part from Fed-handbook](https://github.com/wix-private/fed-handbook/blob/master/DEPLOYMENT_AND_CI.md).
-
-After your CI build is green ✅, you are available to get `viewerScript` and `viewerWidget`s for your *platofrm* and *OOI Widget* components from CDN.
-Url format is:
-- **viewerScript**: `https://static.parastorage.com/services/{artifactId}/1.0.0/viewerScript.bundle.min.js`
-- **viewerWidget** for component with name `button`: `https://static.parastorage.com/services/{artifactId}/1.0.0/[:componentNane]ViewerWidget.bundle.min.js` *(for ex. `buttonViewerWidget.bundle.min.js`)*
-- **Editor widget endpoint**: `https://static.parastorage.com/services/{artifactId}/1.0.0/editor/[:componentName].html` *(for ex. `button.html`)*
-- **Editor settings panel endpoint**: `https://static.parastorage.com/services/{artifactId}/1.0.0/settings/[:componentName].html`
-> Please note that we **should** use 1.0.0 version, b/c it will be overrided under the hood each time you release new RC version.
-
-#### Using static override
-To be added.
 
 ### Troubleshooting new app registration
 Currently, new dev center is not supporting some features.

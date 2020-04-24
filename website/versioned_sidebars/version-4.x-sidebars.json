@@ -22,6 +22,10 @@
     },
     {
       "type": "doc",
+      "id": "version-4.x/editor-flow/overview"
+    },
+    {
+      "type": "doc",
       "id": "version-4.x/legacy-flow"
     },
     {
@@ -97,6 +101,28 @@
           "id": "version-4.x/legacy-guides/managing-dependencies"
         }
       ]
+    }
+  ],
+  "version-4.x/editor-flow": [
+    {
+      "type": "doc",
+      "id": "version-4.x/editor-flow/overview"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/editor-flow/dev-center-registration"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/editor-flow/migration-guide"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/editor-flow/editor-and-settings-apps"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/editor-flow/platform-apps-support"
     }
   ]
 }

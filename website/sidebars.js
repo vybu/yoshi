@@ -5,7 +5,7 @@ module.exports = {
     'templates',
     'app-flow',
     'library-flow',
-    // 'editor-flow'
+    'editor-flow/overview',
     // 'business-manager-flow'
     // 'monorepo-flow'
     'legacy-flow',
@@ -30,5 +30,12 @@ module.exports = {
         'legacy-guides/managing-dependencies',
       ],
     },
+  ],
+  'editor-flow': [
+    'editor-flow/overview',
+    'editor-flow/dev-center-registration',
+    'editor-flow/migration-guide',
+    'editor-flow/editor-and-settings-apps',
+    'editor-flow/platform-apps-support',
   ],
 };

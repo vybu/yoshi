@@ -61,10 +61,12 @@ module.exports = {
               label: 'Library Flow',
               to: 'docs/library-flow',
             },
-            // {
-            //   label: 'Editor Flow',
-            //   to: 'docs/editor-flow',
-            // },
+
+            {
+              label: 'Editor Flow',
+              to: 'docs/editor-flow/overview',
+            },
+
             // {
             //   label: 'Business Manager Flow',
             //   to: 'docs/business-manager-flow',
