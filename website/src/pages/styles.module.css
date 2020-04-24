@@ -4,26 +4,6 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-@media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 10px;
-}
-
 .features {
   display: flex;
   align-items: center;
@@ -35,8 +15,4 @@
   height: 100px;
   width: 100px;
   padding: 50px;
-}
-
-.link {
-  margin: 5px;
 }

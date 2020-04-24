@@ -1,0 +1,50 @@
+.heroBanner {
+  padding: 2rem 0 0 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ifm-alert-color);
+  /* background: radial-gradient(ellipse at bottom, rgba(17, 29, 43, 1), rgba(9, 10, 15, 1)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  overflow: hidden;
+  height: 600px;
+}
+
+@media screen and (max-width: 966px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.link {
+  margin: 5px;
+}
+
+.container {
+  z-index: 1;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+}
+
+.planetsWrapper {
+  margin-top: 40px;
+  margin-bottom: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 966px) {
+  .planetsWrapper {
+    display: none;
+  }
+}

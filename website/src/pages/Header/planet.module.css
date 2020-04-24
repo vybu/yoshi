@@ -1,0 +1,49 @@
+a:hover {
+  text-decoration: none;
+}
+
+.planet {
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.planetMover {
+  margin-top: -15px;
+  animation-name: move;
+  animation-iteration-count: infinite;
+}
+
+.planetResizer:hover {
+  cursor: pointer;
+}
+
+.planetResizer:hover, .planetResizer:hover .planetLabel {
+  transform: scale(1.1);
+  transition: transform 2s ease;
+}
+
+.planetLabel {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: var(--ifm-font-base-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.hover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(circle at 10% 40%, transparent, transparent 56%, black 100%);
+}
+
+@keyframes move {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(30px); }
+}

@@ -4,10 +4,11 @@ const isPr =
   !!process.env.VCS_BRANCH_NAME.replace(/\D+/g, '');
 
 const versions = require('./versions.json');
+const flows = require('./flows.json');
 
 module.exports = {
-  title: 'Yoshi',
-  tagline: 'A Toolkit that supports building all kinds of applications in wix',
+  title: 'Yoshi Universe',
+  tagline: 'A Toolkit that supports building all kinds of applications in Wix',
   url: 'https://wix.github.io',
   baseUrl: isPr ? '/' : '/yoshi/',
   favicon: 'img/favicon.ico',
@@ -15,6 +16,10 @@ module.exports = {
   // Used for publishing and more
   projectName: 'yoshi',
   organizationName: 'wix',
+
+  customFields: {
+    flows,
+  },
 
   themeConfig: {
     algolia: {
@@ -52,34 +57,7 @@ module.exports = {
         {
           label: 'Flows',
           position: 'left',
-          items: [
-            {
-              label: 'App Flow',
-              to: 'docs/app-flow',
-            },
-            {
-              label: 'Library Flow',
-              to: 'docs/library-flow',
-            },
-
-            {
-              label: 'Editor Flow',
-              to: 'docs/editor-flow/overview',
-            },
-
-            // {
-            //   label: 'Business Manager Flow',
-            //   to: 'docs/business-manager-flow',
-            // },
-            // {
-            //   label: 'Monorepo Flow',
-            //   to: 'docs/monorepo-flow',
-            // },
-            {
-              label: 'Legacy Flow',
-              to: 'docs/legacy-flow',
-            },
-          ],
+          items: flows,
         },
         { to: 'blog', label: 'Blog', position: 'left' },
         // It would be much nicer to have the dynamic version of the page here
@@ -98,7 +76,6 @@ module.exports = {
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
           title: 'Docs',

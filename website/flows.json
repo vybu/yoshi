@@ -1,0 +1,18 @@
+[
+  {
+    "label": "App Flow",
+    "to": "docs/app-flow"
+  },
+  {
+    "label": "Library Flow",
+    "to": "docs/library-flow"
+  },
+  {
+    "label": "Editor Flow",
+    "to": "docs/editor-flow/overview"
+  },
+  {
+    "label": "Legacy Flow",
+    "to": "docs/legacy-flow"
+  }
+]
