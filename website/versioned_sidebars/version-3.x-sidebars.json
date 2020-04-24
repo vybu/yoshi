@@ -1,5 +1,5 @@
 {
-  "version-3.x-docs": {
+  "version-3.x-docs": [{
     "Getting Started": [
       "version-3.x/getting-started/create-app",
       "version-3.x/getting-started/usage",
@@ -25,5 +25,7 @@
       "version-3.x/guides/svg",
       "version-3.x/guides/managing-dependencies"
     ]
-  }
+  },
+  "version-3.x/yoshi-3-migration-guide"
+  ]
 }

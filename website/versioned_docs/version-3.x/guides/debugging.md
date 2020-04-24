@@ -51,7 +51,7 @@ Several commercial and open source tools can connect to Node's Inspector and the
 #### [JetBrains WebStorm](https://www.jetbrains.com/webstorm/) [2017.1+ and other JetBrains IDEs](https://nodejs.org/en/docs/guides/debugging-getting-started/#jetbrains-webstorm-2017-1-and-other-jetbrains-ides)
 
 - Create a new Node.js debug configuration
-  ![WebStorm > new "Run/Debug configuration" popup](https://user-images.githubusercontent.com/9748762/80101259-d89e2000-8579-11ea-9863-2d12e6af7d38.png)
+  ![WebStorm > new "Run/Debug configuration" popup](https://user-images.githubusercontent.com/11733036/80118563-3ee26d00-8591-11ea-8971-f7f5cde8d0ee.png)
 - In order to manually tell WebStorm the debugging port, create another configuration, use type 'Attach to Node.js/Chrome'
-  ![WebStorm > Attach to Node.js/Chrome](https://user-images.githubusercontent.com/9748762/80102011-dd170880-857a-11ea-9d8a-364ddda35ed0.png)
+  ![WebStorm > Attach to Node.js/Chrome](https://user-images.githubusercontent.com/11733036/80118565-3f7b0380-8591-11ea-86c0-93acf9a5e33a.png)
 - Press debug in order to start the remote debugger configuration then start (without debugging) the 'Node.js' configuration
