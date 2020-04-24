@@ -2,7 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
-import Header from './Header';
+import Universe from './Universe';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
@@ -51,7 +51,7 @@ function Home() {
       title={'Toolkit for building applications @ Wix'}
       description="Toolkit for building applications @ Wix"
     >
-      <Header />
+      <Universe />
       <main>
         {features && features.length && (
           <section className={styles.features}>

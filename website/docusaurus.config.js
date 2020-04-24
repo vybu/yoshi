@@ -8,7 +8,7 @@ const flows = require('./flows.json');
 
 module.exports = {
   title: 'Yoshi Universe',
-  tagline: 'A Toolkit that supports building all kinds of applications in Wix',
+  tagline: 'A Galaxy of toolkits to develop applications at Wix',
   url: 'https://wix.github.io',
   baseUrl: isPr ? '/' : '/yoshi/',
   favicon: 'img/favicon.ico',

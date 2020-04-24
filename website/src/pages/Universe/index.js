@@ -7,6 +7,35 @@ import Space from './Space';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './header.module.css';
 
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+function getPlanetsDesignParameters() {
+  const colors = shuffle([
+    // skin
+    '#FFA19E',
+    // yellow
+    '#FFD594',
+    // teal
+    '#B3F3ED',
+    // green
+    '#55E5AC',
+    // red
+    '#FF6D89',
+    // purple light
+    '#BDBDFF',
+    // purple
+    '#38216B',
+  ]);
+
+  const sizes = shuffle([80, 90, 100, 110, 120, 130, 140]);
+
+  return { sizes, colors };
+}
+
+const { sizes, colors } = getPlanetsDesignParameters();
+
 export default () => {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -22,9 +51,13 @@ export default () => {
           {siteConfig.tagline}
         </p>
         <div className={styles.planetsWrapper}>
-          {siteConfig.customFields.flows.map(flow => (
+          {siteConfig.customFields.flows.map((flow, index) => (
             <Link to={useBaseUrl(flow.to)} key={flow.label}>
-              <Planet label={flow.label} />
+              <Planet
+                label={flow.label}
+                color={colors[index]}
+                size={sizes[index]}
+              />
             </Link>
           ))}
         </div>
