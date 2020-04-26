@@ -11,9 +11,9 @@
 #### :bug: Bug Fix
 
 - `yoshi-common`
-  - [#2226](https://github.com/wix/yoshi/pull/2226) fix a bug that prevented library flow to work in some cases when yarn… ([@ranyitz](https://github.com/ranyitz))
+  - [#2226](https://github.com/wix/yoshi/pull/2226) Fix a bug that prevented library flow to work in some cases when yarn was used for installation ([@ranyitz](https://github.com/ranyitz))
 - `yoshi-server`
-  - [#2277](https://github.com/wix/yoshi/pull/2277) Yoshi Server: fix a bug where there's no renderer ([@yanivefraim](https://github.com/yanivefraim))
+  - [#2277](https://github.com/wix/yoshi/pull/2277) Fix a bug where there's no renderer ([@yanivefraim](https://github.com/yanivefraim))
 
 #### :memo: Documentation
 
