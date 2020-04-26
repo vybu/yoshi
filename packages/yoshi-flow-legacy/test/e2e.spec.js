@@ -7,7 +7,6 @@ const {
   outsideTeamCity,
   insideTeamCity,
 } = require('../../../test-helpers/env-variables');
-const getMockedCI = require('../../../test-helpers/get-mocked-ci');
 
 describe('Aggregator: e2e', () => {
   let test;
@@ -25,7 +24,7 @@ describe('Aggregator: e2e', () => {
   describe('should run protractor with a cdn server', function() {
     this.timeout(60000);
 
-    it('should download chromedriver 2.29 and use it (when there is environment param IS_BUILD_AGENT and no CHROMEDRIVER_VERSION supplied)', () => {
+    it('should download chromedriver 2.29 and use it (when there is environment param TEAMCITY_VERSION and no CHROMEDRIVER_VERSION supplied)', () => {
       const res = test
         .setup({
           'protractor.conf.js': '',
@@ -35,7 +34,7 @@ describe('Aggregator: e2e', () => {
           'test',
           ['--protractor'],
           Object.assign({}, outsideTeamCity, {
-            IS_BUILD_AGENT: true,
+            TEAMCITY_VERSION: '1',
             CHROMEDRIVER_VERSION: undefined,
           }),
         );
@@ -60,7 +59,7 @@ describe('Aggregator: e2e', () => {
           'test',
           ['--protractor'],
           Object.assign({}, outsideTeamCity, {
-            IS_BUILD_AGENT: true,
+            TEAMCITY_VERSION: '1',
             CHROMEDRIVER_VERSION: 2.35,
           }),
         );
@@ -79,7 +78,7 @@ describe('Aggregator: e2e', () => {
     it('should support single module structure by default', () => {
       const res = test
         .setup(singleModuleWithJasmine())
-        .execute('test', ['--protractor'], outsideTeamCity);
+        .execute('test', ['--protractor'], insideTeamCity);
 
       expect(res.code).to.equal(0);
       // note: we've setup a real integration, keep it in order
@@ -90,7 +89,7 @@ describe('Aggregator: e2e', () => {
     it('should take a screenshot at the end of a failing test', () => {
       const res = test
         .setup(singleModuleWithFailingJasmine())
-        .execute('test', ['--protractor'], outsideTeamCity, { silent: true }); // run in silent so that TC won't fail with the screenshot log
+        .execute('test', ['--protractor'], insideTeamCity, { silent: true }); // run in silent so that TC won't fail with the screenshot log
 
       expect(res.code).to.equal(1);
       expect(res.stdout).to.contain('1 spec, 1 failure');
@@ -100,7 +99,7 @@ describe('Aggregator: e2e', () => {
     it(`should support multiple modules structure and consider clientProjectName configuration`, () => {
       const res = test
         .setup(multipleModuleWithJasmine())
-        .execute('test', ['--protractor'], outsideTeamCity);
+        .execute('test', ['--protractor'], insideTeamCity);
       expect(res.code).to.equal(0);
       expect(res.stdout).to.contain('1 spec, 0 failures');
     });
@@ -108,10 +107,13 @@ describe('Aggregator: e2e', () => {
     it('should run protractor with mocha', () => {
       const res = test
         .setup(singleModuleWithMocha())
-        .execute('test', ['--protractor'], outsideTeamCity);
+        .execute('test', ['--protractor'], {
+          ...insideTeamCity,
+          CHROMEDRIVER_VERSION: '2.35',
+        });
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('1 passing (');
+      expect(res.stdout).to.contain('chrome #01 passed');
     });
 
     it('should run protractor with mocha and use TeamCity reporter', () => {
@@ -137,7 +139,7 @@ describe('Aggregator: e2e', () => {
             }`,
           }),
         )
-        .execute('test', ['--protractor'], outsideTeamCity);
+        .execute('test', ['--protractor'], insideTeamCity);
 
       expect(res.code).to.equal(0);
       expect(res.stdout).to.contain('1 spec, 0 failures');
@@ -164,13 +166,9 @@ describe('Aggregator: e2e', () => {
 
     test
       .setup(singleModuleWithCssModules())
-      .execute('build', [], getMockedCI({ ci: false }));
+      .execute('build', [], insideTeamCity);
 
-    const res = test.execute(
-      'test',
-      ['--protractor'],
-      getMockedCI({ ci: false }),
-    );
+    const res = test.execute('test', ['--protractor'], insideTeamCity);
 
     expect(res.code).to.equal(0);
   });
@@ -180,13 +178,9 @@ describe('Aggregator: e2e', () => {
 
     test
       .setup(singleModuleWithCssModulesAndSass())
-      .execute('build', [], getMockedCI({ ci: false }));
+      .execute('build', [], insideTeamCity);
 
-    const res = test.execute(
-      'test',
-      ['--protractor'],
-      getMockedCI({ ci: false }),
-    );
+    const res = test.execute('test', ['--protractor'], insideTeamCity);
 
     expect(res.code).to.equal(0);
   });
@@ -195,7 +189,7 @@ describe('Aggregator: e2e', () => {
     this.timeout(60000);
     const res = test
       .setup(singleModuleWithBeforeLaunch())
-      .execute('test', ['--protractor'], outsideTeamCity);
+      .execute('test', ['--protractor'], insideTeamCity);
 
     expect(res.code).to.equal(0);
     expect(res.stdout).to.contain('1 spec, 0 failures');
@@ -206,12 +200,13 @@ describe('Aggregator: e2e', () => {
     const res = test
       .setup(singleModuleWithCustomMochaProtractorConfig())
       .execute('test', ['--protractor'], {
-        ...outsideTeamCity,
+        ...insideTeamCity,
+        CHROMEDRIVER_VERSION: '2.35',
         YOSHI_PROTRACTOR_CONFIG: 'protractor1.conf.js',
       });
 
     expect(res.code).to.equal(0);
-    expect(res.stdout).to.contain('1 passing (');
+    expect(res.stdout).to.contain('chrome #01 passed');
   });
 
   it("should extend project's afterLaunch", function() {
@@ -222,7 +217,7 @@ describe('Aggregator: e2e', () => {
         'package.json': fx.packageJson(),
         'protractor.conf.js': fx.protractorConfWithAfterLaunch(),
       })
-      .execute('test', ['--protractor'], outsideTeamCity);
+      .execute('test', ['--protractor'], insideTeamCity);
 
     expect(res.code).to.equal(0);
     expect(res.stdout).to.contain('afterLaunch hook');
