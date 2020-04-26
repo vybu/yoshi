@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.61.2 (2020-04-26)
+
+#### :rocket: New Feature
+* `yoshi-flow-legacy`, `yoshi-helpers`
+  * [#2245](https://github.com/wix/yoshi/pull/2245) Use `is-ci` package instead of reading TeamCity's env vars ([@stavalfi](https://github.com/stavalfi))
+
 ## 4.61.1 (2020-04-26)
 
 #### :bug: Bug Fix
