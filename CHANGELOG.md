@@ -1,56 +1,88 @@
 # Changelog
 
+## 4.61.1 (2020-04-26)
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2226](https://github.com/wix/yoshi/pull/2226) fix a bug that prevented library flow to work in some cases when yarn… ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-server`
+  - [#2277](https://github.com/wix/yoshi/pull/2277) Yoshi Server: fix a bug where there's no renderer ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :memo: Documentation
+
+- [#2286](https://github.com/wix/yoshi/pull/2286) Fix broken assets links in website ([@ranyitz](https://github.com/ranyitz))
+- [#2289](https://github.com/wix/yoshi/pull/2289) Change tagline and improve planets logic ([@ranyitz](https://github.com/ranyitz))
+- [#2288](https://github.com/wix/yoshi/pull/2288) Brand new main page based on yoshi flows universe idea 🚀 ([@yavorsky](https://github.com/yavorsky))
+- [#2285](https://github.com/wix/yoshi/pull/2285) Inline all assets used in the docs ([@amitdahan](https://github.com/amitdahan))
+- [#2287](https://github.com/wix/yoshi/pull/2287) Add flow editor to docs ([@yavorsky](https://github.com/yavorsky))
+
+#### :house: Internal
+
+- `yoshi-server`
+  - [#2278](https://github.com/wix/yoshi/pull/2278) Yoshi Server: fix types ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.61.0 (2020-04-23)
 
 #### :rocket: New Feature
-* `yoshi-common`, `yoshi-flow-monorepo`
-  * [#2284](https://github.com/wix/yoshi/pull/2284) Enable `yoshi build --stats` for monorepo-flow worker bundle ([@amitdahan](https://github.com/amitdahan))
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2284](https://github.com/wix/yoshi/pull/2284) Enable `yoshi build --stats` for monorepo-flow worker bundle ([@amitdahan](https://github.com/amitdahan))
 
 #### :memo: Documentation
-* `yoshi-flow-editor`
-  * [#2275](https://github.com/wix/yoshi/pull/2275) Add docs for platform apps support with editor flow ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-flow-editor`
+  - [#2275](https://github.com/wix/yoshi/pull/2275) Add docs for platform apps support with editor flow ([@yavorsky](https://github.com/yavorsky))
 
 ## 4.60.0 (2020-04-23)
 
 #### :rocket: New Feature
-* `yoshi-flow-monorepo`
-  * [#2280](https://github.com/wix/yoshi/pull/2280) Write only the minimal stats file and do it only when needed ([@ranyitz](https://github.com/ranyitz))
+
+- `yoshi-flow-monorepo`
+  - [#2280](https://github.com/wix/yoshi/pull/2280) Write only the minimal stats file and do it only when needed ([@ranyitz](https://github.com/ranyitz))
 
 #### :nail_care: Polish
-* `yoshi-common`, `yoshi-flow-monorepo`
-  * [#2274](https://github.com/wix/yoshi/pull/2274) Minimize node server code for Tb-Elements ([@ronami](https://github.com/ronami))
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2274](https://github.com/wix/yoshi/pull/2274) Minimize node server code for Tb-Elements ([@ronami](https://github.com/ronami))
 
 ## 4.59.0 (2020-04-22)
 
 #### :rocket: New Feature
-* [#2276](https://github.com/wix/yoshi/pull/2276) Brand new website ([@ranyitz](https://github.com/ranyitz))
+
+- [#2276](https://github.com/wix/yoshi/pull/2276) Brand new website ([@ranyitz](https://github.com/ranyitz))
 
 #### :bug: Bug Fix
-* `yoshi-common`, `yoshi-flow-legacy`
-  * [#2272](https://github.com/wix/yoshi/pull/2272) Generate automatically bundle analyzer port ([@yavorsky](https://github.com/yavorsky))
+
+- `yoshi-common`, `yoshi-flow-legacy`
+  - [#2272](https://github.com/wix/yoshi/pull/2272) Generate automatically bundle analyzer port ([@yavorsky](https://github.com/yavorsky))
 
 ## 4.58.0 (2020-04-21)
 
 #### :rocket: New Feature
-* `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
-  * [#2267](https://github.com/wix/yoshi/pull/2267) Add a progress bar for build & start commands ([@ranyitz](https://github.com/ranyitz))
-* `yoshi-server`
-  * [#2257](https://github.com/wix/yoshi/pull/2257) Add an option to use `@wix/wix-bootstrap-renderer` ([@yanivefraim](https://github.com/yanivefraim))
-* `yoshi-common`
-  * [#2224](https://github.com/wix/yoshi/pull/2224) Add `editorx` domains to webpack-dev-server's allowed hosts ([@ranyitz](https://github.com/ranyitz))
+
+- `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`
+  - [#2267](https://github.com/wix/yoshi/pull/2267) Add a progress bar for build & start commands ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-server`
+  - [#2257](https://github.com/wix/yoshi/pull/2257) Add an option to use `@wix/wix-bootstrap-renderer` ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`
+  - [#2224](https://github.com/wix/yoshi/pull/2224) Add `editorx` domains to webpack-dev-server's allowed hosts ([@ranyitz](https://github.com/ranyitz))
 
 #### :building_construction: Templates
-* `create-yoshi-app`
-  * [#2225](https://github.com/wix/yoshi/pull/2225) Fix flow library template tsconfig to support es5 transpilation ([@ranyitz](https://github.com/ranyitz))
+
+- `create-yoshi-app`
+  - [#2225](https://github.com/wix/yoshi/pull/2225) Fix flow library template tsconfig to support es5 transpilation ([@ranyitz](https://github.com/ranyitz))
 
 #### :memo: Documentation
-* [#2266](https://github.com/wix/yoshi/pull/2266) Change exports to export s to make the search work on API page ([@ranyitz](https://github.com/ranyitz))
+
+- [#2266](https://github.com/wix/yoshi/pull/2266) Change exports to export s to make the search work on API page ([@ranyitz](https://github.com/ranyitz))
 
 #### :house: Internal
-* `yoshi-flow-monorepo`
-  * [#2256](https://github.com/wix/yoshi/pull/2256) Bundle `editor-elements-library` similar to `thudnerbolt-elements` ([@NitayRabi](https://github.com/NitayRabi))
-* Other
-  * [#2258](https://github.com/wix/yoshi/pull/2258) Remove specific names and use a team as the codeowners of the repo ([@ranyitz](https://github.com/ranyitz))
+
+- `yoshi-flow-monorepo`
+  - [#2256](https://github.com/wix/yoshi/pull/2256) Bundle `editor-elements-library` similar to `thudnerbolt-elements` ([@NitayRabi](https://github.com/NitayRabi))
+- Other
+  - [#2258](https://github.com/wix/yoshi/pull/2258) Remove specific names and use a team as the codeowners of the repo ([@ranyitz](https://github.com/ranyitz))
 
 ## 4.57.2 (2020-04-19)
 
