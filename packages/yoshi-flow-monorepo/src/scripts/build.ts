@@ -133,6 +133,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
       });
 
       webWorkerOptimizeConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
+        isAnalyze,
         forceEmitStats,
       });
     }
