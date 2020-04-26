@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.62.0 (2020-04-26)
+
+#### :rocket: New Feature
+* `yoshi-common`
+  * [#2300](https://github.com/wix/yoshi/pull/2300) Profile a build using `PROFILE=true` environment parameter ([@ranyitz](https://github.com/ranyitz))
+* `yoshi-flow-monorepo`
+  * [#2295](https://github.com/wix/yoshi/pull/2295) Run `yoshi build --analyze` in monorepo to get webworker bundles analyze as well ([@amitdahan](https://github.com/amitdahan))
+
+#### :bug: Bug Fix
+* `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
+  * [#2293](https://github.com/wix/yoshi/pull/2293) Register page components with `componentName` instead of `componentId` ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.61.2 (2020-04-26)
 
 #### :rocket: New Feature
