@@ -17,6 +17,7 @@ interface ModuleOptions {
   moduleId: string;
   pages: Array<{
     componentId: string;
+    componentName: string;
     loadComponent(): Promise<ComponentType<any>>;
   }>;
   exportedComponents: Array<{
@@ -57,14 +58,14 @@ export default function createModule({
     constructor(moduleId: ModuleId) {
       super(moduleId);
 
-      pages.forEach(({ componentId, loadComponent }) => {
+      pages.forEach(({ componentId, componentName, loadComponent }) => {
         registerPageComponentMonitors(componentId as PageComponentId, {
           sentryClient,
         });
 
         this.registerPageComponent(
-          componentId,
-          ReactLoadableComponent(componentId, async () => {
+          componentName,
+          ReactLoadableComponent(componentName, async () => {
             const experiments = new Experiments();
 
             experimentsScopes.forEach((scope: string) =>

@@ -16,10 +16,11 @@ createModule({
   moduleId: '${moduleId}',
   pages: [
     ${pages.map(
-      ({ componentId, componentPath }) => `
+      ({ componentId, componentName, componentPath }) => `
       {
         componentId: '${componentId}',
-        loadComponent: async () => (await import(/* webpackChunkName: "${componentId}" */'${componentPath}')).default,
+        componentName: '${componentName}',
+        loadComponent: async () => (await import(/* webpackChunkName: "${componentName}" */'${componentPath}')).default,
       },
     `,
     )}
