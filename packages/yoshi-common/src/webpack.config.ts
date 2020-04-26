@@ -92,7 +92,11 @@ function getProgressBarInfo(
   isDev: boolean,
   isMonorepo: boolean,
   packageName: string,
-): { name: string; color: string } {
+): {
+  name: string;
+  color: string;
+  reporters: Array<string>;
+} {
   const longestNameLength = 19;
 
   function getObject() {
@@ -121,7 +125,17 @@ function getProgressBarInfo(
     obj.name = `${stripOrganization(packageName)}\n  ${obj.name}`;
   }
 
-  return obj;
+  const progressReporter = inTeamCity ? 'basic' : 'fancy';
+
+  const profileReporter =
+    isProduction && process.env.PROFILE === 'true' ? ['profile'] : [];
+
+  const reporters = [progressReporter, ...profileReporter];
+
+  return {
+    ...obj,
+    reporters,
+  };
 }
 
 const getCommonStylbleWebpackConfig = (name: string) => ({
@@ -741,7 +755,7 @@ export function createBaseWebpackConfig({
           : []
         : []),
 
-      ...(!inTeamCity && useProgressBar
+      ...(useProgressBar
         ? [
             new WebpackBar(
               getProgressBarInfo(configName, isDev, isMonorepo, name),
