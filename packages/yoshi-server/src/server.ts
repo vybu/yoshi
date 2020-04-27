@@ -9,6 +9,7 @@ import { send } from 'micro';
 import importFresh from 'import-fresh';
 import requireHttps from 'wix-express-require-https';
 import cookieParser from 'cookie-parser';
+import project from 'yoshi-config';
 import wixExpressCsrf from '@wix/wix-express-csrf';
 import { ROUTES_BUILD_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
@@ -27,12 +28,20 @@ export type Route = {
 
 export default class Server {
   private context: BootstrapContext;
+  private config: any;
   private routes: Array<Route>;
   private initData: any;
 
   constructor(context: BootstrapContext) {
     this.context = context;
-
+    try {
+      this.config = context.config.load(
+        // strip organization name from package name
+        project.name.slice(project.name.indexOf('/') + 1),
+      );
+    } catch (e) {
+      // do nothing
+    }
     this.routes = this.createRoutes();
 
     if (process.env.NODE_ENV === 'development') {
@@ -128,6 +137,7 @@ export default class Server {
             res,
             params,
             initData: this.initData,
+            config: this.config,
           };
 
           const result = await chunk.call(fnThis);

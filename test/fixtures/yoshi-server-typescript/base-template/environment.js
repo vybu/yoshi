@@ -14,6 +14,9 @@ module.exports.emitConfigs = () => {
 // start the server as an embedded app
 module.exports.bootstrapServer = () => {
   return testkit.app(require.resolve('./index'), {
-    env: process.env,
+    env: {
+      ...process.env,
+      APP_CONF_DIR: require('path').resolve('./test/configs'),
+    },
   });
 };
