@@ -1,22 +1,37 @@
 # Changelog
 
+## 4.63.0 (2020-04-27)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#2273](https://github.com/wix/yoshi/pull/2273) Make it easier to access your server's config file ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :nail_care: Polish
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2301](https://github.com/wix/yoshi/pull/2301) Improve Elements' server bundle size ([@ronami](https://github.com/ronami))
+
 ## 4.62.0 (2020-04-26)
 
 #### :rocket: New Feature
-* `yoshi-common`
-  * [#2300](https://github.com/wix/yoshi/pull/2300) Profile a build using `PROFILE=true` environment parameter ([@ranyitz](https://github.com/ranyitz))
-* `yoshi-flow-monorepo`
-  * [#2295](https://github.com/wix/yoshi/pull/2295) Run `yoshi build --analyze` in monorepo to get webworker bundles analyze as well ([@amitdahan](https://github.com/amitdahan))
+
+- `yoshi-common`
+  - [#2300](https://github.com/wix/yoshi/pull/2300) Profile a build using `PROFILE=true` environment parameter ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-flow-monorepo`
+  - [#2295](https://github.com/wix/yoshi/pull/2295) Run `yoshi build --analyze` in monorepo to get webworker bundles analyze as well ([@amitdahan](https://github.com/amitdahan))
 
 #### :bug: Bug Fix
-* `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
-  * [#2293](https://github.com/wix/yoshi/pull/2293) Register page components with `componentName` instead of `componentId` ([@amitdahan](https://github.com/amitdahan))
+
+- `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
+  - [#2293](https://github.com/wix/yoshi/pull/2293) Register page components with `componentName` instead of `componentId` ([@amitdahan](https://github.com/amitdahan))
 
 ## 4.61.2 (2020-04-26)
 
 #### :rocket: New Feature
-* `yoshi-flow-legacy`, `yoshi-helpers`
-  * [#2245](https://github.com/wix/yoshi/pull/2245) Use `is-ci` package instead of reading TeamCity's env vars ([@stavalfi](https://github.com/stavalfi))
+
+- `yoshi-flow-legacy`, `yoshi-helpers`
+  - [#2245](https://github.com/wix/yoshi/pull/2245) Use `is-ci` package instead of reading TeamCity's env vars ([@stavalfi](https://github.com/stavalfi))
 
 ## 4.61.1 (2020-04-26)
 
