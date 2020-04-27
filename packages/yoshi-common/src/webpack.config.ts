@@ -334,6 +334,7 @@ export function createBaseWebpackConfig({
   useCustomSourceMapPlugin = false,
   forceEmitStats = false,
   forceMinimizeServer = false,
+  forceSpecificNodeExternals = false,
 }: {
   name: string;
   configName:
@@ -377,6 +378,7 @@ export function createBaseWebpackConfig({
   useCustomSourceMapPlugin?: boolean;
   forceEmitStats?: boolean;
   forceMinimizeServer?: boolean;
+  forceSpecificNodeExternals?: boolean;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -415,6 +417,18 @@ export function createBaseWebpackConfig({
   // We can take value from env variable mostly for internal purposes and not opening this option to be 'public'
   // 'auto' should satisfy all user's needs. It will auto generate available port and use it.
   const analyzerPort = customAnalyzerPort || (isBrowser ? 'auto' : undefined);
+
+  const terserOptions = {
+    parallel: true,
+    cache: true,
+    sourceMap: true,
+    terserOptions: {
+      output: {
+        ascii_only: true,
+      },
+      keep_fnames: keepFunctionNames,
+    },
+  };
 
   const config: webpack.Configuration = {
     context: join(SRC_DIR),
@@ -496,17 +510,7 @@ export function createBaseWebpackConfig({
             minimize: !isDev,
             concatenateModules: isProduction && !disableModuleConcat,
             minimizer: [
-              new TerserPlugin({
-                parallel: true,
-                cache: true,
-                sourceMap: true,
-                terserOptions: {
-                  output: {
-                    ascii_only: true,
-                  },
-                  keep_fnames: keepFunctionNames,
-                },
-              }),
+              new TerserPlugin(terserOptions),
               new OptimizeCSSAssetsPlugin(),
             ],
 
@@ -525,6 +529,7 @@ export function createBaseWebpackConfig({
             nodeEnv: false,
             // Faster build time and possibly easier debugging
             minimize: forceMinimizeServer,
+            minimizer: [new TerserPlugin(terserOptions)],
           },
 
     plugins: [
@@ -1086,8 +1091,10 @@ export function createBaseWebpackConfig({
               // Svelte and React should always be external on the server side. Only relevant when more than one
               // instance of Svelte/React exists. Normally, with two different Webpack bundles. Currently only
               // relevant for Thunderbolt's use-case.
-              if (res.match(/node_modules\/(svelte|react)/)) {
-                return callback(undefined, `commonjs ${request}`);
+              if (forceSpecificNodeExternals) {
+                if (res.match(/node_modules\/(svelte|react|lodash)/)) {
+                  return callback(undefined, `commonjs ${request}`);
+                }
               }
 
               // If `useNodeExternals` is turned off, bundle everything.

@@ -220,16 +220,24 @@ export function createServerWebpackConfig(
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
     forceMinimizeServer: isThunderboltElementModule(pkg),
+    forceSpecificNodeExternals:
+      isThunderboltAppModule(pkg) || isThunderboltElementModule(pkg),
     ...defaultOptions,
   });
 
   if (isThunderboltElementModule(pkg)) {
+    // output to /dist/statics so it's available for thunderbolt to download
     serverConfig.output!.path = path.join(pkg.location, STATICS_DIR);
+
+    // create only 1 file regardless of dynamic imports so it's easier to download
     serverConfig.plugins!.push(
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1,
       }),
     );
+
+    // use cheap source maps to make download faster
+    serverConfig.devtool = 'inline-cheap-source-map';
   }
 
   serverConfig.entry = async () => {
