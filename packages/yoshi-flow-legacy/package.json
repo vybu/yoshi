@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-legacy",
-  "version": "4.63.0",
+  "version": "4.64.0",
   "bin": {
     "yoshi-legacy": "./bin/yoshi-legacy.js"
   },
@@ -126,7 +126,7 @@
     "generic-names": "1.0.3",
     "graphql-tag": "2.10.3",
     "identity-obj-proxy": "3.0.0",
-    "jest-yoshi-preset": "4.63.0",
+    "jest-yoshi-preset": "4.64.0",
     "karma": "2.0.5",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.2",
