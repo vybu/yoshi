@@ -80,7 +80,12 @@ export default class Server {
       const { pathname } = parseUrl(req.url as string, true);
 
       for (const { handler, route } of this.routes) {
-        const params = pathMatch(route, pathname as string);
+        const params = pathMatch(
+          route,
+          // for Businss Manager apps, routes are mapped (in Fryingpan or BM testkit):
+          // '/_api/projectName/_api_' -> '/api/_api_'
+          pathname?.replace('/api/_api_', '/_api_') as string,
+        );
 
         if (params) {
           await new Promise(resolve => requireHttps(req, res, resolve));
