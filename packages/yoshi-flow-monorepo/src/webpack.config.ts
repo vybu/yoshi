@@ -156,31 +156,10 @@ export function createClientWebpackConfig(
           filename: statsFileName,
           // https://webpack.js.org/configuration/stats/#stats
           stats: {
-            // build date and the build time information
-            builtAt: false,
-            // Add information about children
-            children: false,
-            // We don't need the errors in this stats file
-            errors: false,
-            errorDetails: false,
-            errorStack: false,
-            moduleTrace: false,
-            // shows performance hints
-            performance: false,
-            // Tells stats to add information about the reasons of why modules are included.
-            reasons: false,
-            // Adding the source code of the modules
-            source: false,
-            // show which exports of a module are used
-            usedExports: false,
-            // show the exports of the modules.
-            providedExports: false,
-            // Add the timing information
-            timings: false,
-            // the maximum number of modules to be shown
-            maxModules: Infinity,
+            all: false,
+            chunkGroups: true,
           },
-          transform(data: any) {
+          transform(data: webpack.Stats.ToJsonOutput) {
             // By default, the stats file contain spaces an indentation
             // This verifies it's minified
             return JSON.stringify(data);
