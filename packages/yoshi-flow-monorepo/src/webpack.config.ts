@@ -158,6 +158,7 @@ export function createClientWebpackConfig(
           stats: {
             all: false,
             chunkGroups: true,
+            publicPath: true,
           },
           transform(data: webpack.Stats.ToJsonOutput) {
             // By default, the stats file contain spaces an indentation
