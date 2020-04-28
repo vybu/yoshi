@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.63.1 (2020-04-28)
+
+#### :nail_care: Polish
+
+- `yoshi-flow-monorepo`
+  - [#2302](https://github.com/wix/yoshi/pull/2302) Decrease the size of Elements/TB stats file ([@ronami](https://github.com/ronami))
+
 ## 4.63.0 (2020-04-27)
 
 #### :rocket: New Feature
