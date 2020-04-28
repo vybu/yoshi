@@ -6,7 +6,7 @@ module.exports = {
     'app-flow',
     'library-flow',
     'editor-flow/overview',
-    // 'business-manager-flow'
+    'business-manager-flow',
     // 'monorepo-flow'
     'legacy-flow',
     'babel-preset-yoshi',

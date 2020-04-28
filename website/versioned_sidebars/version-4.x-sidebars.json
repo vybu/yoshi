@@ -26,6 +26,10 @@
     },
     {
       "type": "doc",
+      "id": "version-4.x/business-manager-flow"
+    },
+    {
+      "type": "doc",
       "id": "version-4.x/legacy-flow"
     },
     {

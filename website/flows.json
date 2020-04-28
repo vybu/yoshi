@@ -12,6 +12,10 @@
     "to": "docs/editor-flow/overview"
   },
   {
+    "label": "BM Flow",
+    "to": "docs/business-manager-flow"
+  },
+  {
     "label": "Legacy Flow",
     "to": "docs/legacy-flow"
   }
