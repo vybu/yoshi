@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.64.0 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `yoshi-server`
+  - [#2283](https://github.com/wix/yoshi/pull/2283) Support BM routing ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#2310](https://github.com/wix/yoshi/pull/2310) Create stats for Elements/TB with Webpack's publicPath ([@ronami](https://github.com/ronami))
+- `jest-yoshi-preset`
+  - [#2309](https://github.com/wix/yoshi/pull/2309) Fix `devtools` option in `jest-yoshi.config.js` not working bug ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2290](https://github.com/wix/yoshi/pull/2290) Add initial BM Flow docs ([@amitdahan](https://github.com/amitdahan))
+
 ## 4.63.1 (2020-04-28)
 
 #### :nail_care: Polish
