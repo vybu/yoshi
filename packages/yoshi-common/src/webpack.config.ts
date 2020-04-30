@@ -739,6 +739,9 @@ export function createBaseWebpackConfig({
               ),
               stats: {
                 all: true,
+                source: false,
+                chunkModules: false,
+                chunkRootModules: false,
                 maxModules: Infinity,
               },
             }),
