@@ -15,6 +15,7 @@ import {
 } from 'yoshi-config/build/paths';
 import { inTeamCity as checkInTeamCity } from 'yoshi-helpers/build/queries';
 import { copyTemplates } from 'yoshi-common/build/copy-assets';
+import { stripOrganization } from 'yoshi-helpers/build/utils';
 import { cliCommand } from '../bin/yoshi-monorepo';
 import {
   createClientWebpackConfig,
@@ -55,7 +56,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
         Compiles the application for production deployment
 
       Usage
-        $ yoshi-monorepo build
+        $ yoshi-monorepo build [app-name ...]
 
       Options
         --help, -h      Displays this message
@@ -66,6 +67,35 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     );
 
     process.exit(0);
+  }
+
+  const appNames = args._;
+
+  if (appNames.length) {
+    appNames.forEach(appName => {
+      const pkg = apps.find(pkg => stripOrganization(pkg.name) === appName);
+
+      if (!pkg) {
+        console.log(
+          `Could not find an app with the name of ${chalk.cyan(appName)}!\n`,
+        );
+
+        console.log('Apps found:');
+        console.log(
+          `  ${apps
+            .map(({ name }) => name)
+            .map(stripOrganization)
+            .map(name => chalk.cyanBright(name))
+            .join(', ')}`,
+        );
+        console.log();
+        console.log(chalk.red('Aborting...'));
+
+        return process.exit(1);
+      }
+    });
+
+    apps = apps.filter(app => appNames.includes(stripOrganization(app.name)));
   }
 
   await buildPkgs([...libs, ...apps]);

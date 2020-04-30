@@ -3582,7 +3582,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/glob@^7.1.1":
+"@types/glob@*", "@types/glob@^7.1.1":
   version "7.1.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/glob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
   integrity sha1-qlmhxuP7xCHgfM0xqUTDDrpSFXU=
@@ -3955,6 +3955,14 @@
   version "0.12.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha1-KzXsz87n04zXKtmSMvvVi/+zyE0=
+
+"@types/rimraf@3.0.0":
+  version "3.0.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/rimraf/-/rimraf-3.0.0.tgz#b9d03f090ece263671898d57bb7bb007023ac19f"
+  integrity sha1-udA/CQ7OJjZxiY1Xu3uwBwI6wZ8=
+  dependencies:
+    "@types/glob" "*"
+    "@types/node" "*"
 
 "@types/selenium-webdriver@^3.0.0":
   version "3.0.17"
@@ -23028,7 +23036,7 @@ rgba-regex@^1.0.0:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/rgba-regex/-/rgba-regex-1.0.0.tgz#43374e2e2ca0968b0ef1523460b7d730ff22eeb3"
   integrity sha1-QzdOLiyglosO8VI0YLfXMP8i7rM=
 
-rimraf@2, rimraf@2.7.1, rimraf@2.x.x, rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.0, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
+rimraf@2, rimraf@2.x.x, rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.0, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@^2.7.1:
   version "2.7.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/rimraf/-/rimraf-2.7.1.tgz#35797f13a7fdadc566142c29d4f07ccad483e3ec"
   integrity sha1-NXl/E6f9rcVmFCwp1PB8ytSD4+w=
@@ -23039,6 +23047,13 @@ rimraf@2.6.3, rimraf@~2.6.2:
   version "2.6.3"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   integrity sha1-stEE/g2Psnz54KHNqCYt04M8bKs=
+  dependencies:
+    glob "^7.1.3"
+
+rimraf@3.0.2, rimraf@^3.0.2:
+  version "3.0.2"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  integrity sha1-8aVAK6YiCtUswSgrrBrjqkn9Bho=
   dependencies:
     glob "^7.1.3"
 

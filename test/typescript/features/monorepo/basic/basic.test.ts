@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+import rimraf from 'rimraf';
 import Scripts from '../../../../scripts';
 
 const scripts = Scripts.setupProjectFromTemplate({
@@ -30,5 +33,24 @@ describe('monorepo', () => {
       },
       { extraStartArgs: ['monorepo-app'] },
     );
+  });
+
+  it('selective build', async () => {
+    rimraf.sync(path.join(scripts.testDirectory, 'packages/*/dist'));
+
+    await scripts.build({}, ['monorepo-app']);
+    const bundlePath = 'dist/statics/app.bundle.js';
+
+    expect(
+      fs.existsSync(
+        path.join(scripts.testDirectory, 'packages/app', bundlePath),
+      ),
+    ).toBe(true);
+
+    expect(
+      fs.existsSync(
+        path.join(scripts.testDirectory, 'packages/app-b', bundlePath),
+      ),
+    ).toBe(false);
   });
 });
