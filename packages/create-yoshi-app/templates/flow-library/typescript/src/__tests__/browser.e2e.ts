@@ -1,4 +1,4 @@
-import Counter from '../src/counter';
+import Counter from '../counter';
 
 declare const counter: { default: Counter };
 

@@ -1,4 +1,4 @@
-import Counter from '../src/counter';
+import Counter from '../counter';
 
 describe('Counter', () => {
   let counter: Counter;
