@@ -6,6 +6,7 @@ import {
   DSL,
   RequestPayload,
 } from 'yoshi-server/types';
+import { createHeaders } from '@wix/headers';
 import { joinUrls } from './utils';
 
 type Options = {
@@ -34,18 +35,6 @@ export default class implements HttpClient {
     this.baseUrl = baseUrl;
   }
 
-  private getCookie(name: string) {
-    if (typeof document !== 'undefined') {
-      const parts = `; ${document.cookie}`.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts
-          .pop()
-          ?.split(';')
-          .shift();
-      }
-    }
-  }
-
   async request<Result extends FunctionResult, Args extends FunctionArgs>({
     method: { fileName, functionName },
     args,
@@ -56,17 +45,16 @@ export default class implements HttpClient {
     headers?: { [index: string]: string };
   }): Promise<UnpackPromise<Result>> {
     const url = joinUrls(this.baseUrl, '/_api_');
-
+    const wixHeaders = createHeaders();
     const body: RequestPayload = { fileName, functionName, args };
-
-    const xsrfToken = this.getCookie('XSRF-TOKEN');
 
     const res = await fetch(url, {
       credentials: 'same-origin',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(xsrfToken ? { 'x-xsrf-token': xsrfToken } : {}),
+        // WixHeaders has ? for each key. Here, keys which are undefined will be filtered automatically
+        ...(wixHeaders as Record<string, string>),
         ...headers,
       },
       body: JSON.stringify(body),

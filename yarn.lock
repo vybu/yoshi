@@ -4601,6 +4601,14 @@
     "@types/lodash.defaults" "^4.2.6"
     lodash.defaults "^4.2.0"
 
+"@wix/headers@^1.7.0":
+  version "1.7.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/headers/-/@wix/headers-1.7.0.tgz#510eaccca88785b840c865dcda4ce261687400e9"
+  integrity sha1-UQ6szKiHhbhAyGXc2kziYWh0AOk=
+  dependencies:
+    "@types/lodash.defaults" "^4.2.6"
+    lodash.defaults "^4.2.0"
+
 "@wix/native-components-infra@^1.0.668":
   version "1.0.764"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/native-components-infra/-/@wix/native-components-infra-1.0.764.tgz#d3aae91f8610eee0d486b11ef9cc398ea42b3ab3"
