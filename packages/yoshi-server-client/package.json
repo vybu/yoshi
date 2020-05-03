@@ -1,6 +1,6 @@
 {
   "name": "yoshi-server-client",
-  "version": "4.64.0",
+  "version": "4.66.0",
   "main": "build/index.js",
   "sideEffects": false,
   "keywords": [
