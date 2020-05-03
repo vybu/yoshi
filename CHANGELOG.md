@@ -1,18 +1,36 @@
 # Changelog
 
+## 4.66.0 (2020-05-03)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-bm-runtime`, `yoshi-flow-bm`
+  - [#2279](https://github.com/wix/yoshi/pull/2279) Customize module topology through `.module.json` ([@amitdahan](https://github.com/amitdahan))
+- `yoshi-server-client`
+  - [#2251](https://github.com/wix/yoshi/pull/2251) Yoshi Server Client: use `wix-headers` ([@yanivefraim](https://github.com/yanivefraim))
+
+#### Committers: 3
+
+- Amit Dahan ([@amitdahan](https://github.com/amitdahan))
+- Yaniv Efraim ([@yanivefraim](https://github.com/yanivefraim))
+- [@wix-renovate](https://github.com/wix-renovate)
+
 ## 4.65.0 (2020-04-30)
 
 #### :rocket: New Feature
-* `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`, `yoshi-helpers`
-  * [#2299](https://github.com/wix/yoshi/pull/2299) Allow only building specific apps in a monorepo (e.g. `yoshi-monorepo build my-app`) ([@amitdahan](https://github.com/amitdahan))
+
+- `yoshi-common`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`, `yoshi-helpers`
+  - [#2299](https://github.com/wix/yoshi/pull/2299) Allow only building specific apps in a monorepo (e.g. `yoshi-monorepo build my-app`) ([@amitdahan](https://github.com/amitdahan))
 
 #### :building_construction: Templates
-* `create-yoshi-app`
-  * [#2311](https://github.com/wix/yoshi/pull/2311) Move `__tests__` directory to be inside `src` ([@ranyitz](https://github.com/ranyitz))
+
+- `create-yoshi-app`
+  - [#2311](https://github.com/wix/yoshi/pull/2311) Move `__tests__` directory to be inside `src` ([@ranyitz](https://github.com/ranyitz))
 
 #### :nail_care: Polish
-* `yoshi-common`
-  * [#2313](https://github.com/wix/yoshi/pull/2313) Reduce amount of data saved in stats ([@Gongreg](https://github.com/Gongreg))
+
+- `yoshi-common`
+  - [#2313](https://github.com/wix/yoshi/pull/2313) Reduce amount of data saved in stats ([@Gongreg](https://github.com/Gongreg))
 
 ## 4.64.0 (2020-04-28)
 
