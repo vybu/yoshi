@@ -2,10 +2,10 @@ import path from 'path';
 import globby from 'globby';
 import { watch } from 'chokidar';
 import {
-  readModuleConfig,
-  readExportedComponentConfig,
-  readMethodConfig,
-  readPageConfig,
+  loadModuleConfig,
+  loadExportedComponentConfig,
+  loadMethodConfig,
+  loadPageConfig,
 } from './config';
 import {
   EXPORTED_COMPONENTS_PATTERN,
@@ -14,6 +14,7 @@ import {
   PAGES_PATTERN,
   TRANSLATIONS_DIR,
 } from './constants';
+import { ModuleConfig } from './config/types';
 
 export interface ExportedComponentModel {
   componentId: string;
@@ -35,6 +36,7 @@ export interface FlowBMModel {
   methods: Array<MethodModel>;
   moduleInitPath?: string;
   localePath?: string;
+  config: ModuleConfig;
 }
 
 export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
@@ -49,11 +51,11 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
       expandDirectories: false,
     });
 
-  const config = readModuleConfig(cwd);
+  const config = loadModuleConfig(cwd);
 
   const getPageModel = (componentPath: string): PageModel => {
     const { name } = path.parse(componentPath);
-    const { componentId, componentName } = readPageConfig(
+    const { componentId, componentName } = loadPageConfig(
       config,
       componentPath,
     );
@@ -77,7 +79,7 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
   const getExportedComponentModel = (
     componentPath: string,
   ): ExportedComponentModel => {
-    const { componentId } = readExportedComponentConfig(config, componentPath);
+    const { componentId } = loadExportedComponentConfig(config, componentPath);
 
     return {
       componentId,
@@ -86,7 +88,7 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
   };
 
   const getMethodModel = (methodPath: string): MethodModel => {
-    const { methodId } = readMethodConfig(config, methodPath);
+    const { methodId } = loadMethodConfig(config, methodPath);
 
     return {
       methodId,
@@ -107,6 +109,7 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
 
   return {
     moduleId: config.moduleId,
+    config,
     pages,
     exportedComponents,
     methods,

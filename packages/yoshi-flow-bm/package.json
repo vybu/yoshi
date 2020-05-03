@@ -11,8 +11,11 @@
     "chalk": "3.0.0",
     "chokidar": "3.3.1",
     "constant-case": "3.0.3",
+    "cosmiconfig": "6.0.0",
     "fs-extra": "8.1.0",
     "globby": "10.0.2",
+    "jest-validate": "25.4.0",
+    "lodash": "4.17.15",
     "react-dev-utils": "9.1.0",
     "webpack": "4.43.0",
     "yoshi-common": "4.65.0",
@@ -23,6 +26,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "8.1.0",
+    "@types/lodash": "4.14.150",
     "@types/react-dev-utils": "9.0.4",
     "@types/webpack": "4.41.11"
   }
