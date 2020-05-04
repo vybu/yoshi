@@ -87,7 +87,7 @@
     "pirates": "4.0.1",
     "prettier": "1.19.1",
     "react-dev-utils": "7.0.5",
-    "react-hot-loader": "4.12.20",
+    "react-hot-loader": "4.12.21",
     "source-map-support": "0.5.19",
     "tslint": "5.20.1",
     "tslint-config-yoshi": "4.32.0",
