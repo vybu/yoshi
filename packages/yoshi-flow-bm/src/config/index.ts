@@ -1,7 +1,7 @@
 import path from 'path';
 import { cosmiconfigSync } from 'cosmiconfig';
 import { validate } from 'jest-validate';
-import { MODULE_CONFIG_PATH } from '../constants';
+import { CONFIG_EXT, MODULE_CONFIG_PATH } from '../constants';
 import {
   ExportedComponentConfig,
   InitialExportedComponentConfig,
@@ -48,7 +48,7 @@ export function loadPageConfig(
   const { dir, name } = path.parse(pagePath);
 
   const pageCosmiconfig = cosmiconfigSync('yoshi-flow-bm/page', {
-    searchPlaces: [`${name}.json`],
+    searchPlaces: [`${name}.${CONFIG_EXT}`],
   });
 
   const result = pageCosmiconfig.search(dir);
@@ -71,7 +71,7 @@ export function loadExportedComponentConfig(
   const componentCosmiconfig = cosmiconfigSync(
     'yoshi-flow-bm/exported-component',
     {
-      searchPlaces: [`${name}.json`],
+      searchPlaces: [`${name}.${CONFIG_EXT}`],
     },
   );
 
@@ -98,7 +98,7 @@ export function loadMethodConfig(
   const { dir, name } = path.parse(methodPath);
 
   const methodCosmiconfig = cosmiconfigSync('yoshi-flow-bm/method', {
-    searchPlaces: [`${name}.json`],
+    searchPlaces: [`${name}.${CONFIG_EXT}`],
   });
 
   const result = methodCosmiconfig.search(dir);
