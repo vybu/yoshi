@@ -5,8 +5,10 @@ const expect = require('expect');
 const flatMap = require('lodash/flatMap');
 const prompts = require('prompts');
 const fs = require('fs');
+const mock = require('mock-require');
 
-const { createApp, verifyRegistry } = require('../src/index');
+const { verifyRegistry } = require('../src/index');
+const getQuestions = require('../src/getQuestions').default;
 const TemplateModel = require('../src/TemplateModel').default;
 const { publishMonorepo } = require('../../../scripts/utils/publishMonorepo');
 const { testRegistry } = require('../../../scripts/utils/constants');
@@ -25,9 +27,31 @@ const templatesWithTitles = flatMap(templates, templateDefinition => {
   ];
 });
 
+const mapModelToMockedQuestions = model => {
+  return getQuestions().map(question => model[question.name]);
+};
+
 const filteredTemplates = templatesWithTitles.filter(({ title }) =>
   !focusProjects ? true : focusProjects.split(',').includes(title),
 );
+
+const mockFlowData = (title, type) => {
+  mock('../src/dev-center-registration/runPrompt', {
+    default: async () => {
+      return {
+        appDefinitionId: 'APP_DEF_ID',
+        appName: `test-${title}`,
+        components: [
+          {
+            name: 'myapp',
+            id: 'BUTTON_ID',
+            type,
+          },
+        ],
+      };
+    },
+  });
+};
 
 if (filteredTemplates.length === 0) {
   console.log(
@@ -73,12 +97,17 @@ const testTemplate = mockedAnswers => {
     // If you nest a describe here (and the tests are run by mocha) the test cases
     // in the describe block will run first!
     it('step 1: should generate project successfully', async () => {
-      prompts.inject(mockedAnswers);
-      console.log(chalk.cyan(testDirectory));
+      prompts.inject(mapModelToMockedQuestions(mockedAnswers));
+      if (mockedAnswers.templateDefinition.name === 'flow-editor') {
+        mockFlowData(
+          mockedAnswers.templateDefinition.title,
+          'WIDGET_OUT_OF_IFRAME',
+        );
+      }
+      const { createApp } = mock.reRequire('../src/index');
 
       // This sets the local registry as the NPM registry to use, so templates are installed from local registry
       process.env['npm_config_registry'] = testRegistry;
-
       await createApp({ workingDir: testDirectory });
     });
 
@@ -125,23 +154,6 @@ const testTemplate = mockedAnswers => {
   });
 };
 
-const withFlowData = mockedAnswers => {
-  if (mockedAnswers.templateDefinition.name === 'flow-editor') {
-    mockedAnswers.setFlowData({
-      appDefinitionId: 'APP_DEF_ID',
-      appName: `test-${mockedAnswers.templateDefinition.title}`,
-      components: [
-        {
-          name: 'myapp',
-          id: 'BUTTON_ID',
-          type: 'WIDGET_OUT_OF_IFRAME',
-        },
-      ],
-    });
-  }
-  return mockedAnswers;
-};
-
 describe('create-yoshi-app + yoshi e2e tests', () => {
   let cleanup;
 
@@ -164,6 +176,5 @@ describe('create-yoshi-app + yoshi e2e tests', () => {
             : 'javascript',
         }),
     )
-    .map(withFlowData)
     .forEach(testTemplate);
 });
