@@ -1,3 +1,4 @@
+import { OOI_WIDGET_COMPONENT_TYPE } from 'yoshi-flow-editor-runtime/build/constants';
 import commonViewerScriptEntry from '../CommonViewerScriptEntry';
 
 describe('CommonViewerScriptEntry template', () => {
@@ -9,7 +10,7 @@ describe('CommonViewerScriptEntry template', () => {
         {
           controllerFileName: 'project/src/components/button/controller.ts',
           id: '123',
-          widgetType: 'ooi_widget',
+          widgetType: OOI_WIDGET_COMPONENT_TYPE,
         },
       ],
       viewerAppFileName: 'project/src/app.ts',
@@ -26,12 +27,12 @@ describe('CommonViewerScriptEntry template', () => {
         {
           controllerFileName: 'project/src/components/todo/controller.ts',
           id: '123',
-          widgetType: 'ooi_widget',
+          widgetType: OOI_WIDGET_COMPONENT_TYPE,
         },
         {
           controllerFileName: 'project/src/components/todo/controller.ts',
           id: '567',
-          widgetType: 'ooi_widget',
+          widgetType: OOI_WIDGET_COMPONENT_TYPE,
         },
       ],
       viewerAppFileName: 'project/src/app.ts',

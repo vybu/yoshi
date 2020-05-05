@@ -3567,7 +3567,7 @@
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@*", "@types/express@4.17.6", "@types/express@^4.17.2":
+"@types/express@*", "@types/express@4.17.6", "@types/express@^4.17.2", "@types/express@^4.17.6":
   version "4.17.6"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@types/express/-/express-4.17.6.tgz#6bce49e49570507b86ea1b07b806f04697fac45e"
   integrity sha1-a85J5JVwUHuG6hsHuAbwRpf6xF4=
@@ -6753,7 +6753,7 @@ aws4@^1.2.1, aws4@^1.6.0, aws4@^1.8.0:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha1-fjPY99RJs/ZzzXLeuavcVS2+Uo4=
 
-axios@0.19.2, axios@^0.19.0:
+axios@0.19.2, axios@^0.19.0, axios@^0.19.2:
   version "0.19.2"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
@@ -8637,6 +8637,17 @@ chownr@^1.1.1, chownr@^1.1.2:
   version "1.1.4"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha1-b8nXtC0ypYNZYzdmbn0ICE2izGs=
+
+chrome-launcher@0.13.1:
+  version "0.13.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/chrome-launcher/-/chrome-launcher-0.13.1.tgz#cd5ed4952b630b9fccf2037b211cba81e5aae044"
+  integrity sha1-zV7UlStjC5/M8gN7IRy6geWq4EQ=
+  dependencies:
+    "@types/node" "*"
+    is-wsl "^2.1.0"
+    lighthouse-logger "^1.0.0"
+    mkdirp "^0.5.3"
+    rimraf "^3.0.2"
 
 chrome-trace-event@^1.0.2:
   version "1.0.2"
@@ -11912,7 +11923,7 @@ express-handlebars@3.1.0:
     object.assign "^4.1.0"
     promise "^8.0.2"
 
-express@4.17.1, express@>=4.17.0, express@^4.0.0, express@^4.16.2, express@^4.16.3, express@^4.17.0:
+express@4.17.1, express@>=4.17.0, express@^4.0.0, express@^4.16.2, express@^4.16.3, express@^4.17.0, express@^4.17.1:
   version "4.17.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
   integrity sha1-RJH8OGBc9R+GKdOcK10Cb5ikwTQ=
@@ -15330,6 +15341,13 @@ is-wsl@^1.1.0:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
 
+is-wsl@^2.1.0:
+  version "2.2.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/is-wsl/-/is-wsl-2.2.0.tgz#74a4c76e77ca9fd3f932f290c17ea326cd157271"
+  integrity sha1-dKTHbnfKn9P5MvKQwX6jJs0VcnE=
+  dependencies:
+    is-docker "^2.0.0"
+
 is-wsl@^2.1.1:
   version "2.1.1"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/is-wsl/-/is-wsl-2.1.1.tgz#4a1c152d429df3d441669498e2486d3596ebaf1d"
@@ -16689,7 +16707,7 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-kleur@3.0.3, kleur@^3.0.0, kleur@^3.0.3:
+kleur@3.0.3, kleur@^3.0.3:
   version "3.0.3"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha1-p5yezIbuHOP6YgbRIWxQHxR/wH4=
@@ -17065,6 +17083,14 @@ lie@~3.3.0:
   integrity sha1-3Pgt7lRfRgdNryAMfBxaCOD0D2o=
   dependencies:
     immediate "~3.0.5"
+
+lighthouse-logger@^1.0.0:
+  version "1.2.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lighthouse-logger/-/lighthouse-logger-1.2.0.tgz#b76d56935e9c137e86a04741f6bb9b2776e886ca"
+  integrity sha1-t21Wk16cE36GoEdB9rubJ3bohso=
+  dependencies:
+    debug "^2.6.8"
+    marky "^1.2.0"
 
 lines-and-columns@^1.1.6:
   version "1.1.6"
@@ -17925,6 +17951,11 @@ marked@0.8.0:
   version "0.8.0"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
   integrity sha1-7FwMm5OHjcUt1Uvo0OUkCXvYGpk=
+
+marky@^1.2.0:
+  version "1.2.1"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/marky/-/marky-1.2.1.tgz#a3fcf82ffd357756b8b8affec9fdbf3a30dc1b02"
+  integrity sha1-o/z4L/01d1a4uK/+yf2/OjDcGwI=
 
 math-random@^1.0.1:
   version "1.0.4"
@@ -21354,15 +21385,7 @@ prompts@^0.1.8:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prompts@^1.1.1:
-  version "1.2.1"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/prompts/-/prompts-1.2.1.tgz#7fd4116a458d6a62761e3ccb1432d7bbd8b2cb29"
-  integrity sha1-f9QRakWNamJ2HjzLFDLXu9iyyyk=
-  dependencies:
-    kleur "^3.0.0"
-    sisteransi "^1.0.0"
-
-prompts@^2.0.1, prompts@^2.0.4, prompts@^2.3.0:
+prompts@^2.0.1, prompts@^2.0.4, prompts@^2.3.0, prompts@^2.3.2:
   version "2.3.2"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/prompts/-/prompts-2.3.2.tgz#480572d89ecf39566d2bd3fe2c9fccb7c4c0b068"
   integrity sha1-SAVy2J7POVZtK9P+LJ/Mt8TAsGg=
@@ -23807,7 +23830,7 @@ sisteransi@^0.1.1:
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/sisteransi/-/sisteransi-0.1.1.tgz#5431447d5f7d1675aac667ccd0b865a4994cb3ce"
   integrity sha1-VDFEfV99FnWqxmfM0LhlpJlMs84=
 
-sisteransi@^1.0.0, sisteransi@^1.0.4:
+sisteransi@^1.0.4:
   version "1.0.5"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha1-E01oEpd1ZDfMBcoBNw06elcQde0=

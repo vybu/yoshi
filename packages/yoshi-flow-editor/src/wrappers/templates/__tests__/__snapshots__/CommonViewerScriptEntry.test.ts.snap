@@ -26,9 +26,9 @@ import controller1 from 'project/src/components/todo/controller.ts';
 
   export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
   export const createControllers = createControllersWithDescriptors([{ method: controller0,
-          widgetType: \\"ooi_widget\\",
+          widgetType: \\"WIDGET_OUT_OF_IFRAME\\",
           id: \\"123\\" }, { method: controller1,
-          widgetType: \\"ooi_widget\\",
+          widgetType: \\"WIDGET_OUT_OF_IFRAME\\",
           id: \\"567\\" }], importedApp.mapPlatformStateToAppData);
 "
 `;
@@ -44,7 +44,7 @@ exports[`CommonViewerScriptEntry template generates correct template with single
 
   export const initAppForPage = initAppForPageWrapper(importedApp.initAppForPage);
   export const createControllers = createControllersWithDescriptors([{ method: controller0,
-          widgetType: \\"ooi_widget\\",
+          widgetType: \\"WIDGET_OUT_OF_IFRAME\\",
           id: \\"123\\" }], importedApp.mapPlatformStateToAppData);
 "
 `;

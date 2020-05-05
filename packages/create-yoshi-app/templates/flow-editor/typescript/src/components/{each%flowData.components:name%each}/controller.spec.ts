@@ -11,7 +11,7 @@ export function mockExperiments(scope: string, experiments: ExperimentsBag) {
     .start();
 }
 
-describe('createAppController', () => {
+describe('createController', () => {
   it('should call setProps with data', async () => {
     mockExperiments(EXPERIMENTS_SCOPE, { someExperiment: 'true' });
     const setPropsSpy = jest.fn();

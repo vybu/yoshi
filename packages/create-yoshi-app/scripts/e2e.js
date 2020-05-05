@@ -125,6 +125,23 @@ const testTemplate = mockedAnswers => {
   });
 };
 
+const withFlowData = mockedAnswers => {
+  if (mockedAnswers.templateDefinition.name === 'flow-editor') {
+    mockedAnswers.setFlowData({
+      appDefinitionId: 'APP_DEF_ID',
+      appName: `test-${mockedAnswers.templateDefinition.title}`,
+      components: [
+        {
+          name: 'myapp',
+          id: 'BUTTON_ID',
+          type: 'WIDGET_OUT_OF_IFRAME',
+        },
+      ],
+    });
+  }
+  return mockedAnswers;
+};
+
 describe('create-yoshi-app + yoshi e2e tests', () => {
   let cleanup;
 
@@ -147,5 +164,6 @@ describe('create-yoshi-app + yoshi e2e tests', () => {
             : 'javascript',
         }),
     )
+    .map(withFlowData)
     .forEach(testTemplate);
 });

@@ -10,7 +10,7 @@ import { TPAComponentsProvider } from 'wix-ui-tpa/TPAComponentsConfig';
 import { Button } from 'wix-ui-tpa/Button';
 import styles from './Widget.st.css';
 
-export default class WidgetRoot extends React.Component<{
+export default class extends React.Component<{
   name: string;
   mobile: boolean;
   experiments: ExperimentsBag;
