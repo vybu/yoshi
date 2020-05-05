@@ -5,12 +5,13 @@ import chalk from 'chalk';
 import DevEnvironment from 'yoshi-common/build/dev-environment';
 import { TARGET_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { getServerStartFile } from 'yoshi-helpers/build/server-start-file';
+import { v4 as uuid } from 'uuid';
 import { CliCommand } from '../bin/yoshi-bm';
 import {
   createClientWebpackConfig,
   createServerWebpackConfig,
 } from '../webpack.config';
-import { watchFlowBMModel } from '../createFlowBMModel';
+import createFlowBMModel, { watchFlowBMModel } from '../model';
 import renderModule, { moduleEntryPath } from '../renderModule';
 import renderModuleConfig from '../renderModuleConfig';
 
@@ -22,7 +23,6 @@ const start: CliCommand = async function(argv, config) {
       // Types
       '--help': Boolean,
       '--server': String,
-      '--url': String,
       '--production': Boolean,
       '--https': Boolean,
       '--debug': Boolean,
@@ -38,7 +38,6 @@ const start: CliCommand = async function(argv, config) {
   const {
     '--help': help,
     '--server': serverStartFileCLI,
-    '--url': url,
     '--production': shouldRunAsProduction,
   } = args;
 
@@ -101,13 +100,19 @@ const start: CliCommand = async function(argv, config) {
     isHot: true,
   });
 
+  const { pages } = createFlowBMModel();
+
+  const startUrl = `http://localhost:5000/business-manager/${uuid()}/${
+    pages[0].route
+  }`;
+
   const devEnvironment = await DevEnvironment.create({
     webpackConfigs: [clientConfig, serverConfig],
     https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
     serverFilePath: serverStartFile,
     appName: config.name,
-    startUrl: url || config.startUrl,
+    startUrl,
     enableClientHotUpdates: Boolean(config.hmr),
     createEjsTemplates: config.experimentalBuildHtml,
   });

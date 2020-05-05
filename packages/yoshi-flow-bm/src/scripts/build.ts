@@ -13,7 +13,7 @@ import {
   createServerWebpackConfig,
 } from '../webpack.config';
 import { CliCommand } from '../bin/yoshi-bm';
-import createFlowBMModel from '../createFlowBMModel';
+import createFlowBMModel from '../model';
 import renderModule, { moduleEntryPath } from '../renderModule';
 import renderModuleConfig from '../renderModuleConfig';
 

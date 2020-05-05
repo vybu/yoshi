@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { FlowBMModel } from './createFlowBMModel';
+import { FlowBMModel } from './model';
 
 const generateModuleCode = ({
   moduleId,

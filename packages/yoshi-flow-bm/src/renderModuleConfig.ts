@@ -2,7 +2,7 @@ import path from 'path';
 import * as fs from 'fs-extra';
 import { getProjectArtifactId } from 'yoshi-helpers/build/utils';
 import { constantCase } from 'constant-case';
-import { FlowBMModel } from './createFlowBMModel';
+import { FlowBMModel } from './model';
 
 export default ({ pages, moduleId, config: { topology } }: FlowBMModel) => {
   const artifactId = `com.wixpress.${getProjectArtifactId()}`;
