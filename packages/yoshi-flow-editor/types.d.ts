@@ -151,3 +151,5 @@ declare module '*.inline.worker.ts' {
   const value: any;
   export = value;
 }
+
+declare module 'wix-base-ui/*';

@@ -26,9 +26,14 @@ if (process.env.EXPERIMENTAL_FLOW_BM === 'true') {
   });
 }
 if (process.env.EXPERIMENTAL_FLOW_EDITOR === 'true') {
+  const usePlatformTemplate =
+    process.env.EXPERIMENTAL_PLATFORM_TEMPLATE === 'true';
+
   templates.push({
     name: 'flow-editor',
-    path: toTemplatePath('flow-editor'),
+    path: toTemplatePath(
+      usePlatformTemplate ? 'flow-editor-platform' : 'flow-editor',
+    ),
   });
 }
 
