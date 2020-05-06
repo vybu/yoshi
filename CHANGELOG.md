@@ -1,5 +1,24 @@
 # Changelog
 
+## 4.68.0 (2020-05-06)
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2336](https://github.com/wix/yoshi/pull/2336) Use single brackets for i18next interpolation in templates ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :nail_care: Polish
+
+- `yoshi-common`
+  - [#2340](https://github.com/wix/yoshi/pull/2340) Add content hash to Stylable files ([@ronami](https://github.com/ronami))
+
+#### :memo: Documentation
+
+- `yoshi-server`
+  - [#2327](https://github.com/wix/yoshi/pull/2327) Yoshi Server Docs - middlwares ([@yanivefraim](https://github.com/yanivefraim))
+- Other
+  - [#2330](https://github.com/wix/yoshi/pull/2330) Yoshi Server docs: custom server ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.67.0 (2020-05-06)
 
 #### :rocket: New Feature
