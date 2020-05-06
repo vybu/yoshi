@@ -1,6 +1,6 @@
 {
   "name": "yoshi-flow-bm",
-  "version": "4.66.0",
+  "version": "4.67.0",
   "bin": {
     "yoshi-bm": "./build/bin/yoshi-bm.js"
   },
@@ -17,19 +17,19 @@
     "jest-validate": "25.5.0",
     "lodash": "4.17.15",
     "react-dev-utils": "9.1.0",
+    "uuid": "7.0.3",
     "webpack": "4.43.0",
-    "yoshi-common": "4.65.0",
+    "yoshi-common": "4.67.0",
     "yoshi-config": "4.61.2",
-    "yoshi-flow-bm-runtime": "4.66.0",
-    "yoshi-flow-legacy": "4.66.0",
-    "yoshi-helpers": "4.65.0",
-    "uuid": "7.0.3"
+    "yoshi-flow-bm-runtime": "4.67.0",
+    "yoshi-flow-legacy": "4.67.0",
+    "yoshi-helpers": "4.65.0"
   },
   "devDependencies": {
     "@types/fs-extra": "8.1.0",
     "@types/lodash": "4.14.150",
     "@types/react-dev-utils": "9.0.4",
-    "@types/uuid":  "7.0.3",
+    "@types/uuid": "7.0.3",
     "@types/webpack": "4.41.11"
   }
 }
