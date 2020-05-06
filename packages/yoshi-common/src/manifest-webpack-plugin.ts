@@ -14,12 +14,14 @@ export default class extends ManifestPlugin {
         path: string;
       }) =>
         // Do not include assets
-        !isModuleAsset &&
-        // Only initial chunks included
-        isInitial &&
-        !filePath.endsWith('.rtl.min.css') &&
-        !filePath.endsWith('.rtl.css') &&
-        !filePath.endsWith('.map'),
+        (!isModuleAsset &&
+          // Only initial chunks included
+          isInitial &&
+          !filePath.endsWith('.rtl.min.css') &&
+          !filePath.endsWith('.rtl.css') &&
+          !filePath.endsWith('.map')) ||
+        // Content-hashed metadata for stylable files
+        filePath.endsWith('.metadata.json'),
     });
   }
 }

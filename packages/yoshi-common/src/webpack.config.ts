@@ -664,7 +664,11 @@ export function createBaseWebpackConfig({
 
             new StylableWebpackPlugin({
               ...getCommonStylbleWebpackConfig(name),
-              filename: '[name].stylable.bundle.css',
+              filename: isDev
+                ? '[name].stylable.bundle.css'
+                : createEjsTemplates
+                ? '[name].[hash:8].stylable.bundle.css'
+                : '[name].stylable.bundle.css',
               outputCSS: separateStylableCss,
               includeCSSInJS: !separateStylableCss,
               runtimeMode: 'shared',
