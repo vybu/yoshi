@@ -8,6 +8,12 @@ void i18next.init({
   // Change to `true` to see more information
   debug: false,
 
+  interpolation: {
+    escapeValue: false, // not needed for react (react already protects from xss)
+    prefix: '{',
+    suffix: '}',
+  },
+
   // Configure our translate HOC to not wait for data to be available
   react: {
     wait: false,

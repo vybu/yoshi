@@ -29,6 +29,12 @@ export default memoize(function i18n(initialLanguage) {
       // Don't use a key separator (no support for nested translation objects)
       keySeparator: false,
 
+      interpolation: {
+        escapeValue: false, // not needed for react (react already protects from xss)
+        prefix: '{',
+        suffix: '}',
+      },
+
       // Wait for translation data to be available before rendering a component
       react: {
         wait: true,
