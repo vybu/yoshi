@@ -97,20 +97,25 @@ function getProgressBarInfo(
   const longestNameLength = 19;
 
   function getObject() {
-    if (configName === 'client') {
-      if (isDev) {
-        return { name: `Client [debug]`, color: 'blue' };
-      } else {
+    switch (configName) {
+      case 'client':
+        if (isDev) {
+          return { name: `Client [debug]`, color: 'blue' };
+        }
         return { name: `Client [production]`, color: 'green' };
-      }
-    } else if (configName === 'web-worker') {
-      if (isDev) {
-        return { name: `Worker [debug]`, color: 'magenta' };
-      } else {
+      case 'web-worker':
+        if (isDev) {
+          return { name: `Worker [debug]`, color: 'magenta' };
+        }
         return { name: `Worker [production]`, color: 'cyan' };
-      }
-    } else {
-      return { name: `Server [production]`, color: 'orange' };
+      case 'web-worker-server':
+        return { name: `Worker Server`, color: 'orange' };
+      case 'server':
+        return { name: `Server`, color: 'orange' };
+      case 'site-assets':
+        return { name: `Site Assets`, color: 'green' };
+      default:
+        return { name: configName, color: 'white' };
     }
   }
 

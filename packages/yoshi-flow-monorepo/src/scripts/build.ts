@@ -22,8 +22,10 @@ import {
   createServerWebpackConfig,
   createWebWorkerWebpackConfig,
   createWebWorkerServerWebpackConfig,
+  createSiteAssetsWebpackConfig,
 } from '../webpack.config';
 import buildPkgs from '../build';
+import { isSiteAssetsModule } from '../utils';
 
 const inTeamCity = checkInTeamCity();
 
@@ -139,16 +141,29 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   const webpackManager = new WebpackManager();
 
   apps.forEach(pkg => {
-    const clientDebugConfig = createClientWebpackConfig(rootConfig, pkg, {
-      isDev: true,
-      forceEmitSourceMaps,
-    });
+    let clientDebugConfig;
+    let clientOptimizedConfig;
+    let siteAssetsConfig;
 
-    const clientOptimizedConfig = createClientWebpackConfig(rootConfig, pkg, {
-      isAnalyze,
-      forceEmitSourceMaps,
-      forceEmitStats,
-    });
+    if (isSiteAssetsModule(pkg)) {
+      siteAssetsConfig = createSiteAssetsWebpackConfig(rootConfig, pkg, {
+        isDev: false,
+        isAnalyze,
+        forceEmitSourceMaps,
+        forceEmitStats,
+      });
+    } else {
+      clientDebugConfig = createClientWebpackConfig(rootConfig, pkg, {
+        isDev: true,
+        forceEmitSourceMaps,
+      });
+
+      clientOptimizedConfig = createClientWebpackConfig(rootConfig, pkg, {
+        isAnalyze,
+        forceEmitSourceMaps,
+        forceEmitStats,
+      });
+    }
 
     const serverConfig = createServerWebpackConfig(rootConfig, libs, pkg, {
       isDev: true,
@@ -183,6 +198,7 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
       webWorkerConfig,
       webWorkerOptimizeConfig,
       webWorkerServerConfig,
+      siteAssetsConfig,
     ]);
   });
 
@@ -192,13 +208,21 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     console.log(chalk.bold.underline(pkg.name));
     console.log();
 
-    const [, clientOptimizedStats, serverStats] = getAppData(pkg.name).stats;
+    if (isSiteAssetsModule(pkg)) {
+      const [serverStats, siteAssetsStats] = getAppData(pkg.name).stats;
 
-    printBuildResult({
-      webpackStats: [clientOptimizedStats, serverStats],
-      cwd: pkg.location,
-    });
+      printBuildResult({
+        webpackStats: [siteAssetsStats, serverStats],
+        cwd: pkg.location,
+      });
+    } else {
+      const [, clientOptimizedStats, serverStats] = getAppData(pkg.name).stats;
 
+      printBuildResult({
+        webpackStats: [clientOptimizedStats, serverStats],
+        cwd: pkg.location,
+      });
+    }
     console.log();
   });
 

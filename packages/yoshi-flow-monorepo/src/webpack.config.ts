@@ -20,6 +20,7 @@ import { STATICS_DIR, SERVER_ENTRY } from 'yoshi-config/build/paths';
 import ManifestPlugin from 'yoshi-common/build/manifest-webpack-plugin';
 import { isObject } from 'lodash';
 import { PackageGraphNode } from './load-package-graph';
+import { isThunderboltElementModule, isThunderboltAppModule } from './utils';
 
 const useTypeScript = isTypescriptProject();
 const isProduction = isProductionQuery();
@@ -46,16 +47,6 @@ const createDefaultOptions = (pkg: PackageGraphNode) => {
     separateCss,
   };
 };
-
-// TODO - thunderbolt-elements should be removed once editor-elements-library is source of truth for comps
-const isThunderboltElementModule = (pkg: PackageGraphNode) =>
-  pkg.name === 'thunderbolt-elements' || pkg.name === 'editor-elements-library';
-
-const isThunderboltAppModule = (pkg: PackageGraphNode) =>
-  pkg.name === '@wix/thunderbolt-app';
-
-const isSiteAssetsModule = (pkg: PackageGraphNode) =>
-  pkg.name === 'thunderbolt-becky' || pkg.name === '@wix/thunderbolt-becky';
 
 export function createClientWebpackConfig(
   rootConfig: Config,
@@ -98,29 +89,8 @@ export function createClientWebpackConfig(
     createEjsTemplates: pkg.config.experimentalBuildHtml,
     useCustomSourceMapPlugin:
       isThunderboltElementModule(pkg) || isThunderboltAppModule(pkg),
-    ...(isSiteAssetsModule(pkg)
-      ? {
-          configName: 'site-assets',
-          target: 'node',
-          useNodeExternals: false,
-        }
-      : {}),
     ...defaultOptions,
   });
-
-  if (isSiteAssetsModule(pkg)) {
-    // Apply manifest since standard `node` webpack configs don't
-    clientConfig.plugins!.push(
-      new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
-    );
-    clientConfig.output!.path = path.join(pkg.location, STATICS_DIR);
-    clientConfig.output!.filename = isDev
-      ? '[name].bundle.js'
-      : '[name].[contenthash:8].bundle.min.js';
-    clientConfig.output!.chunkFilename = isDev
-      ? '[name].chunk.js'
-      : '[name].[contenthash:8].chunk.min.js';
-  }
 
   if (isThunderboltElementModule(pkg)) {
     clientConfig.optimization!.runtimeChunk = false;
@@ -317,4 +287,70 @@ export function createWebWorkerServerWebpackConfig(
   );
 
   return workerConfig;
+}
+
+export function createSiteAssetsWebpackConfig(
+  rootConfig: Config,
+  pkg: PackageGraphNode,
+  {
+    isDev,
+    forceEmitSourceMaps,
+    forceEmitStats,
+    isAnalyze,
+  }: {
+    isDev?: boolean;
+    forceEmitSourceMaps?: boolean;
+    forceEmitStats?: boolean;
+    isAnalyze?: boolean;
+  },
+): webpack.Configuration {
+  const entry = pkg.config.entry || defaultEntry;
+
+  const defaultOptions = createDefaultOptions(pkg);
+
+  const config = createBaseWebpackConfig({
+    cwd: pkg.location,
+    configName: 'site-assets',
+    target: 'node',
+    useNodeExternals: false,
+    isDev,
+    isMonorepo: true,
+    isAnalyze,
+    forceEmitSourceMaps,
+    forceEmitStats,
+    exportAsLibraryName: pkg.config.exports,
+    enhancedTpaStyle: pkg.config.enhancedTpaStyle,
+    tpaStyle: pkg.config.tpaStyle,
+    separateStylableCss: pkg.config.separateStylableCss,
+    createEjsTemplates: pkg.config.experimentalBuildHtml,
+    ...defaultOptions,
+  });
+
+  config.entry = isSingleEntry(entry) ? { app: entry as string } : entry;
+  config.resolve!.alias = pkg.config.resolveAlias;
+  config.externals = pkg.config.externals;
+
+  const useSplitChunks = pkg.config.splitChunks;
+
+  if (useSplitChunks) {
+    const splitChunksConfig = isObject(useSplitChunks)
+      ? useSplitChunks
+      : defaultSplitChunksConfig;
+
+    config!.optimization!.splitChunks = splitChunksConfig as webpack.Options.SplitChunksOptions;
+  }
+
+  // Apply manifest since standard `node` webpack configs don't
+  config.plugins!.push(
+    new ManifestPlugin({ fileName: 'manifest', isDev: isDev as boolean }),
+  );
+  config.output!.path = path.join(pkg.location, STATICS_DIR);
+  config.output!.filename = isDev
+    ? '[name].bundle.js'
+    : '[name].[contenthash:8].bundle.min.js';
+  config.output!.chunkFilename = isDev
+    ? '[name].chunk.js'
+    : '[name].[contenthash:8].chunk.min.js';
+
+  return config;
 }
