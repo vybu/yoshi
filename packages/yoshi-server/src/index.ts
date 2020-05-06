@@ -9,5 +9,7 @@ export { default as render } from './render';
 
 export { default as renderView } from './renderView';
 
+export { default as runMiddleware } from './runMiddleware';
+
 export { boAuth };
 export { requireLogin };

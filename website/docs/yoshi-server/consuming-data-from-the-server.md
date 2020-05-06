@@ -132,7 +132,7 @@ Then your `.erb` file should be:
 }
 ```
 
-And anywhere in your route / api functions:
+And anywhere in your route / server functions:
 
 ```
 console.log(this.config.hello); // logs 'world'

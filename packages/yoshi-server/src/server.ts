@@ -16,6 +16,7 @@ import { BootstrapContext } from '@wix/wix-bootstrap-ng/typed';
 import { InternalServerError } from './httpErrors';
 import { RouteFunction, InitServerFunction } from './types';
 import { pathMatch, connectToYoshiServerHMR, buildRoute } from './utils';
+import runMiddleware from './runMiddleware';
 
 export type Route = {
   route: string;
@@ -88,14 +89,13 @@ export default class Server {
         );
 
         if (params) {
-          await new Promise(resolve => requireHttps(req, res, resolve));
-          await new Promise(resolve => cookieParser()(req, res, resolve));
-          await new Promise(resolve => wixExpressCsrf()(req, res, resolve));
+          await runMiddleware(req, res, requireHttps);
+          await runMiddleware(req, res, cookieParser());
+          await runMiddleware(req, res, wixExpressCsrf());
+
           const renderer = (this.context as any).renderer;
           if (renderer) {
-            await new Promise(resolve =>
-              renderer.middleware()(req, res, resolve),
-            );
+            await runMiddleware(req, res, renderer.middleware());
           }
           return await handler(req, res, params);
         }
