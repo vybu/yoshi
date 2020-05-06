@@ -1,5 +1,36 @@
 # Changelog
 
+## 4.67.0 (2020-05-06)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2332](https://github.com/wix/yoshi/pull/2332) Improve thunderbolt progress bar with showing all compilations & remove the debug site-assets compilation ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-flow-bm`
+  - [#2322](https://github.com/wix/yoshi/pull/2322) Open Business-Manager (testkit) url on `yoshi-bm start` ([@amitdahan](https://github.com/amitdahan))
+  - [#2324](https://github.com/wix/yoshi/pull/2324) Watch config files for flow-bm model changes ([@amitdahan](https://github.com/amitdahan))
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2318](https://github.com/wix/yoshi/pull/2318) Implement dev center wizard ([@yavorsky](https://github.com/yavorsky))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2333](https://github.com/wix/yoshi/pull/2333) Use `data-hook` instead of `data-testid` in templates ([@sidoruk-sv](https://github.com/sidoruk-sv))
+  - [#2331](https://github.com/wix/yoshi/pull/2331) Remove JS project for editor flow and update template tests ([@yavorsky](https://github.com/yavorsky))
+- `create-yoshi-app`, `yoshi-flow-editor-runtime`, `yoshi-flow-editor`
+  - [#2305](https://github.com/wix/yoshi/pull/2305) Add template for platform apps ([@maoryosef2](https://github.com/maoryosef2))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-monorepo`
+  - [#2332](https://github.com/wix/yoshi/pull/2332) Improve thunderbolt progress bar with showing all compilations ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2326](https://github.com/wix/yoshi/pull/2326) Yoshi server docs: Initialize server data ([@yanivefraim](https://github.com/yanivefraim))
+- [#2329](https://github.com/wix/yoshi/pull/2329) Yoshi server docs: testing ([@yanivefraim](https://github.com/yanivefraim))
+- [#2321](https://github.com/wix/yoshi/pull/2321) Yoshi server docs: getting started ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.66.0 (2020-05-03)
 
 #### :rocket: New Feature
