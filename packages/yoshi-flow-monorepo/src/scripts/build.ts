@@ -140,6 +140,13 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
 
   const webpackManager = new WebpackManager();
 
+  // If there are more than 2 applications, the screen size
+  // is just not big enough for the fancy progress bar
+  // so we configure it to not be showed
+  if (apps.length > 2) {
+    process.env.PROGRESS_BAR = 'false';
+  }
+
   apps.forEach(pkg => {
     let clientDebugConfig;
     let clientOptimizedConfig;

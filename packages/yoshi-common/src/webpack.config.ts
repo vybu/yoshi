@@ -127,7 +127,8 @@ function getProgressBarInfo(
     obj.name = `${stripOrganization(packageName)}\n  ${obj.name}`;
   }
 
-  const progressReporter = inTeamCity ? 'basic' : 'fancy';
+  const progressReporter =
+    inTeamCity || process.env.PROGRESS_BAR === 'false' ? 'basic' : 'fancy';
 
   const profileReporter =
     isProduction && process.env.PROFILE === 'true' ? ['profile'] : [];
