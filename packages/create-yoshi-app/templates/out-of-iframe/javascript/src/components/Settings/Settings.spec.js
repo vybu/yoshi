@@ -4,8 +4,8 @@ import Settings from './Settings';
 
 jest.mock('@wix/wix-base-ui', () => ({
   ...jest.requireActual('@wix/wix-base-ui'),
-  Slider: () => <div data-testid="base-ui-slider" />,
-  ColorPickerColorSpace: () => <div data-testid="base-ui-color-picker" />,
+  Slider: () => <div data-hook="base-ui-slider" />,
+  ColorPickerColorSpace: () => <div data-hook="base-ui-color-picker" />,
 }));
 
 describe('Settings', () => {
