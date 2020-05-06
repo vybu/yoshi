@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.68.1 (2020-05-06)
+
+#### :bug: Bug Fix
+* `yoshi-common`, `yoshi-flow-monorepo`
+  * [#2344](https://github.com/wix/yoshi/pull/2344) Do not show the progress bar in case there are many compilations ([@ranyitz](https://github.com/ranyitz))
+* `create-yoshi-app`
+  * [#2346](https://github.com/wix/yoshi/pull/2346) Add lodash to create yoshi app dependencies ([@yavorsky](https://github.com/yavorsky))
+
 ## 4.68.0 (2020-05-06)
 
 #### :building_construction: Templates
