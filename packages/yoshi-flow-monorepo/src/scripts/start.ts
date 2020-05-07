@@ -99,13 +99,13 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     process.exit(1);
   }
 
-  const clientConfig = createClientWebpackConfig(rootConfig, pkg, {
+  const clientConfig = createClientWebpackConfig(rootConfig, pkg, libs, apps, {
     isDev: true,
     isHot: pkg.config.hmr as boolean,
     suricate: pkg.config.suricate,
   });
 
-  const serverConfig = createServerWebpackConfig(rootConfig, libs, pkg, {
+  const serverConfig = createServerWebpackConfig(rootConfig, pkg, libs, apps, {
     isDev: true,
     isHot: true,
   });
@@ -113,18 +113,30 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
   let webWorkerConfig;
 
   if (pkg.config.webWorkerEntry) {
-    webWorkerConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
-      isDev: true,
-      isHot: true,
-    });
+    webWorkerConfig = createWebWorkerWebpackConfig(
+      rootConfig,
+      pkg,
+      libs,
+      apps,
+      {
+        isDev: true,
+        isHot: true,
+      },
+    );
   }
 
   let webWorkerServerConfig;
 
   if (pkg.config.webWorkerServerEntry) {
-    webWorkerServerConfig = createWebWorkerServerWebpackConfig(pkg, {
-      isDev: true,
-    });
+    webWorkerServerConfig = createWebWorkerServerWebpackConfig(
+      rootConfig,
+      pkg,
+      libs,
+      apps,
+      {
+        isDev: true,
+      },
+    );
   }
 
   const devEnvironment = await DevEnvironment.create({

@@ -16,7 +16,7 @@ import {
   inTeamCity,
   isProduction as isProductionQuery,
 } from 'yoshi-helpers/build/queries';
-import { STATICS_DIR, SERVER_ENTRY } from 'yoshi-config/build/paths';
+import { STATICS_DIR, SERVER_ENTRY, SRC_DIR } from 'yoshi-config/build/paths';
 import ManifestPlugin from 'yoshi-common/build/manifest-webpack-plugin';
 import { isObject } from 'lodash';
 import { PackageGraphNode } from './load-package-graph';
@@ -31,7 +31,12 @@ const defaultSplitChunksConfig = {
   minChunks: 2,
 };
 
-const createDefaultOptions = (pkg: PackageGraphNode) => {
+const createDefaultOptions = (
+  pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
+  rootConfig: Config,
+) => {
   const separateCss =
     pkg.config.separateCss === 'prod'
       ? inTeamCity() || isProduction
@@ -45,12 +50,20 @@ const createDefaultOptions = (pkg: PackageGraphNode) => {
     devServerUrl: pkg.config.servers.cdn.url,
     cssModules: pkg.config.cssModules,
     separateCss,
+    includeInTranspilation: [
+      ...[...apps, ...libs].map(({ location }) => path.join(location, SRC_DIR)),
+      ...rootConfig.externalUnprocessedModules.map(
+        m => new RegExp(`node_modules/${m}`),
+      ),
+    ],
   };
 };
 
 export function createClientWebpackConfig(
   rootConfig: Config,
   pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
   {
     isDev,
     isHot,
@@ -69,7 +82,7 @@ export function createClientWebpackConfig(
 ): webpack.Configuration {
   const entry = pkg.config.entry || defaultEntry;
 
-  const defaultOptions = createDefaultOptions(pkg);
+  const defaultOptions = createDefaultOptions(pkg, libs, apps, rootConfig);
 
   const clientConfig = createBaseWebpackConfig({
     cwd: pkg.location,
@@ -153,11 +166,12 @@ export function createClientWebpackConfig(
 
 export function createServerWebpackConfig(
   rootConfig: Config,
-  libs: Array<PackageGraphNode>,
   pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
   { isDev, isHot }: { isDev?: boolean; isHot?: boolean } = {},
 ): webpack.Configuration {
-  const defaultOptions = createDefaultOptions(pkg);
+  const defaultOptions = createDefaultOptions(pkg, libs, apps, rootConfig);
 
   const serverConfig = createBaseWebpackConfig({
     cwd: pkg.location,
@@ -214,6 +228,8 @@ export function createServerWebpackConfig(
 export function createWebWorkerWebpackConfig(
   rootConfig: Config,
   pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
   {
     isDev,
     isHot,
@@ -226,7 +242,7 @@ export function createWebWorkerWebpackConfig(
     forceEmitStats?: boolean;
   } = {},
 ): webpack.Configuration {
-  const defaultOptions = createDefaultOptions(pkg);
+  const defaultOptions = createDefaultOptions(pkg, libs, apps, rootConfig);
 
   const workerConfig = createBaseWebpackConfig({
     cwd: pkg.location,
@@ -258,10 +274,13 @@ export function createWebWorkerWebpackConfig(
 }
 
 export function createWebWorkerServerWebpackConfig(
+  rootConfig: Config,
   pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
   { isDev, isHot }: { isDev?: boolean; isHot?: boolean } = {},
 ): webpack.Configuration {
-  const defaultOptions = createDefaultOptions(pkg);
+  const defaultOptions = createDefaultOptions(pkg, libs, apps, rootConfig);
 
   const workerConfig = createBaseWebpackConfig({
     cwd: pkg.location,
@@ -292,6 +311,8 @@ export function createWebWorkerServerWebpackConfig(
 export function createSiteAssetsWebpackConfig(
   rootConfig: Config,
   pkg: PackageGraphNode,
+  libs: Array<PackageGraphNode>,
+  apps: Array<PackageGraphNode>,
   {
     isDev,
     forceEmitSourceMaps,
@@ -306,7 +327,7 @@ export function createSiteAssetsWebpackConfig(
 ): webpack.Configuration {
   const entry = pkg.config.entry || defaultEntry;
 
-  const defaultOptions = createDefaultOptions(pkg);
+  const defaultOptions = createDefaultOptions(pkg, libs, apps, rootConfig);
 
   const config = createBaseWebpackConfig({
     cwd: pkg.location,

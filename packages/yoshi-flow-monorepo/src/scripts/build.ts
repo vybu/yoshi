@@ -153,49 +153,91 @@ const build: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     let siteAssetsConfig;
 
     if (isSiteAssetsModule(pkg)) {
-      siteAssetsConfig = createSiteAssetsWebpackConfig(rootConfig, pkg, {
-        isDev: false,
-        isAnalyze,
-        forceEmitSourceMaps,
-        forceEmitStats,
-      });
+      siteAssetsConfig = createSiteAssetsWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isDev: false,
+          isAnalyze,
+          forceEmitSourceMaps,
+          forceEmitStats,
+        },
+      );
     } else {
-      clientDebugConfig = createClientWebpackConfig(rootConfig, pkg, {
-        isDev: true,
-        forceEmitSourceMaps,
-      });
+      clientDebugConfig = createClientWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isDev: true,
+          forceEmitSourceMaps,
+        },
+      );
 
-      clientOptimizedConfig = createClientWebpackConfig(rootConfig, pkg, {
-        isAnalyze,
-        forceEmitSourceMaps,
-        forceEmitStats,
-      });
+      clientOptimizedConfig = createClientWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isAnalyze,
+          forceEmitSourceMaps,
+          forceEmitStats,
+        },
+      );
     }
 
-    const serverConfig = createServerWebpackConfig(rootConfig, libs, pkg, {
-      isDev: true,
-    });
+    const serverConfig = createServerWebpackConfig(
+      rootConfig,
+      pkg,
+      libs,
+      apps,
+      {
+        isDev: true,
+      },
+    );
 
     let webWorkerConfig;
     let webWorkerOptimizeConfig;
 
     if (pkg.config.webWorkerEntry) {
-      webWorkerConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
-        isDev: true,
-      });
+      webWorkerConfig = createWebWorkerWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isDev: true,
+        },
+      );
 
-      webWorkerOptimizeConfig = createWebWorkerWebpackConfig(rootConfig, pkg, {
-        isAnalyze,
-        forceEmitStats,
-      });
+      webWorkerOptimizeConfig = createWebWorkerWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isAnalyze,
+          forceEmitStats,
+        },
+      );
     }
 
     let webWorkerServerConfig;
 
     if (pkg.config.webWorkerServerEntry) {
-      webWorkerServerConfig = createWebWorkerServerWebpackConfig(pkg, {
-        isDev: true,
-      });
+      webWorkerServerConfig = createWebWorkerServerWebpackConfig(
+        rootConfig,
+        pkg,
+        libs,
+        apps,
+        {
+          isDev: true,
+        },
+      );
     }
 
     webpackManager.addConfigs(pkg.name, [

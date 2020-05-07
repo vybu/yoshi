@@ -1,7 +1,7 @@
 import path from 'path';
 import os from 'os';
 import fs from 'fs-extra';
-import webpack from 'webpack';
+import webpack, { RuleSetCondition } from 'webpack';
 import {
   SRC_DIR,
   STATICS_DIR,
@@ -324,6 +324,7 @@ export function createBaseWebpackConfig({
   createEjsTemplates = false,
   performanceBudget,
   includeStyleLoaders = true,
+  includeInTranspilation = shouldTranspileFile,
   enhancedTpaStyle = false,
   tpaStyle = false,
   forceEmitSourceMaps = false,
@@ -360,6 +361,7 @@ export function createBaseWebpackConfig({
   experimentalRtlCss?: boolean;
   cssModules?: boolean;
   cwd?: string;
+  includeInTranspilation?: Array<RuleSetCondition> | RuleSetCondition;
   devServerUrl: string;
   externalizeRelativeLodash?: boolean;
   isAnalyze?: boolean;
@@ -903,7 +905,10 @@ export function createBaseWebpackConfig({
 
         {
           test: /\.(ts|tsx)$/,
-          include: shouldTranspileFile,
+          // Don't transpile the output of Carmi with Babel/TypeScript
+          // https://github.com/wix/yoshi/pull/2227
+          exclude: /\.carmi.(js|ts)$/,
+          include: includeInTranspilation,
           use: [
             {
               loader: 'thread-loader',
@@ -939,10 +944,10 @@ export function createBaseWebpackConfig({
 
         {
           test: reScript,
-          include: shouldTranspileFile,
+          include: includeInTranspilation,
           // Optimize JS processing worker stuff excluded due to
           // https://github.com/webpack-contrib/worker-loader/issues/177
-          exclude: /\.inline\.worker\.js/,
+          exclude: [/\.inline\.worker\.js/, /\.carmi.(js|ts)$/],
           use: [
             {
               loader: 'thread-loader',
@@ -955,7 +960,10 @@ export function createBaseWebpackConfig({
 
         {
           test: reScript,
-          include: shouldTranspileFile,
+          // Don't transpile the output of Carmi with Babel/TypeScript
+          // https://github.com/wix/yoshi/pull/2227
+          exclude: /\.carmi.(js|ts)$/,
+          include: includeInTranspilation,
           use: [
             {
               loader: 'babel-loader',
