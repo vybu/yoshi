@@ -7,6 +7,7 @@ describe('TemplateModel', () => {
       templateDefinition: {
         name: 'client',
         path: path.join(__dirname, '../templates/client'),
+        language: ['javascript'],
       },
       language: 'javascript',
       authorEmail: 'author-email',
@@ -26,6 +27,7 @@ describe('TemplateModel', () => {
       templateDefinition: {
         name: 'client',
         path: path.join(__dirname, '../templates/client'),
+        language: ['typescript'],
       },
       language: 'typescript',
       projectName: 'project-name',

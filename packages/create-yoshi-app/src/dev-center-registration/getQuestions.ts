@@ -213,6 +213,12 @@ export default (): Array<ExtendedPromptObject<string>> => {
                   value: null,
                 },
               ],
+              before(answers) {
+                if (!answers.components) {
+                  answers.components = [];
+                }
+                return answers;
+              },
               repeatUntil(answers) {
                 return !answers.registerComponentType;
               },

@@ -7,7 +7,6 @@ import {
   npmInstall,
   gitCommit,
 } from './utils';
-import runPrompt from './runPrompt';
 import generateProject from './generateProject';
 import TemplateModel from './TemplateModel';
 import DevCenterTemplateModel from './dev-center-registration/TemplateModel';
@@ -37,13 +36,16 @@ export default async ({
 
     // If we don't have template model injected, ask the user
     // to answer the questions and generate one for us
-    templateModel = await runPrompt(workingDir);
+    const runPrompt = require('./runPrompt').default;
+    templateModel = (await runPrompt(workingDir)) as TemplateModel;
   }
 
   if (templateModel.templateDefinition.name === 'flow-editor') {
     const runDevCenterRegistrationPrompt = require('./dev-center-registration/runPrompt')
       .default;
-    const devCenterModel = await runDevCenterRegistrationPrompt(templateModel);
+    const devCenterModel = (await runDevCenterRegistrationPrompt(
+      templateModel,
+    )) as DevCenterTemplateModel;
     templateModel.setFlowData<DevCenterTemplateModel>(devCenterModel);
   }
 

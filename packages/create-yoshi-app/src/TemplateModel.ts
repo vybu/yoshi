@@ -6,6 +6,7 @@ export type Language = 'javascript' | 'typescript';
 export interface TemplateDefinition {
   name: string;
   path: string;
+  language: Array<'typescript' | 'javascript'>;
 }
 
 export default class TemplateModel {

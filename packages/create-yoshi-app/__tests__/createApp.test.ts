@@ -91,6 +91,7 @@ function minimalTemplateModel() {
     templateDefinition: {
       name: 'minimal-template',
       path: path.join(__dirname, './__fixtures__/minimal-template/'),
+      language: ['javascript'],
     },
   });
 }

@@ -1,23 +1,24 @@
 import path from 'path';
-import prompts from 'prompts';
+import extendedPropmts, {
+  Answers,
+} from './dev-center-registration/extended-prompts';
 import TemplateModel from './TemplateModel';
 import getQuestions from './getQuestions';
 
 export default async (workingDir = process.cwd()) => {
   const questions = getQuestions();
 
-  let promptAborted = false;
+  let answers: Answers<string> = {};
 
-  const answers = await prompts(questions, {
-    onCancel: () => {
-      promptAborted = true;
-    },
-  });
-
-  if (promptAborted) {
-    console.log();
-    console.log('Aborting ...');
-    process.exit(0);
+  try {
+    answers = await extendedPropmts<{}>(questions, {});
+  } catch (e) {
+    // We want to show unhanded errors
+    if (e.message === 'Aborted') {
+      console.log();
+      console.log('Aborting ...');
+      process.exit(0);
+    }
   }
 
   // use the basename of the current working directory if projectName wasn't supplied

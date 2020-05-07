@@ -3,12 +3,10 @@ const execa = require('execa');
 const chalk = require('chalk');
 const expect = require('expect');
 const flatMap = require('lodash/flatMap');
-const prompts = require('prompts');
 const fs = require('fs');
 const mock = require('mock-require');
 
 const { verifyRegistry } = require('../src/index');
-const getQuestions = require('../src/getQuestions').default;
 const TemplateModel = require('../src/TemplateModel').default;
 const { publishMonorepo } = require('../../../scripts/utils/publishMonorepo');
 const { testRegistry } = require('../../../scripts/utils/constants');
@@ -27,13 +25,13 @@ const templatesWithTitles = flatMap(templates, templateDefinition => {
   ];
 });
 
-const mapModelToMockedQuestions = model => {
-  return getQuestions().map(question => model[question.name]);
-};
-
 const filteredTemplates = templatesWithTitles.filter(({ title }) =>
   !focusProjects ? true : focusProjects.split(',').includes(title),
 );
+
+const mockAppData = data => {
+  mock('../src/runPrompt', { default: async () => data });
+};
 
 const mockFlowData = (title, type) => {
   mock('../src/dev-center-registration/runPrompt', {
@@ -97,7 +95,7 @@ const testTemplate = mockedAnswers => {
     // If you nest a describe here (and the tests are run by mocha) the test cases
     // in the describe block will run first!
     it('step 1: should generate project successfully', async () => {
-      prompts.inject(mapModelToMockedQuestions(mockedAnswers));
+      mockAppData(mockedAnswers);
       if (mockedAnswers.templateDefinition.name === 'flow-editor') {
         mockFlowData(
           mockedAnswers.templateDefinition.title,

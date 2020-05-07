@@ -1,6 +1,7 @@
 import getGitConfig from 'parse-git-config';
-import { PromptObject } from 'prompts';
+import { capitalize } from 'lodash';
 import templates from './templates';
+import { ExtendedPromptObject } from './dev-center-registration/extended-prompts';
 
 const WIX_EMAIL_PATTERN = '@wix.com';
 
@@ -26,7 +27,7 @@ const formatEmail = (email: string) => {
 // Check if string is not in an email format.
 const withoutEmail = (value: string) => value.length && !/@+/.test(value);
 
-export default (): Array<PromptObject<string>> => {
+export default (): Array<ExtendedPromptObject<string>> => {
   const gitConfig = getGitConfig.sync({ include: true, type: 'global' });
 
   const gitUser = gitConfig.user || {};
@@ -60,15 +61,32 @@ export default (): Array<PromptObject<string>> => {
         title: project.name,
         value: project,
       })),
-    },
-    {
-      type: 'select',
-      name: 'language',
-      message: 'Choose JavaScript Transpiler',
-      choices: [
-        { title: 'Typescript', value: 'typescript' },
-        { title: 'Babel', value: 'javascript' },
-      ],
+      after(answers) {
+        const templateLangs = answers.templateDefinition.language;
+        if (templateLangs.length === 1) {
+          answers.language = templateLangs[0];
+        }
+      },
+      next(answers) {
+        if (answers.templateDefinition.language.length > 1) {
+          return [
+            {
+              type: 'select',
+              name: 'language',
+              message: 'Choose JavaScript Transpiler',
+              async getDynamicChoices(answers) {
+                return answers.templateDefinition.language.map(
+                  (lang: string) => ({
+                    title: capitalize(lang),
+                    value: lang,
+                  }),
+                );
+              },
+            },
+          ];
+        }
+        return [];
+      },
     },
   ];
 };
