@@ -28,7 +28,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
     "noEmit": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true

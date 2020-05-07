@@ -9,7 +9,7 @@ import {
   Divider,
   TextLabel,
 } from '@wix/wix-base-ui';
-import * as css from './Settings.scss';
+import css from './Settings.scss';
 
 interface ISettingsProps {
   Wix: IWixStatic;

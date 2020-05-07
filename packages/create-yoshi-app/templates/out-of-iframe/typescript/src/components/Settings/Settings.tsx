@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as css from './Settings.scss';
+import React from 'react';
+import css from './Settings.scss';
 import './Settings.global.scss';
 import { get } from 'lodash';
 import {
