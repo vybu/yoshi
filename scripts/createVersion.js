@@ -82,10 +82,12 @@ Promise.resolve()
       );
       console.log();
     } else {
-      execa.sync(
-        `git commit -a -m "documentation for version ${majorVersion}"`,
-        { shell: true },
-      );
+      execa.sync('git add -A', {
+        shell: true,
+      });
+      execa.sync(`git commit -m "documentation for version ${majorVersion}"`, {
+        shell: true,
+      });
     }
   })
   .then(() => {
