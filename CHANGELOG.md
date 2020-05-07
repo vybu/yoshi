@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.68.3 (2020-05-07)
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2337](https://github.com/wix/yoshi/pull/2337) Set `esModuleInterop` for all TypeScript templates ([@sidoruk-sv](https://github.com/sidoruk-sv))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`
+  - [#2354](https://github.com/wix/yoshi/pull/2354) Verify that the `target` directory exists before writing the `server.log` ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2351](https://github.com/wix/yoshi/pull/2351) fix link to OOI docs ([@junkkerrigan](https://github.com/junkkerrigan))
+
 ## 4.68.2 (2020-05-07)
 
 #### :bug: Bug Fix
