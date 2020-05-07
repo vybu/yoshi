@@ -40,6 +40,7 @@ import TpaStyleWebpackPlugin from 'tpa-style-webpack-plugin';
 // @ts-ignore - missing types
 import { mdsvex } from 'mdsvex';
 import WebpackBar from 'webpackbar';
+import isCi from 'is-ci';
 import { stripOrganization } from 'yoshi-helpers/build/utils';
 import { resolveNamespaceFactory } from './@stylable/node';
 import StylableWebpackPlugin from './@stylable/webpack-plugin';
@@ -126,9 +127,8 @@ function getProgressBarInfo(
   if (isMonorepo) {
     obj.name = `${stripOrganization(packageName)}\n  ${obj.name}`;
   }
-
   const progressReporter =
-    inTeamCity || process.env.PROGRESS_BAR === 'false' ? 'basic' : 'fancy';
+    isCi || process.env.PROGRESS_BAR === 'false' ? 'basic' : 'fancy';
 
   const profileReporter =
     isProduction && process.env.PROFILE === 'true' ? ['profile'] : [];
