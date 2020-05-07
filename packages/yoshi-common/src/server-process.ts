@@ -55,6 +55,10 @@ export class ServerProcess {
   }
 
   async initialize() {
+    const serverLogFile = path.join(this.cwd, SERVER_LOG_FILE);
+    // Verify that the `target/server.log` file exist before we write to it
+    fs.ensureFileSync(serverLogFile);
+
     const bootstrapEnvironmentParams = getDevelopmentEnvVars({
       port: PORT,
       cwd: this.cwd,
@@ -81,9 +85,7 @@ export class ServerProcess {
       },
     });
 
-    const serverLogWriteStream = fs.createWriteStream(
-      path.join(this.cwd, SERVER_LOG_FILE),
-    );
+    const serverLogWriteStream = fs.createWriteStream(serverLogFile);
     const serverOutLogStream = this.child.stdout!.pipe(serverLogPrefixer());
     serverOutLogStream.pipe(serverLogWriteStream);
     serverOutLogStream.pipe(process.stdout);
