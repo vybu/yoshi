@@ -11,12 +11,9 @@ import { environment } from './environment';
     await testkit.start();
   };
 
-  watch(['app-config-templates/module_{%PROJECT_NAME%}.json']).on(
-    'all',
-    async () => {
-      await restartTestkit();
-    },
-  );
+  watch(['target/module_{%PROJECT_NAME%}.json']).on('all', async () => {
+    await restartTestkit();
+  });
 
   process.on('SIGINT', () => testkit.stop());
   process.on('exit', () => testkit.stop());

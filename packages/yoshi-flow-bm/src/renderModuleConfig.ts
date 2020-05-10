@@ -1,8 +1,8 @@
 import path from 'path';
 import * as fs from 'fs-extra';
 import { getProjectArtifactId } from 'yoshi-helpers/build/utils';
-import { constantCase } from 'constant-case';
 import { FlowBMModel } from './model';
+import { MODULE_CONFIG_PATH } from './constants';
 
 export default ({ pages, moduleId, config: { topology } }: FlowBMModel) => {
   const artifactId = `com.wixpress.${getProjectArtifactId()}`;
@@ -37,10 +37,7 @@ export default ({ pages, moduleId, config: { topology } }: FlowBMModel) => {
     ],
   };
 
-  const templatePath = path.join(
-    process.cwd(),
-    `app-config-templates/module_${constantCase(moduleId)}.json`,
-  );
+  const templatePath = path.join(process.cwd(), MODULE_CONFIG_PATH(moduleId));
 
   fs.outputJSONSync(templatePath, template, { spaces: 2 });
 };

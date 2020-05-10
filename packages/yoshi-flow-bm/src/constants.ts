@@ -1,7 +1,12 @@
+import { constantCase } from 'constant-case';
+
 const EXTENSIONS = '{tsx,ts,jsx,js}';
 export const CONFIG_EXT = 'json';
 
-export const MODULE_CONFIG_PATH = `.module.${CONFIG_EXT}`;
+export const CONFIG_PATH = `.module.${CONFIG_EXT}`;
+
+export const MODULE_CONFIG_PATH = (moduleId: string) =>
+  `target/module_${constantCase(moduleId)}.json`;
 
 export const PAGES_DIR = 'src/pages';
 export const PAGES_PATTERN = `${PAGES_DIR}/**/*.${EXTENSIONS}`;

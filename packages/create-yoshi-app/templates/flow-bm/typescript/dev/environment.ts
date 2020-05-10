@@ -18,10 +18,7 @@ const getTestKitConfig = async (
 
   const template = JSON.parse(
     fs.readFileSync(
-      path.join(
-        __dirname,
-        '../app-config-templates/module_{%PROJECT_NAME%}.json',
-      ),
+      path.join(__dirname, '../target/module_{%PROJECT_NAME%}.json'),
       'utf-8',
     ),
   );

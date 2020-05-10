@@ -1,7 +1,7 @@
 import path from 'path';
 import { cosmiconfigSync } from 'cosmiconfig';
 import { validate } from 'jest-validate';
-import { CONFIG_EXT, MODULE_CONFIG_PATH } from '../constants';
+import { CONFIG_EXT, CONFIG_PATH } from '../constants';
 import {
   ExportedComponentConfig,
   InitialExportedComponentConfig,
@@ -26,7 +26,7 @@ import {
 } from './normalize';
 
 const moduleCosmiconfig = cosmiconfigSync('yoshi-flow-bm/module', {
-  searchPlaces: [MODULE_CONFIG_PATH],
+  searchPlaces: [CONFIG_PATH],
 });
 
 export function loadModuleConfig(cwd: string): ModuleConfig {
