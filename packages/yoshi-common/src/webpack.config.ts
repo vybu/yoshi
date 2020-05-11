@@ -27,6 +27,7 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import { toIdentifier, getProjectArtifactId } from 'yoshi-helpers/utils';
 import TerserPlugin from 'terser-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import cssnano from 'cssnano';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import importCwd from 'import-cwd';
@@ -516,7 +517,20 @@ export function createBaseWebpackConfig({
             concatenateModules: isProduction && !disableModuleConcat,
             minimizer: [
               new TerserPlugin(terserOptions),
-              new OptimizeCSSAssetsPlugin(),
+              new OptimizeCSSAssetsPlugin({
+                cssProcessor: cssnano,
+                cssProcessorPluginOptions: {
+                  preset: [
+                    'default',
+                    {
+                      // These bugs prevents us from using mergeLonghand plugin:
+                      // https://github.com/cssnano/cssnano/issues/675
+                      // https://github.com/cssnano/cssnano/issues/847
+                      mergeLonghand: false,
+                    },
+                  ],
+                },
+              }),
             ],
 
             ...(createEjsTemplates && target === 'web'

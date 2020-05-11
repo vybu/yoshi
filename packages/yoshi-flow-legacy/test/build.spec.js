@@ -627,7 +627,7 @@ describe('Aggregator: Build', () => {
           'src/something.ts': fx.angularJs(),
           'something/something.js': fx.angularJs(),
           'something.js': fx.angularJs(),
-          'src/styles/style.scss': `.a {.b {color: red;}} .c{margin: 10px 20px 10px 20px;}`,
+          'src/styles/style.scss': `.a {.b {color: red;}} h1,h3,h2,h1{color:red;}`,
           'tsconfig.json': fx.tsconfig({
             compilerOptions: { skipLibCheck: true },
           }),
@@ -693,7 +693,7 @@ describe('Aggregator: Build', () => {
         short: true,
       });
 
-      const expectedCssPattern = `.${hashA} .${hashB}{`;
+      const expectedCssPattern = `.${hashA} .${hashB}`;
       expect(test.content(`dist/statics/app.min.css`)).to.contain(
         expectedCssPattern,
       );
@@ -728,10 +728,10 @@ describe('Aggregator: Build', () => {
 
     it('should generate css bundle minified with cssnano on ci', () => {
       expect(test.content('dist/statics/app.min.css')).not.to.contain(
-        '{margin:10px 20px 10px 20px}',
+        'h1,h3,h2,h1{color:red}',
       );
       expect(test.content('dist/statics/app.min.css')).to.contain(
-        '{margin:10px 20px}',
+        'h1,h2,h3{color:red}',
       );
     });
 
