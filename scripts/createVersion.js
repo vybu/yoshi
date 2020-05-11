@@ -71,11 +71,17 @@ Promise.resolve()
       shell: true,
     });
 
+    const numberOfUntrackedFiles = execa
+      .sync(`git ls-files --others --exclude-standard | wc -l`, {
+        shell: true,
+      })
+      .stdout.trim();
+
     const numberOfModifiedFiles = execa
       .sync(`git ls-files -m | wc -l`, { shell: true })
       .stdout.trim();
 
-    if (numberOfModifiedFiles === '0') {
+    if (numberOfModifiedFiles === '0' && numberOfUntrackedFiles === '0') {
       console.log();
       console.log(
         `no changes created after running "${createVersionedDocsCommand}"`,
