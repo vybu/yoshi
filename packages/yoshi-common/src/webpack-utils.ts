@@ -226,13 +226,11 @@ async function runWebpack(
     const messages = formatWebpackMessages(webpackStats.toJson({}, true));
 
     if (messages.errors.length) {
-      // Only keep the first error. Others are often indicative
-      // of the same problem, but confuse the reader with noise.
-      if (messages.errors.length > 1) {
-        messages.errors.length = 1;
-      }
+      // Error handled by webpack
+      console.log(chalk.red('Failed to compile.\n'));
+      console.error(messages.errors.join('\n\n'));
 
-      throw new Error(messages.errors.join('\n\n'));
+      process.exit(1);
     }
 
     if (messages.warnings.length) {
@@ -244,8 +242,9 @@ async function runWebpack(
 
     return webpackStats;
   } catch (error) {
+    // Error webpack couldn't handle
     console.log(chalk.red('Failed to compile.\n'));
-    console.error(error.message || error);
+    console.error(error);
 
     process.exit(1);
   }
