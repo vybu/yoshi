@@ -36,7 +36,7 @@ Default: `index.js`
 
 > An alias for `entry-point` configuration option.
 
-Entry point for the app server. Supported only by [app flow](../guides/app-flow.md).
+Entry point for the app server. Supported only by [app flow](app-flow.md).
 
 Default: `index.js`
 
@@ -110,7 +110,7 @@ run webpack-bundle-analyzer plugin.
 
 ##### `--stats`
 
-output webpack stats file to `dist/webpack-stats.json` (see also [bundle analysis](../guides/bundle-analyze.md))|
+output webpack stats file to `dist/webpack-stats.json` (see also [bundle analysis](legacy-guides/bundle-analyze.md))|
 
 ##### `--source-map`
 

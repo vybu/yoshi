@@ -9,7 +9,7 @@ npx create-yoshi-app my-app
 ```
 
 - Answer a few questions
-- Choose The right [Template](./templates)
+- Choose The right [Template](templates.md)
 - Choose [Babel](https://babeljs.io/)/[TypeScript](https://www.typescriptlang.org/)
 
 ```sh

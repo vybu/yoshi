@@ -87,7 +87,7 @@ This command runs `yoshi-flow-editor start` and opens two tabs:
 After understanding basic concept, we recommend you to read [Dev-Center registraion section](#dev-center-registration) and register your app.
 
 ## Dev-Center registration
-To register your app please read: [Register your app via Dev Center](./DEV_CENTER_REGISTRATION.md)
+To register your app please read: [Register your app via Dev Center](dev-center-registration.md)
 
 #####After your app is registered
 - update viewer and editor urls under `dev/sites.js`
@@ -105,7 +105,7 @@ Run `npm start`, open another terminal and run `npx jest --watch`
 
 Using the ooi development app that points to your local _viewer script_ and _viewer widget_.
 
-See [`viewerApp/viewerApp.e2e.js`](./src/viewerApp/viewerApp.e2e.js) for an example.
+See [`viewerApp/viewerApp.e2e.js`](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates/out-of-iframe/typescript/src/viewerApp/viewerApp.e2e.js) for an example.
 
 #### SSR
 
@@ -115,9 +115,9 @@ See [`viewerApp/viewerApp.e2e.js`](./src/viewerApp/viewerApp.e2e.js) for an exam
 
 #### E2E Against Locally Served HTMLs
 
-When running tests, Yoshi runs your [`dev/server.js`](./dev/server.js) as configured in [`jest-yoshi.config.js`](./jest-yoshi.config.js).
+When running tests, Yoshi runs your [`dev/server.js`](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates/out-of-iframe/typescript/dev/server.js) as configured in [`jest-yoshi.config.js`](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates/out-of-iframe/typescript/jest-yoshi.config.js).
 
-See [`editorApp/editorApp.e2e.js`](./src/editorApp/editorApp.e2e.js) & [`settingsPanel/settingsPanel.e2e.js`](./src/settingsPanel/settingsPanel.e2e.js) for an example.
+See [`editorApp/editorApp.e2e.js`](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates/out-of-iframe/typescript/src/editorApp/editorApp.e2e.js) & [`settingsPanel/settingsPanel.e2e.js`](https://github.com/wix/yoshi/tree/master/packages/create-yoshi-app/templates/out-of-iframe/typescript/src/settingsPanel/settingsPanel.e2e.js) for an example.
 
 > Testing against the production editor similarly to the viewer app is problematic due to the editor loading time and required authentication.
 
