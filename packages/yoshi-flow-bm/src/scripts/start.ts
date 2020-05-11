@@ -115,6 +115,7 @@ const start: CliCommand = async function(argv, config) {
     startUrl,
     enableClientHotUpdates: Boolean(config.hmr),
     createEjsTemplates: config.experimentalBuildHtml,
+    yoshiServer: config.yoshiServer,
   });
 
   await devEnvironment.start();

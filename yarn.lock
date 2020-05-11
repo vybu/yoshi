@@ -27312,6 +27312,13 @@ wix-eventually@2.3.0:
   dependencies:
     trier-promise "~1.0.1"
 
+wix-eventually@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/wix-eventually/-/wix-eventually-2.3.0.tgz#910323921b7fca2b8d5d18d4cbde01df43c81efd"
+  integrity sha512-bmaLsh/DD+7pcHRKWoOoM6poTai9WKUQVGMoqvbtYpvkujnz1HQbdoXROQTHq5pqY699XtuFuiR+fcj6HIsIlg==
+  dependencies:
+    trier-promise "~1.0.1"
+
 wix-express-require-https@^1.0.756:
   version "1.0.810"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wix-express-require-https/-/wix-express-require-https-1.0.810.tgz#f844f1ef50059430869b06ab1714589c437edc68"

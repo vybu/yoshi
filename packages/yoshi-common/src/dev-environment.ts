@@ -1,10 +1,12 @@
 import path from 'path';
 import webpack from 'webpack';
+import chokidar from 'chokidar';
 import createStore, { Store } from 'unistore';
 import execa, { ExecaChildProcess } from 'execa';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
 import debounce from 'lodash/debounce';
+import { SRC_DIR } from 'yoshi-config/build/paths';
 import openBrowser from './open-browser';
 import { PORT } from './utils/constants';
 import { ServerProcessWithHMR } from './server-process';
@@ -58,6 +60,7 @@ type DevEnvironmentProps = {
   tscProcess?: TscProcess;
   startUrl?: StartUrl;
   cwd: string;
+  yoshiServer: boolean;
 };
 
 export default class DevEnvironment {
@@ -270,7 +273,7 @@ export default class DevEnvironment {
   startServerHotUpdate(compiler: webpack.Compiler) {
     const { serverProcess } = this.props;
 
-    compiler.watch({}, async (error, stats) => {
+    const watcher = compiler.watch({}, async (error, stats) => {
       // We save the result of this build to webpack-dev-server's internal state so the last
       // server build results are sent to the browser on every refresh
       //
@@ -308,6 +311,20 @@ export default class DevEnvironment {
         }
       }
     });
+
+    if (this.props.yoshiServer) {
+      const apiFilesGlobPattern = ['routes/**/*.(js|ts)', '**/*.api.(js|ts)'];
+      const absoluteRootDir = path.join(this.props.cwd, SRC_DIR);
+
+      const apiWatcher = chokidar.watch(apiFilesGlobPattern, {
+        cwd: absoluteRootDir,
+        ignoreInitial: true,
+      });
+
+      apiWatcher.on('add', () => {
+        watcher.invalidate();
+      });
+    }
   }
 
   async start() {
@@ -375,6 +392,7 @@ export default class DevEnvironment {
     suricate = false,
     storybook = false,
     compileTypeScriptFiles = false,
+    yoshiServer = false,
   }: {
     webpackConfigs: [
       webpack.Configuration?,
@@ -392,6 +410,7 @@ export default class DevEnvironment {
     startUrl?: StartUrl;
     suricate?: boolean;
     storybook?: boolean;
+    yoshiServer?: boolean;
     compileTypeScriptFiles?: boolean;
   }): Promise<DevEnvironment> {
     const [clientConfig, serverConfig] = webpackConfigs;
@@ -513,6 +532,7 @@ export default class DevEnvironment {
       tscProcess,
       storybookProcess,
       cwd,
+      yoshiServer,
     });
 
     if (serverCompiler) {
