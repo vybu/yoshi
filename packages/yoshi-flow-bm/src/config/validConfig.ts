@@ -9,6 +9,8 @@ import {
 export const validModuleConfig: InitialModuleConfig = {
   moduleId: 'module-id',
   routeNamespace: 'some-route',
+  sentryDsn: '1337',
+  experimentsScopes: ['yoshi', 'wos'],
   topology: multipleValidOptions(
     {
       fooUrl: { artifactId: 'foo' },

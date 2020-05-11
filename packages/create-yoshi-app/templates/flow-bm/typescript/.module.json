@@ -3,11 +3,6 @@
   "experimentsScopes": [
     "{%projectName%}"
   ],
-  "config": {
-    "foo": {
-      "bar": "baz"
-    }
-  },
   "topology": {
     "someonesUrl": "https://www.wix.com"
   }

@@ -3,14 +3,11 @@ import {
   ModuleId,
   PageComponentId,
   registerModule,
-  notifyViewStartLoading,
   registerPageComponentMonitors,
 } from '@wix/business-manager-api';
-import Experiments from '@wix/wix-experiments';
-import { BrowserClient } from '@sentry/browser';
 import { ModuleRegistry, ReactLoadableComponent } from 'react-module-container';
 import { ComponentType } from 'react';
-import withBM from './withBM';
+import { BrowserClient } from '@sentry/browser';
 import { IBMModuleParams } from './hooks/ModuleProvider';
 
 interface ModuleOptions {
@@ -28,13 +25,12 @@ interface ModuleOptions {
     methodId: string;
     loadMethod(): (...args: Array<any>) => any;
   }>;
-  loadLocale?: (locale?: string) => Record<string, string>;
   moduleInit: (
     this: any,
     _module: BusinessManagerModule,
     _moduleParams: IBMModuleParams,
   ) => void;
-  config?: any;
+  sentryDsn?: string;
 }
 
 export default function createModule({
@@ -42,13 +38,14 @@ export default function createModule({
   pages,
   exportedComponents,
   methods,
-  loadLocale,
   moduleInit,
-  config: { experimentsScopes = [] } = {},
+  sentryDsn,
 }: ModuleOptions) {
-  const sentryClient = new BrowserClient({
-    dsn: 'https://123456@sentry.ioo/1337', // generate sentry dsn for groupId & artifactId
-  });
+  const sentryClient = sentryDsn
+    ? new BrowserClient({
+        dsn: sentryDsn,
+      })
+    : undefined;
 
   class Module extends BusinessManagerModule {
     state: any = {};
@@ -59,74 +56,22 @@ export default function createModule({
       super(moduleId);
 
       pages.forEach(({ componentId, componentName, loadComponent }) => {
-        registerPageComponentMonitors(componentId as PageComponentId, {
-          sentryClient,
-        });
+        if (sentryClient) {
+          registerPageComponentMonitors(componentId as PageComponentId, {
+            sentryClient,
+          });
+        }
 
         this.registerPageComponent(
           componentName,
-          ReactLoadableComponent(componentName, async () => {
-            const experiments = new Experiments();
-
-            experimentsScopes.forEach((scope: string) =>
-              experiments.load(scope),
-            );
-
-            notifyViewStartLoading(componentId);
-
-            // TODO: Do this the react-loadable way
-            const [Component, translations] = await Promise.all([
-              loadComponent(),
-              loadLocale
-                ? loadLocale(
-                    ((this as any)._moduleParams as IBMModuleParams).locale,
-                  )
-                : {},
-              experiments.ready(),
-            ]);
-
-            return {
-              default: withBM(
-                componentId,
-                experiments.all(),
-                translations,
-                sentryClient,
-              )(Component),
-            };
-          }),
+          ReactLoadableComponent(componentName, loadComponent),
         );
       });
 
       exportedComponents.forEach(({ componentId, loadComponent }) => {
         this.registerComponentWithModuleParams(
           componentId,
-          ReactLoadableComponent(componentId, async () => {
-            const experiments = new Experiments();
-
-            experimentsScopes.forEach((scope: string) =>
-              experiments.load(scope),
-            );
-
-            // TODO: Do this the react-loadable way
-            const [Component, translations] = await Promise.all([
-              loadComponent(),
-              loadLocale
-                ? loadLocale(
-                    ((this as any)._moduleParams as IBMModuleParams).locale,
-                  )
-                : {},
-              experiments.ready(),
-            ]);
-
-            return {
-              default: withBM(
-                componentId,
-                experiments.all(),
-                translations,
-                sentryClient,
-              )(Component),
-            };
-          }),
+          ReactLoadableComponent(componentId, loadComponent),
         );
       });
 

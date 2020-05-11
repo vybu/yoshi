@@ -20,6 +20,7 @@ export const normalizeModuleConfig = (
   const moduleConfigDefaults: InitialModuleConfig = {
     moduleId: artifactId,
     routeNamespace: '',
+    experimentsScopes: [],
     topology: {
       staticsUrl: {
         artifactId: `com.wixpress.${artifactId}`,

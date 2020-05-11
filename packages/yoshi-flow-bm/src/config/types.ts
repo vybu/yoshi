@@ -2,6 +2,8 @@ export type InitialModuleConfig = Partial<ModuleConfig>;
 
 export interface ModuleConfig {
   moduleId: string;
+  experimentsScopes: Array<string>;
+  sentryDsn?: string;
   routeNamespace: string;
   topology: Record<string, { artifactId: string }>;
 }

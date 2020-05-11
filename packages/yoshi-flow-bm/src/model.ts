@@ -9,12 +9,15 @@ import {
 } from './config';
 import {
   EXPORTED_COMPONENTS_CONFIG_PATTERN,
+  EXPORTED_COMPONENTS_DIR,
   EXPORTED_COMPONENTS_PATTERN,
   METHODS_CONFIG_PATTERN,
+  METHODS_DIR,
   METHODS_PATTERN,
   CONFIG_PATH,
   MODULE_INIT_PATTERN,
   PAGES_CONFIG_PATTERN,
+  PAGES_DIR,
   PAGES_PATTERN,
   TRANSLATIONS_DIR,
 } from './constants';
@@ -22,7 +25,8 @@ import { ModuleConfig } from './config/types';
 
 export interface ExportedComponentModel {
   componentId: string;
-  componentPath: string;
+  absolutePath: string;
+  relativePath: string;
 }
 export interface PageModel extends ExportedComponentModel {
   componentName: string;
@@ -30,7 +34,8 @@ export interface PageModel extends ExportedComponentModel {
 }
 export interface MethodModel {
   methodId: string;
-  methodPath: string;
+  absolutePath: string;
+  relativePath: string;
 }
 
 export interface FlowBMModel {
@@ -57,46 +62,56 @@ export default function createFlowBMModel(cwd = process.cwd()): FlowBMModel {
 
   const config = loadModuleConfig(cwd);
 
-  const getPageModel = (componentPath: string): PageModel => {
-    const { name } = path.parse(componentPath);
-    const { componentId, componentName } = loadPageConfig(
-      config,
-      componentPath,
-    );
+  const getPageModel = (absolutePath: string): PageModel => {
+    const { name } = path.parse(absolutePath);
+    const { componentId, componentName } = loadPageConfig(config, absolutePath);
+
+    const relativePath = path.relative(path.join(cwd, PAGES_DIR), absolutePath);
+
     const route = path.join(
       config.routeNamespace,
-      ...path
-        .relative(path.join(cwd, PAGES_PATTERN), componentPath)
-        .split(path.delimiter)
-        .slice(0, -1),
+      ...relativePath.split(path.delimiter).slice(0, -1),
       name !== 'index' ? name : '',
     );
 
     return {
       componentId,
       componentName,
-      componentPath,
+      absolutePath,
+      relativePath,
       route,
     };
   };
 
   const getExportedComponentModel = (
-    componentPath: string,
+    absolutePath: string,
   ): ExportedComponentModel => {
-    const { componentId } = loadExportedComponentConfig(config, componentPath);
+    const { componentId } = loadExportedComponentConfig(config, absolutePath);
+
+    const relativePath = path.relative(
+      path.join(cwd, EXPORTED_COMPONENTS_DIR),
+      absolutePath,
+    );
 
     return {
       componentId,
-      componentPath,
+      absolutePath,
+      relativePath,
     };
   };
 
-  const getMethodModel = (methodPath: string): MethodModel => {
-    const { methodId } = loadMethodConfig(config, methodPath);
+  const getMethodModel = (absolutePath: string): MethodModel => {
+    const { methodId } = loadMethodConfig(config, absolutePath);
+
+    const relativePath = path.relative(
+      path.join(cwd, METHODS_DIR),
+      absolutePath,
+    );
 
     return {
       methodId,
-      methodPath,
+      absolutePath,
+      relativePath,
     };
   };
 

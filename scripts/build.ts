@@ -19,8 +19,12 @@ const packages = globby.sync('*', {
 });
 
 const packagesWithTs = packages.filter(p =>
-  fs.existsSync(path.resolve(p, 'tsconfig.json')),
+  fs.existsSync(path.join(p, 'tsconfig.json')),
 );
+
+const packagesWithESM = packagesWithTs
+  .map(p => path.join(p, 'tsconfig.esm.json'))
+  .filter(p => fs.existsSync(p));
 
 copyAssets(packagesDir, packagesWithTs, shouldWatch);
 
@@ -32,6 +36,7 @@ const args = [
   ),
   '-b',
   ...packagesWithTs,
+  ...packagesWithESM,
   ...process.argv.slice(2),
 ];
 

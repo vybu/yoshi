@@ -5008,14 +5008,14 @@
     http-status-codes "1.4.0"
     long "4.0.0"
 
-"@wix/wix-experiments-react@3.0.553":
-  version "3.0.553"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-experiments-react/-/@wix/wix-experiments-react-3.0.553.tgz#7a984ebe27d22fc175b592fb2c4fca6bd57a862e"
-  integrity sha1-ephOvifSL8F1tZL7LE/Ka9V6hi4=
+"@wix/wix-experiments-react@4.0.15":
+  version "4.0.15"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-experiments-react/-/@wix/wix-experiments-react-4.0.15.tgz#89b490c2e88bc12f06704c2bfa8edf7be137440f"
+  integrity sha1-ibSQwuiLwS8GcEwr+o7fe+E3RA8=
   dependencies:
-    "@wix/wix-experiments" "~3.0.0"
+    "@wix/wix-experiments" "^3.0.442"
 
-"@wix/wix-experiments@3.0.442", "@wix/wix-experiments@latest", "@wix/wix-experiments@~3.0.0":
+"@wix/wix-experiments@3.0.442", "@wix/wix-experiments@^3.0.442", "@wix/wix-experiments@latest":
   version "3.0.442"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/wix-experiments/-/@wix/wix-experiments-3.0.442.tgz#1edf8e4ea6024c6b7d9e833071f35a953004f4de"
   integrity sha1-Ht+OTqYCTGt9noMwcfNalTAE9N4=
@@ -27305,14 +27305,7 @@ wix-bootstrap-bo-auth@^1.0.1888:
     "@wix/wnp-bo-auth-crypto" "~1.0.0"
     "@wix/wnp-express-bo-auth" "~1.0.0"
 
-wix-eventually@2.3.0:
-  version "2.3.0"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/wix-eventually/-/wix-eventually-2.3.0.tgz#910323921b7fca2b8d5d18d4cbde01df43c81efd"
-  integrity sha1-kQMjkht/yiuNXRjUy94B30PIHv0=
-  dependencies:
-    trier-promise "~1.0.1"
-
-wix-eventually@^2.3.0:
+wix-eventually@2.3.0, wix-eventually@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/wix-eventually/-/wix-eventually-2.3.0.tgz#910323921b7fca2b8d5d18d4cbde01df43c81efd"
   integrity sha512-bmaLsh/DD+7pcHRKWoOoM6poTai9WKUQVGMoqvbtYpvkujnz1HQbdoXROQTHq5pqY699XtuFuiR+fcj6HIsIlg==

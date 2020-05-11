@@ -12,11 +12,13 @@ export const PAGES_DIR = 'src/pages';
 export const PAGES_PATTERN = `${PAGES_DIR}/**/*.${EXTENSIONS}`;
 export const PAGES_CONFIG_PATTERN = `${PAGES_DIR}/**/*.${CONFIG_EXT}`;
 
-export const EXPORTED_COMPONENTS_PATTERN = `src/exported-components/**/*.${EXTENSIONS}`;
-export const EXPORTED_COMPONENTS_CONFIG_PATTERN = `src/exported-components/**/*.${CONFIG_EXT}`;
+export const EXPORTED_COMPONENTS_DIR = 'src/exported-components';
+export const EXPORTED_COMPONENTS_PATTERN = `${EXPORTED_COMPONENTS_DIR}/**/*.${EXTENSIONS}`;
+export const EXPORTED_COMPONENTS_CONFIG_PATTERN = `${EXPORTED_COMPONENTS_DIR}/**/*.${CONFIG_EXT}`;
 
-export const METHODS_PATTERN = `src/methods/**/*.${EXTENSIONS}`;
-export const METHODS_CONFIG_PATTERN = `src/methods/**/*.${CONFIG_EXT}`;
+export const METHODS_DIR = 'src/methods';
+export const METHODS_PATTERN = `${METHODS_DIR}/**/*.${EXTENSIONS}`;
+export const METHODS_CONFIG_PATTERN = `${METHODS_DIR}/**/*.${CONFIG_EXT}`;
 
 export const MODULE_INIT_PATTERN = `src/moduleInit.${EXTENSIONS}`;
 
