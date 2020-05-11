@@ -3,7 +3,6 @@ process.on('unhandledRejection', error => {
 });
 
 import execa from 'execa';
-import chalk from 'chalk';
 import semver from 'semver';
 import memoize from 'lodash/memoize';
 import get from 'lodash/get';
@@ -27,19 +26,17 @@ const getPackageDetails = memoize((pkg: Package) => {
     );
   } catch (error) {
     if (error.stderr.toString().includes('npm ERR! code E404')) {
-      console.error(
-        chalk.red(
-          `\nError: package "${pkg.name}" not found. \nPossibly not published yet, please verify that this package is published to npm.\n\nExit with status 1`,
-        ),
-      );
-
-      // This script will not publish new packages to npm
-      process.exit(1);
+      // this means that the package does not exist on npm
+      return {};
     }
 
     throw error;
   }
 });
+
+function isNewPackage(pkg: Package) {
+  return isEmpty(getPackageDetails(pkg));
+}
 
 function getPublishedVersions(pkg: Package) {
   return getPackageDetails(pkg).versions || [];
@@ -58,6 +55,11 @@ function shouldPublishPackage(pkg: Package) {
 function getTag(pkg: Package) {
   const isLessThanLatest = () => semver.lt(pkg.version!, getLatestVersion(pkg));
   const isPreRelease = () => semver.prerelease(pkg.version!) !== null;
+  // we return an empty object in case the package doesn't exist on npm yet
+
+  if (isNewPackage(pkg)) {
+    return LATEST_TAG;
+  }
 
   // if the version is less than the version tagged as latest in the registry
   if (isLessThanLatest()) {
@@ -94,6 +96,13 @@ function prepareForPublish(pkg: Package): Package | undefined {
     );
 
     return;
+  }
+
+  if (isNewPackage(pkg)) {
+    console.log(
+      `[PUBLISH] ${pkg.name}@${pkg.version} - new package detected (initial publish)`,
+    );
+    return pkg;
   }
 
   console.log(`[PUBLISH] ${pkg.name}@${pkg.version} - new version detected`);
