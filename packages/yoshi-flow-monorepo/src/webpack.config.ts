@@ -180,12 +180,10 @@ export function createServerWebpackConfig(
     isDev,
     isHot,
     isMonorepo: true,
-    useNodeExternals: !isThunderboltElementModule(pkg),
     nodeExternalsWhitelist: libs.map(pkg => new RegExp(pkg.name)),
     useAssetRelocator: pkg.config.experimentalUseAssetRelocator,
     forceMinimizeServer: isThunderboltElementModule(pkg),
-    forceSpecificNodeExternals:
-      isThunderboltAppModule(pkg) || isThunderboltElementModule(pkg),
+    serverExternals: pkg.config.serverExternals,
     ...defaultOptions,
   });
 
@@ -333,7 +331,9 @@ export function createSiteAssetsWebpackConfig(
     cwd: pkg.location,
     configName: 'site-assets',
     target: 'node',
-    useNodeExternals: false,
+    // We don't have any server externals for `site assets` bundle
+    // So with empty object, we'll be sure that no default externals value will be applied
+    serverExternals: {},
     isDev,
     isMonorepo: true,
     isAnalyze,

@@ -114,6 +114,7 @@ export function createServerWebpackConfig(
     isDev,
     isHot,
     useYoshiServer: config.yoshiServer,
+    serverExternals: config.serverExternals,
     ...defaultOptions,
   });
 

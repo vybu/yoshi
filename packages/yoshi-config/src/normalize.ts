@@ -81,6 +81,7 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     projectType: initialConfig.projectType ?? null,
     webWorkerEntry: initialConfig.webWorker?.entry,
     webWorkerExternals: initialConfig.webWorker?.externals,
+    serverExternals: initialConfig.server?.externals,
     webWorkerServerEntry: initialConfig.webWorkerServer?.entry,
 
     jestConfig: jest,

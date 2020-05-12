@@ -1,7 +1,7 @@
 import path from 'path';
 import os from 'os';
 import fs from 'fs-extra';
-import webpack, { RuleSetCondition } from 'webpack';
+import webpack, { ExternalsElement, RuleSetCondition } from 'webpack';
 import {
   SRC_DIR,
   STATICS_DIR,
@@ -330,7 +330,6 @@ export function createBaseWebpackConfig({
   tpaStyle = false,
   forceEmitSourceMaps = false,
   exportAsLibraryName,
-  useNodeExternals = true,
   nodeExternalsWhitelist = [],
   useAssetRelocator = false,
   useYoshiServer = false,
@@ -339,7 +338,7 @@ export function createBaseWebpackConfig({
   useCustomSourceMapPlugin = false,
   forceEmitStats = false,
   forceMinimizeServer = false,
-  forceSpecificNodeExternals = false,
+  serverExternals,
 }: {
   name: string;
   configName:
@@ -372,7 +371,6 @@ export function createBaseWebpackConfig({
   enhancedTpaStyle?: boolean;
   tpaStyle?: boolean;
   forceEmitSourceMaps?: boolean;
-  useNodeExternals?: boolean;
   exportAsLibraryName?: string;
   nodeExternalsWhitelist?: Array<RegExp>;
   useAssetRelocator?: boolean;
@@ -384,7 +382,7 @@ export function createBaseWebpackConfig({
   useCustomSourceMapPlugin?: boolean;
   forceEmitStats?: boolean;
   forceMinimizeServer?: boolean;
-  forceSpecificNodeExternals?: boolean;
+  serverExternals?: ExternalsElement | Array<ExternalsElement>;
 }): webpack.Configuration {
   const join = (...dirs: Array<string>) => path.join(cwd, ...dirs);
 
@@ -1099,7 +1097,7 @@ export function createBaseWebpackConfig({
 
     ...(target === 'node'
       ? {
-          externals: [
+          externals: serverExternals || [
             (
               context,
               request,
@@ -1118,20 +1116,6 @@ export function createBaseWebpackConfig({
               // Same as above, if the request cannot be resolved we need to have
               // webpack "bundle" it so it surfaces the not found error.
               if (!res) {
-                return callback();
-              }
-
-              // Svelte and React should always be external on the server side. Only relevant when more than one
-              // instance of Svelte/React exists. Normally, with two different Webpack bundles. Currently only
-              // relevant for Thunderbolt's use-case.
-              if (forceSpecificNodeExternals) {
-                if (res.match(/node_modules\/(svelte|react|lodash)/)) {
-                  return callback(undefined, `commonjs ${request}`);
-                }
-              }
-
-              // If `useNodeExternals` is turned off, bundle everything.
-              if (!useNodeExternals) {
                 return callback();
               }
 
