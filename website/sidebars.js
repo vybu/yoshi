@@ -13,6 +13,7 @@ module.exports = {
     'babel-preset-yoshi',
     'jest-yoshi-preset',
     'node-api',
+    'yoshi-config',
     'migration-guide',
     {
       'Legacy-Guides': [
