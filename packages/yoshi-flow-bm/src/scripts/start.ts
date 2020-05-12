@@ -66,7 +66,7 @@ const start: CliCommand = async function(argv, config) {
 
   let serverStartFile;
   try {
-    serverStartFile = getServerStartFile(serverStartFileCLI);
+    serverStartFile = getServerStartFile({ serverStartFileCLI });
   } catch (e) {
     console.error(e.message);
     process.exit(1);
@@ -110,6 +110,7 @@ const start: CliCommand = async function(argv, config) {
     webpackConfigs: [clientConfig, serverConfig],
     https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
+    appServerPort: config.servers.app.port,
     serverFilePath: serverStartFile,
     appName: config.name,
     startUrl,

@@ -16,6 +16,10 @@ type CdnConfig = {
   ssl: boolean;
 };
 
+type AppServerConfig = {
+  port: number;
+};
+
 export type StartUrl = string | Array<string> | null;
 
 type HooksConfig = {
@@ -49,6 +53,7 @@ export type InitialConfig = {
   entry?: WebpackEntry;
   servers?: {
     cdn?: Partial<CdnConfig>;
+    app?: Partial<AppServerConfig>;
   };
   externals?: WebpackExternals;
   specs?: SpecsConfig;
@@ -96,6 +101,7 @@ export type Config = {
   isReactProject: boolean;
   servers: {
     cdn: Omit<CdnConfig, 'dir'>;
+    app: AppServerConfig;
   };
   entry?: WebpackEntry;
   splitChunks: Options.SplitChunksOptions | false;

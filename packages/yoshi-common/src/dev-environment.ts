@@ -8,7 +8,6 @@ import { prepareUrls, Urls } from 'react-dev-utils/WebpackDevServerUtils';
 import debounce from 'lodash/debounce';
 import { SRC_DIR } from 'yoshi-config/build/paths';
 import openBrowser from './open-browser';
-import { PORT } from './utils/constants';
 import { ServerProcessWithHMR } from './server-process';
 import { WebpackDevServer, host } from './webpack-dev-server';
 import { addEntry, createCompiler } from './webpack-utils';
@@ -362,7 +361,7 @@ export default class DevEnvironment {
     if (serverProcess) {
       await serverProcess.initialize();
 
-      const serverUrls = prepareUrls('http', host, PORT);
+      const serverUrls = prepareUrls('http', host, serverProcess.port);
 
       this.store.setState({
         AppServer: {
@@ -384,6 +383,7 @@ export default class DevEnvironment {
     serverFilePath,
     https,
     webpackDevServerPort,
+    appServerPort,
     enableClientHotUpdates,
     cwd = process.cwd(),
     createEjsTemplates = false,
@@ -403,6 +403,7 @@ export default class DevEnvironment {
     serverFilePath?: string;
     https: boolean;
     webpackDevServerPort: number;
+    appServerPort: number;
     enableClientHotUpdates: boolean;
     cwd?: string;
     createEjsTemplates?: boolean;
@@ -421,6 +422,7 @@ export default class DevEnvironment {
       serverProcess = await ServerProcessWithHMR.create({
         serverFilePath,
         cwd,
+        port: appServerPort,
         suricate,
         appName,
       });

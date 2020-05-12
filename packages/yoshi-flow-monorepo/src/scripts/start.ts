@@ -93,7 +93,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
 
   let serverStartFile;
   try {
-    serverStartFile = getServerStartFile(serverStartFileCLI);
+    serverStartFile = getServerStartFile({ serverStartFileCLI });
   } catch (e) {
     console.error(e.message);
     process.exit(1);
@@ -148,6 +148,7 @@ const start: cliCommand = async function(argv, rootConfig, { apps, libs }) {
     ],
     https: pkg.config.servers.cdn.ssl,
     webpackDevServerPort: pkg.config.servers.cdn.port,
+    appServerPort: pkg.config.servers.app.port,
     serverFilePath: serverStartFile,
     appName: pkg.config.name,
     suricate: pkg.config.suricate,

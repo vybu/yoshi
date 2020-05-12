@@ -12,8 +12,8 @@ describe('Yoshi, serve', () => {
     await scripts.serve(
       () => Promise.resolve(),
       e => {
-        expect(e).toEqual(
-          `Error: dist/statics directory is empty. Run yoshi build before running the serve command`,
+        expect(e.message).toMatch(
+          `dist/statics directory is empty. Run the build before running serve`,
         );
       },
     );

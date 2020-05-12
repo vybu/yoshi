@@ -30,6 +30,9 @@ const validConfig: RequiredRecursively<InitialConfig> = {
       dir: 'statics',
       ssl: false,
     },
+    app: {
+      port: 4000,
+    },
   },
   resolveAlias: {
     hello: 'world',

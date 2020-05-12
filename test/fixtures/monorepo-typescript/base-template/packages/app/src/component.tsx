@@ -4,7 +4,7 @@ import Lib from 'monorepo-lib';
 export default function() {
   return (
     <div>
-      <Lib name="Hello World" />
+      <Lib name="hello from app" />
     </div>
   );
 }

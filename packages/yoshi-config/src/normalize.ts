@@ -17,6 +17,12 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     initialConfig.servers?.cdn?.url ??
     `${cdnSsl ? 'https:' : 'http:'}//localhost:${cdnPort}/`;
 
+  const cdn = {
+    port: cdnPort,
+    ssl: cdnSsl,
+    url: cdnUrl,
+  };
+
   const clientProjectName = initialConfig.clientProjectName;
   const singleDir = initialConfig.servers?.cdn?.dir ?? singleModule.clientDist;
   const multiDir =
@@ -33,10 +39,11 @@ export default (initialConfig: InitialConfig, pkgJson: PackageJson): Config => {
     pkgJson,
 
     servers: {
-      cdn: {
-        port: cdnPort,
-        ssl: cdnSsl,
-        url: cdnUrl,
+      cdn,
+      app: {
+        port:
+          initialConfig.servers?.app?.port ??
+          (parseInt(process.env.PORT || '', 10) || 3000),
       },
     },
 

@@ -69,7 +69,11 @@ const test: cliCommand = async function(argv, config) {
 
     if (config.bundleConfig) {
       closeCdn = (
-        await startCDN({ ssl: false, port: config.bundleConfig.port })
+        await startCDN({
+          ssl: false,
+          port: config.bundleConfig.port,
+          cwd: process.cwd(),
+        })
       ).close;
     }
   }

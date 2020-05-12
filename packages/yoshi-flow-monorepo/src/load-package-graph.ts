@@ -45,11 +45,13 @@ export type LoadGraphResult = {
   libs: Array<PackageGraphNode>;
 };
 
-export default async function loadPackageGraph(): Promise<LoadGraphResult> {
+export default async function loadPackageGraph(
+  monorepoRoot: string = process.cwd(),
+): Promise<LoadGraphResult> {
   const { getPackages } = importCwd('@lerna/project') as any;
   const PackageGraph = importCwd('@lerna/package-graph') as any;
 
-  const pkgs: Array<Package> = await getPackages(process.cwd());
+  const pkgs: Array<Package> = await getPackages(monorepoRoot);
 
   const graph: PackageGraph = new PackageGraph(pkgs);
 

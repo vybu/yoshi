@@ -11,7 +11,7 @@ describe('Yoshi serve monorepo', () => {
 
     await scripts.serve(
       () => Promise.resolve(),
-      e => expect(e).toEqual('Error: yoshi-flow-monorepo is not supported yet'),
+      e => expect(e.message).toEqual('use yoshi-flow-monorepo/serve instead'),
     );
   });
 });

@@ -2,7 +2,6 @@ import arg from 'arg';
 import fs from 'fs-extra';
 import chalk from 'chalk';
 import DevEnvironment from 'yoshi-common/build/dev-environment';
-import { PORT } from 'yoshi-common/build/utils/constants';
 import { TARGET_DIR, BUILD_DIR } from 'yoshi-config/build/paths';
 import { cliCommand } from '../cli';
 import {
@@ -98,7 +97,7 @@ const start: cliCommand = async function(argv, config, model) {
   const startUrl = normalizedUrls.map(
     overrideQueryParamsWithModel(model, {
       cdnUrl: config.servers.cdn.url,
-      serverUrl: `https://localhost:${PORT}`,
+      serverUrl: `https://localhost:${config.servers.app.port}`,
     }),
   );
 
@@ -106,6 +105,7 @@ const start: cliCommand = async function(argv, config, model) {
     webpackConfigs: [clientConfig, serverConfig, webWorkerConfig],
     https: config.servers.cdn.ssl,
     webpackDevServerPort: config.servers.cdn.port,
+    appServerPort: config.servers.app.port,
     appName: config.name,
     serverFilePath: require.resolve('yoshi-flow-editor/build/server/server.js'),
     startUrl,

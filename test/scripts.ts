@@ -303,7 +303,7 @@ export default class Scripts {
 
   async serve(
     resolve: TestCallback,
-    reject: (reason: string) => void = () => {},
+    reject: (reason: Error) => void = () => {},
   ) {
     const curDir = process.cwd();
     process.chdir(this.testDirectory);

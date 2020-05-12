@@ -1,13 +1,22 @@
 import fs from 'fs';
+import path from 'path';
 import http, { IncomingMessage, ServerResponse } from 'http';
 import https from 'https';
 import serveHandler from 'serve-handler';
 import { STATICS_DIR } from 'yoshi-config/build/paths';
 
-export async function startCDN({ port, ssl }: { port: number; ssl: boolean }) {
+export async function startCDN({
+  port,
+  ssl,
+  cwd,
+}: {
+  port: number;
+  ssl: boolean;
+  cwd: string;
+}) {
   function serverFn(req: IncomingMessage, res: ServerResponse) {
     return serveHandler(req, res, {
-      public: STATICS_DIR,
+      public: path.join(cwd, STATICS_DIR),
       headers: [
         {
           source: '*',

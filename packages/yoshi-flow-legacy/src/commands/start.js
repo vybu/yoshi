@@ -61,9 +61,11 @@ const serverStartFileCLI = cliArgs['entry-point'];
 let serverStartFile = 'index.js';
 try {
   // Legacy flow can start while missing server entry (for instance library projects).
-  serverStartFile = getServerStartFile(
-    serverStartFileCLI ? addJsSuffix(serverStartFileCLI) : undefined,
-  );
+  serverStartFile = getServerStartFile({
+    serverStartFileCLI: serverStartFileCLI
+      ? addJsSuffix(serverStartFileCLI)
+      : undefined,
+  });
 } catch (e) {}
 
 module.exports = runner.command(

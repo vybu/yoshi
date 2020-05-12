@@ -10,13 +10,12 @@ const boxen = require('boxen');
 const {
   getDevelopmentEnvVars,
 } = require('yoshi-helpers/build/bootstrap-utils');
-const { PORT } = require('yoshi-common/build/utils/constants');
 const { SERVER_LOG_FILE } = require('yoshi-config/build/paths');
 
 let server;
 let port;
 
-const defaultPort = Number(process.env.PORT) || PORT;
+const defaultPort = Number(process.env.PORT) || 3000;
 const serverDebugHost = '127.0.0.1';
 
 function ensureServerIsNotRunning(newPort) {

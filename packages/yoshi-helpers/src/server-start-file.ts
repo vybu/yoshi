@@ -1,3 +1,4 @@
+import path from 'path';
 import chalk from 'chalk';
 import { existsSync, isTypescriptProject } from './queries';
 
@@ -10,22 +11,31 @@ const serverStartFileOrder = [
   'index.js',
 ];
 
-export const getServerStartFile = (serverStartFileFromCLI?: string) => {
+export const getServerStartFile = ({
+  serverStartFileCLI,
+  cwd = process.cwd(),
+}: {
+  serverStartFileCLI?: string;
+  cwd?: string;
+}) => {
   const extension = isTypescriptProject() ? 'ts' : 'js';
 
-  if (serverStartFileFromCLI) {
+  if (serverStartFileCLI) {
     console.log(
       chalk.yellow(
         `Deprecation warning: --server and --entry-point is going to be removed in Yoshi v5.
-Please remove the flags and use these default entry points: 
+Please remove the flags and use these default entry points:
   - fullstack: index-dev.${extension}
   - client:    dev/server.${extension}`,
       ),
     );
-    return serverStartFileFromCLI;
+
+    return serverStartFileCLI;
   }
 
-  const serverStartFile = serverStartFileOrder.find(file => existsSync(file));
+  const serverStartFile = serverStartFileOrder
+    .map(filePath => path.join(cwd, filePath))
+    .find(existsSync);
 
   if (!serverStartFile) {
     throw new Error(
@@ -35,10 +45,12 @@ Please remove the flags and use these default entry points:
     );
   }
 
-  if (serverStartFile.split('.')[0] === 'index') {
+  if (path.basename(serverStartFile).split('.')[0] === 'index') {
     console.log(
       chalk.yellow(
-        `Deprecation warning: ${serverStartFile} is not going to be started automatically in Yoshi v5. Please create the entry poiont:
+        `Deprecation warning: ${path.basename(
+          serverStartFile,
+        )} is not going to be started automatically in Yoshi v5. Please create the entry poiont:
   - fullstack: index-dev.${extension}
   - client:    dev/server.${extension}`,
       ),

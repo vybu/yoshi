@@ -4,50 +4,68 @@ import loadConfig from 'yoshi-config/loadConfig';
 import { getServerStartFile } from 'yoshi-helpers/build/server-start-file';
 import { serverStartFileParser } from 'yoshi-helpers/build/server-start-file-parser';
 import { STATICS_DIR } from 'yoshi-config/build/paths';
+import { Config } from 'yoshi-config/build/config';
 import { ServerProcess } from '../server-process';
 import { startCDN } from '../cdn';
 
-const serve = async function() {
+export type ServeOptions = {
+  cwd?: string;
+  env?: Record<string, string>;
+};
+
+export default async ({ cwd = process.cwd(), env }: ServeOptions = {}) => {
   process.env.NODE_ENV = 'production';
   process.env.BABEL_ENV = 'production';
 
-  return new Promise<() => Promise<void>>(async (resolve, reject) => {
-    const config = loadConfig();
+  const config = loadConfig({ cwd });
 
-    if (config.experimentalMonorepo) {
-      reject(`Error: yoshi-flow-monorepo is not supported yet`);
-      return;
-    }
+  if (config.experimentalMonorepo) {
+    throw new Error('use yoshi-flow-monorepo/serve instead');
+  }
 
-    const packageJSON = require(path.resolve(process.cwd(), 'package.json'));
-    const serverFilePath =
-      serverStartFileParser(packageJSON) ?? getServerStartFile();
-
-    if (
-      !fs.existsSync(STATICS_DIR) ||
-      fs.readdirSync(STATICS_DIR).length === 0
-    ) {
-      reject(
-        `Error: ${STATICS_DIR} directory is empty. Run yoshi build before running the serve command`,
-      );
-      return;
-    }
-
-    const serverProcess = new ServerProcess({
-      serverFilePath,
-      appName: config.name,
-      env: {
-        NODE_ENV: 'development',
-      },
-    });
-
-    const [, cdn] = await Promise.all([
-      serverProcess.initialize(),
-      startCDN({ ssl: config.servers.cdn.ssl, port: config.servers.cdn.port }),
-    ]);
-
-    resolve(() => Promise.all([serverProcess.close(), cdn.close()]).then());
-  });
+  return serveApp({ config, cwd, env });
 };
 
-export default serve;
+export const serveApp = async ({
+  config,
+  cwd,
+  env = {},
+  useAppName,
+}: {
+  config: Config;
+  cwd: string;
+  env?: Record<string, string>;
+  useAppName?: boolean;
+}) => {
+  const serverFilePath =
+    serverStartFileParser(config.pkgJson) ?? getServerStartFile({ cwd });
+
+  const staticsDir = path.join(cwd, STATICS_DIR);
+  if (!fs.existsSync(staticsDir) || fs.readdirSync(staticsDir).length === 0) {
+    throw new Error(
+      `Error: ${staticsDir} directory is empty. Run the build before running serve`,
+    );
+  }
+
+  const serverProcess = new ServerProcess({
+    serverFilePath,
+    appName: config.name,
+    port: config.servers.app.port,
+    useAppName,
+    env: {
+      NODE_ENV: 'development',
+      ...env,
+    },
+  });
+
+  const [, cdn] = await Promise.all([
+    serverProcess.initialize(),
+    startCDN({
+      ssl: config.servers.cdn.ssl,
+      port: config.servers.cdn.port,
+      cwd,
+    }),
+  ]);
+
+  return () => Promise.all([serverProcess.close(), cdn.close()]);
+};

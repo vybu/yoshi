@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import rimraf from 'rimraf';
-import Scripts from '../../../../scripts';
+import Scripts from '../../../scripts';
 
 const scripts = Scripts.setupProjectFromTemplate({
   templateDir: __dirname,
@@ -15,7 +15,7 @@ describe('monorepo', () => {
         await page.goto(`${scripts.serverUrl}`);
         const innerHTML = await page.$eval('#name', elm => elm.textContent);
 
-        expect(innerHTML).toEqual('Hello World!');
+        expect(innerHTML).toEqual('hello from app!');
       },
       {
         staticsDir: 'packages/app/dist/statics',
@@ -29,7 +29,7 @@ describe('monorepo', () => {
         await page.goto(`${scripts.serverUrl}`);
         const innerHTML = await page.$eval('#name', elm => elm.textContent);
 
-        expect(innerHTML).toEqual('Hello World!');
+        expect(innerHTML).toEqual('hello from app!');
       },
       { extraStartArgs: ['monorepo-app'] },
     );
