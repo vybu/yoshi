@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.70.1 (2020-05-12)
+
+#### :memo: Documentation
+
+- [#2376](https://github.com/wix/yoshi/pull/2376) Yoshi Server: remove the 'under development' message ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.70.0 (2020-05-12)
 
 #### :rocket: New Feature
