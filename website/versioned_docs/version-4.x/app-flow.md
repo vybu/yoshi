@@ -159,7 +159,7 @@ mv index.js dev/server.js
 
 With that, Yoshi will now bundle it into `/dist/server.js`.
 
-### Scripts
+### CLI
 
 These are the scripts that are available to you in a project that uses app flow:
 
@@ -186,3 +186,7 @@ Possible flags:
 
 - `--analyze`: Analyze production bundle. This is helpful to understand what is included in the bundle.
 - `--stats`: Generate Webpack stats into `dist/webpack-stats.json`.
+
+## Configuration
+
+The app flow is using [yoshi-config](yoshi-config.md)

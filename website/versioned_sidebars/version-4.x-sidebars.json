@@ -50,6 +50,10 @@
     },
     {
       "type": "doc",
+      "id": "version-4.x/yoshi-config"
+    },
+    {
+      "type": "doc",
       "id": "version-4.x/migration-guide"
     },
     {

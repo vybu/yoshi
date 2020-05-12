@@ -27,3 +27,19 @@ serve()
     console.log(errorReason);
   });
 ```
+
+### Monorepo
+
+In case you are using `yoshi-flow-monorepo` and want to serve all the apps in the monorepo, you can do so using the following api:
+
+```javascript
+const serve = require("yoshi-flow-monorepo/serve");
+
+serve()
+  .then(() => {
+    console.log("All Servers and CDNs started successfully");
+  })
+  .catch(errorReason => {
+    console.log(errorReason);
+  });
+```
