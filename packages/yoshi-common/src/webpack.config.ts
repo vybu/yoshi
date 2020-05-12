@@ -716,6 +716,7 @@ export function createBaseWebpackConfig({
               'process.env.ARTIFACT_ID': JSON.stringify(getProjectArtifactId()),
             }
           : {}),
+        'process.env.PACKAGE_NAME': JSON.stringify(stripOrganization(name)),
         'process.env.browser': JSON.stringify(target !== 'node'),
       }),
 

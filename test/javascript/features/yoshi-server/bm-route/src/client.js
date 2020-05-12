@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import HttpClient from 'yoshi-server-client';
 import Component from './component';
 
-const client = new HttpClient({ baseUrl: '_api/bm' });
+const client = new HttpClient();
 
 ReactDOM.render(
   <Component httpClient={client} />,

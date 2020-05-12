@@ -31,7 +31,7 @@ const fetch = unfetch;
 export default class implements HttpClient {
   private baseUrl: string;
 
-  constructor({ baseUrl = '/' }: Options = {}) {
+  constructor({ baseUrl = `/_api/${process.env.PACKAGE_NAME}` }: Options = {}) {
     this.baseUrl = baseUrl;
   }
 
