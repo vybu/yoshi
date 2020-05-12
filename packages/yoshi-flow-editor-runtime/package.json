@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@wix/native-components-infra": "^1.0.668",
-    "@wix/platform-editor-sdk": "^0.0.909",
+    "@wix/platform-editor-sdk": "^0.0.921",
     "@wix/wix-base-ui": "^3.0.0",
     "@wix/wix-experiments": "3.0.442",
     "prop-types": "^15.7.2",
