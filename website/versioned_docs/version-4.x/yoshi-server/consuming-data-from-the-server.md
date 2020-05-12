@@ -33,8 +33,7 @@ import ReactDOM from "react-dom";
 import HttpClient from "yoshi-server-client";
 import Component from "./component";
 
-// For Business Manager modules, we map all api requests to '/_api/projectName'. If you need another baseUrl, please use it as an option passed to the constructor
-const client = new HttpClient();
+const client = new HttpClient({ baseUrl: "/_api/projectName" });
 
 ReactDOM.render(
   <Component httpClient={client} />,
