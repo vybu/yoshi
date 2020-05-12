@@ -21,7 +21,7 @@ export type FunctionResult = OptionalPromise<any>;
 export type FunctionContext = {
   req: Request;
   res: Response;
-  context: any;
+  context: BootstrapContext;
   initData: any;
   config: any;
 };
