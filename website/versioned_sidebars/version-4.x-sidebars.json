@@ -34,6 +34,10 @@
     },
     {
       "type": "doc",
+      "id": "version-4.x/yoshi-server/getting-started"
+    },
+    {
+      "type": "doc",
       "id": "version-4.x/babel-preset-yoshi"
     },
     {
@@ -127,6 +131,40 @@
     {
       "type": "doc",
       "id": "version-4.x/editor-flow/platform-apps-support"
+    }
+  ],
+  "version-4.x/yoshi-server": [
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/getting-started"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/consuming-data-from-the-server"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/exposing-route"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/react-binding"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/initializing-server-data"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/middlewares"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/custom-server"
+    },
+    {
+      "type": "doc",
+      "id": "version-4.x/yoshi-server/testing"
     }
   ]
 }
