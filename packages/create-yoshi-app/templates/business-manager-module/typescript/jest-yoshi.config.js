@@ -1,4 +1,4 @@
-const { environment } = require('./dev/environment');
+const { environment } = require('./environment');
 
 // The purpose of this file is to start your server and possibly additional servers
 // like RPC/Petri servers.
@@ -11,15 +11,18 @@ const { environment } = require('./dev/environment');
 module.exports = {
   bootstrap: {
     setup: async ({ globalObject }) => {
-      const env = await environment({ withRandomPorts: true });
-      await env.start();
-      globalObject.testKitEnv = env;
-      // in tests we can just await testKitEnv.getUrl();
+      const { bmApp, app } = await environment({ withRandomPorts: true });
+      await app.start();
+      await bmApp.start();
+      globalObject.testKitBMApp = bmApp;
+      globalObject.testKitApp = app;
+      // in tests we can just await testKitBMApp.getUrl();
     },
     teardown: async ({ globalObject }) => {
       // take the env we created at setup() and stop it
-      if (globalObject.testKitEnv) {
-        await globalObject.testKitEnv.stop();
+      if (globalObject.testKitBMApp) {
+        await globalObject.testKitBMApp.stop();
+        await globalObject.testKitApp.stop();
       }
     },
   },
