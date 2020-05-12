@@ -4580,6 +4580,13 @@
     rimraf "^2.6.3"
     typescript "^2.9.2"
 
+"@wix/bob-widget-services@^1.30.0":
+  version "1.30.0"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/bob-widget-services/-/@wix/bob-widget-services-1.30.0.tgz#05abbc8e5dbdabeb37cc6fa29b2ba35df2e09896"
+  integrity sha1-Bau8jl29q+s3zG+imyujXfLgmJY=
+  dependencies:
+    lodash "^4.17.15"
+
 "@wix/business-manager-api@1.0.1034":
   version "1.0.1034"
   resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/@wix/business-manager-api/-/@wix/business-manager-api-1.0.1034.tgz#6216841d360e0390f1794095453ac4a99b7e98ce"

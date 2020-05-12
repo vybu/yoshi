@@ -1,7 +1,23 @@
 import path from 'path';
 import fs from 'fs-extra';
-import { FlowEditorModel } from '../model';
+import { PLATFORM_WIDGET_COMPONENT_TYPE } from 'yoshi-flow-editor-runtime/build/constants';
+import { FlowEditorModel, ComponentModel } from '../model';
 import editorScriptEntry from './templates/CommonEditorScriptEntry';
+import { TemplateControllerConfig } from './templates/CommonViewerScriptEntry';
+
+const isConfigured = (component: ComponentModel): boolean => {
+  return !!component.id && !!component.editorControllerFileName;
+};
+
+const toControllerMeta = (
+  component: ComponentModel,
+): TemplateControllerConfig => {
+  return {
+    controllerFileName: component.editorControllerFileName!,
+    id: component.id,
+    widgetType: component.type,
+  };
+};
 
 const editorScriptWrapper = (
   generatedWidgetEntriesPath: string,
@@ -11,6 +27,14 @@ const editorScriptWrapper = (
     return {};
   }
 
+  const controllersMeta: Array<TemplateControllerConfig> = model.components
+    .filter(isConfigured)
+    .map(toControllerMeta);
+
+  const shouldUseAppBuilder = controllersMeta.some(
+    meta => meta.widgetType === PLATFORM_WIDGET_COMPONENT_TYPE,
+  );
+
   const generatedEditorScriptEntryPath = path.join(
     generatedWidgetEntriesPath,
     'editorScript.js',
@@ -18,6 +42,8 @@ const editorScriptWrapper = (
 
   const generateEditorScriptEntryContent = editorScriptEntry({
     editorEntryFileName: model.editorEntryFileName,
+    controllersMeta,
+    shouldUseAppBuilder,
   });
 
   fs.outputFileSync(

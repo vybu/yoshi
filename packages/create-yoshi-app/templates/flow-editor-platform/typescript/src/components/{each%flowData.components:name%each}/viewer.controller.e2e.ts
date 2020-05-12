@@ -1,4 +1,5 @@
-import { viewerUrl } from '../dev/sites';
+import eventually from 'wix-eventually';
+import { viewerUrl } from '../../../dev/sites';
 
 describe('Viewer App', () => {
   it('should change text on button click', async () => {
@@ -13,10 +14,11 @@ describe('Viewer App', () => {
 
     await page.click('button');
 
-    const widgetTextAfterClick = await page.$eval('h2', node =>
-      node?.textContent?.toLowerCase(),
-    );
-
-    expect(widgetTextAfterClick).toEqual('you clicked the button');
+    eventually(async () => {
+      const widgetTextAfterClick = await page.$eval('h2', node =>
+        node?.textContent?.toLowerCase(),
+      );
+      expect(widgetTextAfterClick).toEqual('you clicked the button');
+    });
   });
 });

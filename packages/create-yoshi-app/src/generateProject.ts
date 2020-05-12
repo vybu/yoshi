@@ -26,7 +26,10 @@ const processFilesWithScopes = (
     const scopes = getTemplateScopes(fileName, scope);
 
     scopes.forEach(loopScope => {
-      processFileWithScope(fullPath, files[fileName], loopScope);
+      processFileWithScope(fullPath, files[fileName], {
+        ...scope,
+        ...loopScope,
+      });
     });
   });
 };

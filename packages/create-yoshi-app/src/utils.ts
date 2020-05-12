@@ -90,3 +90,14 @@ export const isInsideGitRepo = (dir: string) => {
     return false;
   }
 };
+
+export const OOI_TEMPLATE_NAME = 'flow-editor-ooi';
+export const PLATFORM_TEMPLATE_NAME = 'flow-editor-platform';
+
+export const isOutOfIframe = (str: string): boolean => {
+  return str === OOI_TEMPLATE_NAME;
+};
+
+export const isAppBuilder = (str: string): boolean => {
+  return str === PLATFORM_TEMPLATE_NAME;
+};

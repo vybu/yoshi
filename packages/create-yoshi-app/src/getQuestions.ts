@@ -58,7 +58,7 @@ export default (): Array<ExtendedPromptObject<string>> => {
       name: 'templateDefinition',
       message: 'Choose project type',
       choices: templates.map(project => ({
-        title: project.name,
+        title: project.title || project.name,
         value: project,
       })),
       after(answers) {

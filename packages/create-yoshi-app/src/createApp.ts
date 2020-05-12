@@ -40,7 +40,7 @@ export default async ({
     templateModel = (await runPrompt(workingDir)) as TemplateModel;
   }
 
-  if (templateModel.templateDefinition.name === 'flow-editor') {
+  if (templateModel.templateDefinition.name.includes('flow-editor')) {
     const runDevCenterRegistrationPrompt = require('./dev-center-registration/runPrompt')
       .default;
     const devCenterModel = (await runDevCenterRegistrationPrompt(

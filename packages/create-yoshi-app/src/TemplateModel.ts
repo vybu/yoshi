@@ -5,6 +5,7 @@ export type Language = 'javascript' | 'typescript';
 
 export interface TemplateDefinition {
   name: string;
+  title?: string;
   path: string;
   language: Array<'typescript' | 'javascript'>;
 }

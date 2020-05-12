@@ -9,7 +9,7 @@ import TextInput from 'wix-base-ui/lib/controls/textInput';
 import { TextInputLabeled } from 'wix-base-ui/lib/composites/composites';
 import { EditorSDK as IEditorSDK } from '@wix/platform-editor-sdk';
 import { WidgetEditorAPI } from '@wix/bob-widget-services';
-import './firstWidgetSettings.global.scss';
+import './Settings.global.scss';
 
 interface WidgetSettingsPanelProps {
   editorSDK: IEditorSDK;

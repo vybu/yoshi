@@ -8,7 +8,7 @@ import viewerScriptEntry, {
 const viewerScriptWrapperPath =
   'yoshi-flow-editor-runtime/build/viewerScript.js';
 
-const toControllerMeta = (
+export const toControllerMeta = (
   component: ComponentModel,
 ): TemplateControllerConfig => {
   return {
@@ -18,7 +18,7 @@ const toControllerMeta = (
   };
 };
 
-const isConfigured = (component: ComponentModel): boolean => {
+export const isConfigured = (component: ComponentModel): boolean => {
   return !!component.id;
 };
 

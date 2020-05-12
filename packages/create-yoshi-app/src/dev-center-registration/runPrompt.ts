@@ -4,13 +4,14 @@ import TemplateModel from './TemplateModel';
 import getQuestions from './getQuestions';
 import { getInstance } from './auth';
 import { initAppService } from './appService';
-import defaultAnswers from './defaultAnswers';
-
-const fallbackWithDefaultTemplate = () => new TemplateModel(defaultAnswers);
+import getDefaultAnswers from './getDefaultAnswers';
 
 export default async (
   localAppModel: LocalAppTemplateModel,
 ): Promise<TemplateModel> => {
+  const fallbackWithDefaultTemplate = () =>
+    new TemplateModel(getDefaultAnswers(localAppModel.templateDefinition.name));
+
   const instance = await getInstance();
   if (instance) {
     initAppService(instance);

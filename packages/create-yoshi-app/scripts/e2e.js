@@ -7,6 +7,7 @@ const fs = require('fs');
 const mock = require('mock-require');
 
 const { verifyRegistry } = require('../src/index');
+const { isOutOfIframe, isAppBuilder } = require('../src/utils');
 const TemplateModel = require('../src/TemplateModel').default;
 const { publishMonorepo } = require('../../../scripts/utils/publishMonorepo');
 const { testRegistry } = require('../../../scripts/utils/constants');
@@ -20,8 +21,8 @@ verifyRegistry();
 // add `${template}-typescript` to support legacy filter by title
 const templatesWithTitles = flatMap(templates, templateDefinition => {
   return [
-    { title: templateDefinition.name, ...templateDefinition },
-    { title: `${templateDefinition.name}-typescript`, ...templateDefinition },
+    { ...templateDefinition, title: templateDefinition.name },
+    { ...templateDefinition, title: `${templateDefinition.name}-typescript` },
   ];
 });
 
@@ -97,11 +98,13 @@ const testTemplate = mockedAnswers => {
     // in the describe block will run first!
     it('step 1: should generate project successfully', async () => {
       mockAppData(mockedAnswers);
-      if (mockedAnswers.templateDefinition.name === 'flow-editor') {
+      if (isOutOfIframe(mockedAnswers.templateDefinition.name)) {
         mockFlowData(
           mockedAnswers.templateDefinition.title,
           'WIDGET_OUT_OF_IFRAME',
         );
+      } else if (isAppBuilder(mockedAnswers.templateDefinition.name)) {
+        mockFlowData(mockedAnswers.templateDefinition.title, 'STUDIO_WIDGET');
       }
       const { createApp } = mock.reRequire('../src/index');
 

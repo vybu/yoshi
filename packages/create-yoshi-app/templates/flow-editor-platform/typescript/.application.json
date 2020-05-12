@@ -1,3 +1,4 @@
 {
-  "appDefinitionId": "945c0d1a-5d9d-422d-adc0-da8fb3fe8c8f"
+  "appDefinitionId": "{%flowData.appDefinitionId%}",
+  "appName": "{%flowData.appName%}"
 }

@@ -1,8 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CommonEditorScriptEntry template generates correct template with entry editorScript file 1`] = `
+exports[`CommonEditorScriptEntry template generates correct template with entry editorScript file for OOI components 1`] = `
 "
   var editorScriptEntry = require('project/src/editor.app.ts');
+
+  
+
+  module.exports = editorScriptEntry.default || editorScriptEntry;
+"
+`;
+
+exports[`CommonEditorScriptEntry template generates correct template with entry editorScript file for app builder components 1`] = `
+"
+  var editorScriptEntry = require('project/src/editor.app.ts');
+
+  
+  var editorScriptBuilder = require('@wix/bob-widget-services').editorScriptBuilder;
+
+  var builder = editorScriptBuilder();
+  if (editorScriptEntry.editorReady) {
+    builder = builder.withEditorReady(editorScriptEntry.editorReady);
+  }
+  if (editorScriptEntry.appManifest) {
+    builder = builder.withAppManifest(editorScriptEntry.appManifest);
+  }
+  if (editorScriptEntry.eventHandler) {
+    builder = builder.withEventHandler(editorScriptEntry.eventHandler);
+  }
+  builder = builder.withWidget(require(\\"project/src/components/a/editor.controller.ts\\"));
+  editorScriptEntry = builder.build();
+  
+
+  module.exports = editorScriptEntry.default || editorScriptEntry;
+"
+`;
+
+exports[`CommonEditorScriptEntry template generates correct template with entry editorScript file for multiple app builder components 1`] = `
+"
+  var editorScriptEntry = require('project/src/editor.app.ts');
+
+  
+  var editorScriptBuilder = require('@wix/bob-widget-services').editorScriptBuilder;
+
+  var builder = editorScriptBuilder();
+  if (editorScriptEntry.editorReady) {
+    builder = builder.withEditorReady(editorScriptEntry.editorReady);
+  }
+  if (editorScriptEntry.appManifest) {
+    builder = builder.withAppManifest(editorScriptEntry.appManifest);
+  }
+  if (editorScriptEntry.eventHandler) {
+    builder = builder.withEventHandler(editorScriptEntry.eventHandler);
+  }
+  builder = builder.withWidget(require(\\"project/src/components/a/editor.controller.ts\\"));
+  builder = builder.withWidget(require(\\"project/src/components/c/editor.controller.ts\\"));
+  builder = builder.withWidget(require(\\"project/src/components/d/editor.controller.ts\\"));
+  editorScriptEntry = builder.build();
+  
 
   module.exports = editorScriptEntry.default || editorScriptEntry;
 "

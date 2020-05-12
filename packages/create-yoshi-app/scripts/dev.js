@@ -4,6 +4,7 @@ process.on('unhandledRejection', error => {
 
 process.env.EXPERIMENTAL_FLOW_BM = 'true';
 process.env.EXPERIMENTAL_FLOW_EDITOR = 'true';
+process.env.EXPERIMENTAL_PLATFORM_TEMPLATE = 'true';
 process.env.EXPERIMENTAL_FLOW_LIBRARY = 'true';
 
 const fs = require('fs-extra');
