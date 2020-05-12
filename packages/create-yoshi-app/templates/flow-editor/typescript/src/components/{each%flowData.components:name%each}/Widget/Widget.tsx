@@ -32,7 +32,7 @@ export const Widget = withExperiments<
   { name: string } & InjectedExperimentsProps
 >(({ name, ...rest }) => {
   return (
-    <div {...styles('root', {}, rest)}>
+    <div {...styles('root', {}, rest)} data-hook="{%name%}-wrapper">
       <div className={styles.header}>
         <h2 data-hook="app-title">
           {'app.hello'} {name}!

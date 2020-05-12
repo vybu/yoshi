@@ -76,12 +76,13 @@ const testTemplate = mockedAnswers => {
     fs.mkdirSync(testDirectory);
 
     // Executes and logs output if errored
-    const exec = async cmd => {
+    const exec = async (cmd, env) => {
       try {
         return await execa(cmd, {
           shell: true,
           all: true,
           cwd: testDirectory,
+          env,
         });
       } catch (err) {
         console.error(err.all);
@@ -141,7 +142,9 @@ const testTemplate = mockedAnswers => {
     it('step 3: should run npm test', async () => {
       console.log('running npm test...');
 
-      const testResult = await exec('npm test');
+      const testResult = await exec('npm test', {
+        VCS_BRANCH_NAME: undefined,
+      });
 
       if (testResult.exitCode !== 0) {
         throw new Error(
