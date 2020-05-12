@@ -1,5 +1,25 @@
 # Changelog
 
+## 4.72.0 (2020-05-12)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-monorepo`
+  - [#2335](https://github.com/wix/yoshi/pull/2335) Allow configuring `serverExternals` via config ([@yavorsky](https://github.com/yavorsky))
+- `yoshi-server`
+  - [#2381](https://github.com/wix/yoshi/pull/2381) Fix context type ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `create-yoshi-app`
+  - [#2377](https://github.com/wix/yoshi/pull/2377) Fix BM template ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-flow-bm-runtime`
+  - [#2374](https://github.com/wix/yoshi/pull/2374) Fix yoshi-flow-bm-runtime ESM build and root exports ([@amitdahan](https://github.com/amitdahan))
+
+#### :memo: Documentation
+
+- [#2382](https://github.com/wix/yoshi/pull/2382) Yoshi Server: Fix documentation ([@yanivefraim](https://github.com/yanivefraim))
+
 ## 4.71.0 (2020-05-12)
 
 #### :rocket: New Feature
