@@ -9,15 +9,7 @@ module.exports = {
     'business-manager-flow',
     // 'monorepo-flow'
     'legacy-flow',
-    // {
-    //   'Yoshi Server': [
-    //     'yoshi-server/getting-started',
-    //     'yoshi-server/consuming-data-from-the-server',
-    //     'yoshi-server/exposing-route',
-    //     'yoshi-server/react-binding',
-    //     'yoshi-server/initializing-server-data',
-    //   ],
-    // },
+    'yoshi-server/getting-started',
     'babel-preset-yoshi',
     'jest-yoshi-preset',
     'node-api',
@@ -46,5 +38,15 @@ module.exports = {
     'editor-flow/migration-guide',
     'editor-flow/editor-and-settings-apps',
     'editor-flow/platform-apps-support',
+  ],
+  'yoshi-server': [
+    'yoshi-server/getting-started',
+    'yoshi-server/consuming-data-from-the-server',
+    'yoshi-server/exposing-route',
+    'yoshi-server/react-binding',
+    'yoshi-server/initializing-server-data',
+    'yoshi-server/middlewares',
+    'yoshi-server/custom-server',
+    'yoshi-server/testing',
   ],
 };

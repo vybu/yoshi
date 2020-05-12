@@ -59,6 +59,11 @@ module.exports = {
           position: 'left',
           items: flows,
         },
+        {
+          label: 'Yoshi Server',
+          position: 'left',
+          to: 'docs/yoshi-server/getting-started',
+        },
         { to: 'blog', label: 'Blog', position: 'left' },
         // It would be much nicer to have the dynamic version of the page here
         // e.g. v3.x

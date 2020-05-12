@@ -18,5 +18,10 @@
   {
     "label": "Legacy Flow",
     "to": "docs/legacy-flow"
+  },
+  {
+    "label": "Yoshi Server",
+    "to": "docs/yoshi-server/getting-started"
   }
+
 ]

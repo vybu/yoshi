@@ -1,7 +1,7 @@
 ---
-id: built-in-middleware
-title: Built-in Middleware
-sidebar_label: Built-in Middleware
+id: middlewares
+title: Middlewares
+sidebar_label: Middlewares
 ---
 
 Yoshi Server provides built-in middlewares that parse the incoming request. Those middlewares are:

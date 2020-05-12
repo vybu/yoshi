@@ -10,6 +10,28 @@ Welcome to Yoshi Server documentation!
 
 Yoshi Server makes it easier to consume data from the server by adding an abstraction over client server communication, using conventions.
 
+## Why we built Yoshi Server
+
+#### Less boilerplate
+
+With Yoshi Server, there's no need to setup a [node-platform](https://github.com/wix-platform/wix-node-platform) server.
+
+#### Type safety for client-server communication
+
+When using Typescript, client-server communication is fully typed.
+
+#### Better error handling
+
+Yoshi Server handles server errors and displays them on your browser.
+
+#### Built in HMR support
+
+HMR support out of the box, no need to setup anything.
+
+#### Get updates easier
+
+With Yoshi server, it will be easier to ship updates without breaking changes.
+
 ## Setup
 
 We recommend creating a new Yoshi Server app using the [`create-yoshi-app`](https://wix.github.io/yoshi/docs/getting-started/create-app). It is available for both Fullstack and Business Manager apps.
@@ -18,7 +40,7 @@ We recommend creating a new Yoshi Server app using the [`create-yoshi-app`](http
 npx create-yoshi-app my-app-name
 ```
 
-## Manual Setup
+## Manual setup
 
 ##### Prerequisits
 
