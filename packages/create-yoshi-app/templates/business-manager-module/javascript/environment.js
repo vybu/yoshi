@@ -1,9 +1,9 @@
-import testkit from '@wix/wix-bootstrap-testkit';
-import {
+const testkit = require('@wix/wix-bootstrap-testkit');
+const {
   createTestkit,
   testkitConfigBuilder,
   anAppConfigBuilder,
-} from '@wix/business-manager/dist/testkit';
+} = require('@wix/business-manager/dist/testkit');
 
 // start the server as an embedded app
 const bootstrapServer = () => {
@@ -41,7 +41,7 @@ const getTestKitConfig = async (
   return builder.build();
 };
 
-export const environment = async envConfig => {
+module.exports.environment = async envConfig => {
   const app = bootstrapServer();
   const bmApp = createTestkit(await getTestKitConfig(envConfig, app));
   return {
