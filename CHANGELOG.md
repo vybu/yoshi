@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.71.0 (2020-05-12)
+
+#### :rocket: New Feature
+
+- `yoshi-common`, `yoshi-config`, `yoshi-flow-app`, `yoshi-flow-bm`, `yoshi-flow-editor`, `yoshi-flow-legacy`, `yoshi-flow-library`, `yoshi-flow-monorepo`, `yoshi-helpers`
+  - [#2316](https://github.com/wix/yoshi/pull/2316) Yoshi serve support for monorepo ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.70.1 (2020-05-12)
 
 #### :memo: Documentation
