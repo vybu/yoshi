@@ -95,6 +95,7 @@ Now that we have our first server function (`greeting`), let's consume the data 
 import HttpClient from "yoshi-server-client";
 import { greeting } from "./greet.api";
 
+// For Business Manager modules, we map all api requests to '/_api/projectName'
 const client = new HttpClient();
 
 client.request({ method: greeting, args: ["John"] }).then(data => {
