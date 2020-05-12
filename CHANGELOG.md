@@ -1,5 +1,31 @@
 # Changelog
 
+## 4.70.0 (2020-05-12)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`
+  - [#2282](https://github.com/wix/yoshi/pull/2282) Yoshi Server: update BM template ([@yanivefraim](https://github.com/yanivefraim))
+- `yoshi-common`, `yoshi-server-client`
+  - [#2373](https://github.com/wix/yoshi/pull/2373) Yoshi Server: add a Business Manager default baseUrl ([@yanivefraim](https://github.com/yanivefraim))
+
+#### :bug: Bug Fix
+
+- `yoshi-common`, `yoshi-flow-legacy`
+  - [#2371](https://github.com/wix/yoshi/pull/2371) Exclude `mergeLonghand` plugin from cssnano optimizations ([@ranyitz](https://github.com/ranyitz))
+- `yoshi-common`
+  - [#2370](https://github.com/wix/yoshi/pull/2370) better error handling for webpack errors during build ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2342](https://github.com/wix/yoshi/pull/2342) Yoshi server Docs: add to sidebar ([@yanivefraim](https://github.com/yanivefraim))
+- [#2364](https://github.com/wix/yoshi/pull/2364) Fix broken links in website ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2343](https://github.com/wix/yoshi/pull/2343) createVersion: Commit also when there are just untracked files ([@ranyitz](https://github.com/ranyitz))
+- [#2372](https://github.com/wix/yoshi/pull/2372) Custom publish can now publish new packages to npm from the CI ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.69.0 (2020-05-11)
 
 #### :rocket: New Feature
