@@ -11,7 +11,9 @@
   ],
   "files": [
     "build",
-    "src"
+    "src",
+    "serve.js",
+    "serve.d.ts"
   ],
   "author": "Ronen Amiel",
   "license": "ISC",
