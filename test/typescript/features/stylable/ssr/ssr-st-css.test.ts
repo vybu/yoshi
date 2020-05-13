@@ -5,7 +5,7 @@ const scripts = Scripts.setupProjectFromTemplate({
   projectType: 'typescript',
 });
 
-describe.each(['dev', 'prod'] as const)('ssr-st-css [%s]', mode => {
+describe.skip.each(['dev', 'prod'] as const)('ssr-st-css [%s]', mode => {
   it('Should allow consuming *.st.css in server', async () => {
     await scripts[mode](async () => {
       await page.goto(scripts.serverUrl);
