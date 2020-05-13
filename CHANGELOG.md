@@ -1,5 +1,30 @@
 # Changelog
 
+## 4.73.0 (2020-05-13)
+
+#### :rocket: New Feature
+
+- `create-yoshi-app`, `yoshi-flow-editor`
+  - [#2357](https://github.com/wix/yoshi/pull/2357) Add platform app studio component to be generated via wizard and generate editor builder automatically ([@yavorsky](https://github.com/yavorsky))
+
+#### :building_construction: Templates
+
+- `create-yoshi-app`
+  - [#2384](https://github.com/wix/yoshi/pull/2384) Integrate `sled` to yoshi flow editor ooi template ([@yavorsky](https://github.com/yavorsky))
+
+#### :bug: Bug Fix
+
+- `yoshi-flow-monorepo`
+  - [#2389](https://github.com/wix/yoshi/pull/2389) Upload `serve.js` & `serve.d.ts` files to npm ([@ranyitz](https://github.com/ranyitz))
+
+#### :memo: Documentation
+
+- [#2388](https://github.com/wix/yoshi/pull/2388) Remove `yoshi server` from being a planet on the website (Flow) ([@ranyitz](https://github.com/ranyitz))
+
+#### :house: Internal
+
+- [#2386](https://github.com/wix/yoshi/pull/2386) Fix website publishing on master using travis ([@ranyitz](https://github.com/ranyitz))
+
 ## 4.72.0 (2020-05-12)
 
 #### :rocket: New Feature
