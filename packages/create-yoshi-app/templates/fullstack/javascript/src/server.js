@@ -1,8 +1,8 @@
-import * as path from 'path';
+import path from 'path';
 import wixExpressCsrf from '@wix/wix-express-csrf';
 import wixExpressRequireHttps from '@wix/wix-express-require-https';
 import { hot } from 'bootstrap-hot-loader';
-import * as WixNodeI18nCache from 'wix-node-i18n-cache';
+import WixNodeI18nCache from 'wix-node-i18n-cache';
 
 // caches translation files and serves them per request
 // https://github.com/wix-private/wix-node-i18n-cache
