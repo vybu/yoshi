@@ -5,6 +5,8 @@ import wixExpressCsrf from '@wix/wix-express-csrf';
 import wixExpressRequireHttps from '@wix/wix-express-require-https';
 import * as WixNodeI18nCache from 'wix-node-i18n-cache';
 
+// caches translation files and serves them per request
+// https://github.com/wix-private/wix-node-i18n-cache
 const localI18NCache = new WixNodeI18nCache({
   localeFilePath: path.join(__dirname, 'statics', 'assets', 'locales'),
 });
