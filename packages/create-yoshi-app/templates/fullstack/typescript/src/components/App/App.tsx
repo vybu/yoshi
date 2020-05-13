@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTranslation, WithTranslation } from 'react-i18next';
+import { withTranslation, WithTranslation } from '@wix/wix-i18n-config';
 import s from './App.scss';
 
 /* <-- To remove demo stuff just copy-paste:

@@ -14,7 +14,7 @@ const fedopsLogger = createFedopsLogger('{%projectName%}');
 
 const i18n = initI18n({
   locale: window.__LOCALE__,
-  messages: JSON.parse(window.__MESSAGES__),
+  messages: window.__MESSAGES__,
 });
 
 // Move the following `appLoaded()` call to the point where your app has fully loaded.

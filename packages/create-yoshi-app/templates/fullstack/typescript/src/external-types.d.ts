@@ -1,7 +1,7 @@
 interface Window {
   __LOCALE__: string;
   __BASEURL__: string;
-  __MESSAGES__: string;
+  __MESSAGES__: Messages;
 }
 
 // tslint:disable-next-line:no-namespace
