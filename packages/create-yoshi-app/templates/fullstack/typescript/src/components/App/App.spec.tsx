@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { render, waitForElement } from '@testing-library/react';
-import { I18nextProvider } from 'react-i18next';
-import App from './App';
+import { I18nextProvider } from '@wix/wix-i18n-config';
 import i18n from '../__mocks__/i18n';
+import App from './App';
 
 describe('App', () => {
   it('renders a title correctly', async () => {
